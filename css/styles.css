@@ -1,0 +1,38 @@
+body {
+    margin: 20px    
+}
+
+.axis {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.x-axis {
+    text-transform: capitalize;
+}
+
+.point {
+    r: 8px;
+    stroke: black;
+    stroke-width: 2px;
+}
+
+#legend circle {
+    r: 8px;
+    cy: 8px;
+    cx: 8px;
+}
+
+.y-title {
+    fill: black;
+    text-anchor: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+#legend svg {
+    width: 100px;
+    height: 50px;
+}
+
