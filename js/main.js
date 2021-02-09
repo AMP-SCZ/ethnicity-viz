@@ -12,21 +12,23 @@ let sharedLightBlue = '#6150D8';
 let races=["White", "Black", "Hispanic", "Asian"];
 
 // load data using promises
-let promises = [d3.csv('data/enroll_data.csv')];
+let promises = [d3.csv('data/enroll_data.csv'), d3.csv('data/expected_data.csv')];
 
 Promise.all(promises)
-    .then(function (data) {
+    .then(function (dataArray) {
         
         // date pareser
         let parseDate = d3.timeParse("%Y-%m-%d");        
-                
-		data[0].forEach(function(d){
-			// Convert string to 'date object'
-			d.date = parseDate(d.date).getTime();
-			
-		});
         
-        initMainPage(data);
+        dataArray.forEach(data=> {
+            data.forEach(function(d){
+                // Convert string to 'date object'
+                d.date = parseDate(d.date).getTime();
+                
+            });
+        });
+        
+        initMainPage(dataArray);
     })
     .catch(function (err) {
         console.log(err);
@@ -36,7 +38,7 @@ Promise.all(promises)
 function initMainPage(dataArray) {
 
     // init line-graph
-    myLineVis = new LineVis('line-graph', dataArray[0]);
+    myLineVis = new LineVis('line-graph', dataArray[1]);
 
 }
 
