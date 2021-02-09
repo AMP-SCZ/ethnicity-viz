@@ -115,7 +115,7 @@ class LineVis {
             }
         ))
         
-               
+        vis.totalEnroll= Object.values(enrollCount).reduce((a, v) => a + v, 0)
 
         vis.updateVis();
     }
@@ -180,7 +180,7 @@ class LineVis {
                     .style('top', event.pageY + 20 + 'px').html(`
                  <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
                      <h6>${d.group}</h6>
-                     ${type} enrollment ${d3.format(',')(d.visit)}
+                     ${type} enrollment ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/vis.totalEnroll)})
                  </div>`);
             })
             .on('mouseout', function (event, d) {
