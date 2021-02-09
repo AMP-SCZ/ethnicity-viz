@@ -3,10 +3,10 @@
  * * * * * * * * * * * * * */
 
 class LineVis {
-    constructor(parentElement, enrollData) {
+    constructor(parentElement, enrollData, expectedData) {
         this.parentElement = parentElement;
         this.enrollData = enrollData;
-        // this.expectedData = expectedData;
+        this.expectedData = expectedData;
         this.displayData;
 
         this.initVis();
@@ -55,6 +55,7 @@ class LineVis {
 
         // Path
         vis.path = vis.patterng.append('path').attr('class', 'path');
+        vis.path1 = vis.patterng.append('path').attr('class', 'path');
 
 
         // Draw path
@@ -73,50 +74,10 @@ class LineVis {
 
     wrangleData() {
         let vis = this;
-        
-        // Date parser
-        let parseDate = d3.timeParse("%m/%d/%Y");
-        
-        let selectedSite = $('#site-name').val();
                 
-        // Filter by site
-        let siteData = vis.enrollData.filter(d=>d.site===selectedSite)
+        vis.enrollCount, vis.totalEnroll= count(vis.enrollData)
+        vis.enrollCount1, vis.totalEnroll1= count(vis.expectedData)
         
-        // Get input field values and filter
-        let lower= document.getElementById("lower").value
-        let upper= document.getElementById("upper").value
-        
-        lower=lower?parseDate(lower).getTime():d3.min(siteData, d=>d.date)
-        upper=upper?parseDate(upper).getTime():d3.max(siteData, d=>d.date)
-        
-        // Filter by date
-        vis.filteredData= siteData.filter(d => d.date>=lower && d.date<=upper)
-
-        console.log("Filtered data", vis.filteredData);
-        
-        // Get unique ethnicities and their enrollments
-        let enrollCount= {}
-        
-        // TODO combine the following two blocks into one
-        races.forEach(r=> {
-            vis.filteredData.forEach(d=> {
-                if ((d.race===r) && (Object.keys(enrollCount).indexOf(r)<0))
-                    enrollCount[r]= 0
-                else if (d.race===r)
-                    enrollCount[r]+= 1
-            })
-        })
-        
-        vis.enrollCount= []
-        Object.keys(enrollCount).forEach(r=>vis.enrollCount.push(
-            {
-                group: r,
-                visit: enrollCount[r]
-            }
-        ))
-        
-        vis.totalEnroll= Object.values(enrollCount).reduce((a, v) => a + v, 0)
-
         vis.updateVis();
     }
 
@@ -134,7 +95,8 @@ class LineVis {
         vis.trend.x(d => vis.x(d.group));
 
         vis.patterng.attr('transform', `translate(${vis.x.bandwidth() / 2},0)`);
-
+        
+        // Actual
         let tmp = vis.patterng
             .selectAll('.numVisit')
             .data(vis.enrollCount, d => d.group);
@@ -152,10 +114,10 @@ class LineVis {
             .attr('fill', sharedBlue);
         
         tmp.exit().remove();
-        
+                
         // Tooltip for actual enrollment
-        vis.showTooltip(circle, sharedBlue, "Actual");
-
+        vis.showTooltip(circle, sharedBlue, "Actual", vis.totalEnroll);
+        
         vis.path
             .datum(vis.enrollCount)
             .transition()
@@ -164,10 +126,41 @@ class LineVis {
             .attr('stroke', 'black')
             .attr('fill', 'none');
 
+        
+        // Expected
+        let tmp1 = vis.patterng
+            .selectAll('.numVisit1')
+            .data(vis.enrollCount1, d => d.group);
+
+        let circle1 = tmp1.enter()
+            .append('circle')
+            .merge(tmp1);
+
+        circle1
+            .transition()
+            .duration(1000)
+            .attr('cx', (d) => vis.x(d.group))
+            .attr('cy', (d) => vis.y(d.visit))
+            .attr('class', 'point numVisit1')
+            .attr('fill', sharedRed);
+            
+        vis.path1
+            .datum(vis.enrollCount1)
+            .transition()
+            .duration(1000)
+            .attr('d', vis.trend)
+            .attr('stroke', 'black')
+            .attr('fill', 'none'); 
+
+        // Tooltip for expected enrollment
+        vis.showTooltip(circle1, sharedRed, "Expected", vis.totalEnroll1);
+
+   
+
 
     }
 
-    showTooltip(circle, color, type) {
+    showTooltip(circle, color, type, total) {
         let vis = this;
 
         circle
@@ -180,7 +173,7 @@ class LineVis {
                     .style('top', event.pageY + 20 + 'px').html(`
                  <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
                      <h6>${d.group}</h6>
-                     ${type} enrollment ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/vis.totalEnroll)})
+                     ${type} enrollment ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/total)})
                  </div>`);
             })
             .on('mouseout', function (event, d) {
@@ -189,5 +182,55 @@ class LineVis {
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
     }
+}
+
+
+function count(enrollData) {
+    
+    let selectedSite = $('#site-name').val();
+        
+    // Filter by site
+    let siteData = enrollData.filter(d=>d.site===selectedSite)
+    
+    // Date parser
+    let parseDate = d3.timeParse("%m/%d/%Y");
+
+    // Get input field values and filter
+    let lower= document.getElementById("lower").value
+    let upper= document.getElementById("upper").value  
+    
+    lower=lower?parseDate(lower).getTime():d3.min(siteData, d=>d.date)
+    upper=upper?parseDate(upper).getTime():d3.max(siteData, d=>d.date)
+    
+    // Filter by date
+    filteredData= siteData.filter(d => d.date>=lower && d.date<=upper)
+
+    console.log("Filtered data", filteredData);
+    
+    // Get unique ethnicities and their enrollments
+    let enrollCount= {}
+    
+    // TODO combine the following two blocks into one
+    races.forEach(r=> {
+        filteredData.forEach(d=> {
+            if ((d.race===r) && (Object.keys(enrollCount).indexOf(r)<0))
+                enrollCount[r]= 0
+            else if (d.race===r)
+                enrollCount[r]+= 1
+        })
+    })
+    
+    enrollCountDict= []
+    Object.keys(enrollCount).forEach(r=>enrollCountDict.push(
+        {
+            group: r,
+            visit: enrollCount[r]
+        }
+    ))
+    
+    totalEnroll= Object.values(enrollCount).reduce((a, v) => a + v, 0)
+    
+    return (enrollCountDict, totalEnroll)
+    
 }
 

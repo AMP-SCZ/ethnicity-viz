@@ -34,11 +34,13 @@ Promise.all(promises)
         console.log(err);
     });
 
+    
+    
 // initMainPage
 function initMainPage(dataArray) {
-
+        
     // init line-graph
-    myLineVis = new LineVis('line-graph', dataArray[1]);
+    myLineVis = new LineVis('line-graph', dataArray[0], dataArray[1]);
 
 }
 
