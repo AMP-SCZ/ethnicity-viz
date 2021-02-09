@@ -74,9 +74,16 @@ class LineVis {
 
     wrangleData() {
         let vis = this;
-                
-        vis.enrollCount, vis.totalEnroll= count(vis.enrollData)
-        vis.enrollCount1, vis.totalEnroll1= count(vis.expectedData)
+        
+        let tmp
+        
+        tmp= count(vis.enrollData)
+        vis.enrollCount= tmp[0]
+        vis.totalEnroll= tmp[1]
+        
+        tmp= count(vis.expectedData)
+        vis.enrollCount1= tmp[0]
+        vis.totalEnroll1= tmp[1]
         
         vis.updateVis();
     }
@@ -88,7 +95,8 @@ class LineVis {
         vis.xAxis.scale(vis.x);
         vis.gx.transition().duration(1000).call(vis.xAxis);
 
-        vis.y.domain([0, d3.max(vis.enrollCount.map(d=>d.visit))]);
+        vis.y.domain([0, d3.max([vis.enrollCount.map(d=>d.visit), vis.enrollCount1.map(d=>d.visit)].flat())]);
+        
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);
 
@@ -230,7 +238,7 @@ function count(enrollData) {
     
     totalEnroll= Object.values(enrollCount).reduce((a, v) => a + v, 0)
     
-    return (enrollCountDict, totalEnroll)
+    return [enrollCountDict, totalEnroll]
     
 }
 
