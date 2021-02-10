@@ -45,7 +45,7 @@ class LineVis {
         vis.gy = vis.svg
             .append('g')
             .attr('class', 'axis y-axis')
-            .attr('transform', `translate(${vis.margin.left}, 0)`);
+            .attr('transform', `translate(${vis.margin.left-15}, 0)`);
 
         vis.gy.append('text').attr('y', -15).attr('class', 'title y-title');
 
@@ -116,7 +116,7 @@ class LineVis {
         vis.circle
             .transition()
             .duration(1000)
-            .attr('x', d=> vis.x(d.group)+vis.rectOffset-vis.x.bandwidth()/2)
+            .attr('x', d=> d3.max([vis.x(d.group)+vis.rectOffset-vis.x.bandwidth()/2,0]))
             .attr('y', d=> vis.y(d.visit))
             .attr('width', vis.x.bandwidth()/2)
             .attr('height', d=> vis.height-vis.y(d.visit))
@@ -175,7 +175,7 @@ function count(enrollData) {
     // Filter by date
     filteredData= siteData.filter(d => d.date>=lower && d.date<=upper)
 
-    console.log("Filtered data", filteredData);
+    // console.log("Filtered data", filteredData);
     
     // Get unique ethnicities and their enrollments
     let enrollCount= {}
