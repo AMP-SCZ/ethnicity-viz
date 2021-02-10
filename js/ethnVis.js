@@ -84,14 +84,16 @@ class LineVis {
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);      
         
+        vis.statType='Actual'
         vis.enrollCount= enrollCount
         vis.totalEnroll= totalEnroll
-        vis.statType='Actual'
+        vis.elementColor= sharedRed
         vis.updateVis();
         
         vis.statType='Expected'
         vis.enrollCount= enrollCount1
         vis.totalEnroll= totalEnroll1
+        vis.elementColor= sharedBlue
         vis.updateVis();
     }
 
@@ -105,29 +107,29 @@ class LineVis {
             .selectAll(`.${vis.statType}`)
             .data(vis.enrollCount, d => d.group);
 
-        let circle = tmp.enter()
+        vis.circle = tmp.enter()
             .append('circle')
             .merge(tmp);
 
-        circle
+        vis.circle
             .transition()
             .duration(1000)
             .attr('cx', (d) => vis.x(d.group))
             .attr('cy', (d) => vis.y(d.visit))
             .attr('class', `point ${vis.statType}`)
-            .attr('fill', sharedBlue);
+            .attr('fill', vis.elementColor);
         
         tmp.exit().remove();
         
-        vis.showTooltip(circle, sharedBlue, `${vis.statType}`, vis.totalEnroll);
+        vis.showTooltip(vis.statType);
         
 
     }
 
-    showTooltip(circle, color, type, total) {
+    showTooltip(type) {
         let vis = this;
 
-        circle
+        vis.circle
             .on('mouseover', function (event, d) {
                 d3.select(this).attr('fill', sharedYellow);
 
@@ -137,11 +139,11 @@ class LineVis {
                     .style('top', event.pageY + 20 + 'px').html(`
                  <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
                      <h6>${d.group}</h6>
-                     ${type} enrollment ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/total)})
+                     ${type} ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/vis.totalEnroll)})
                  </div>`);
             })
             .on('mouseout', function (event, d) {
-                d3.select(this).attr('fill', color);
+                d3.select(this).attr('fill', vis.elementColor);
 
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
