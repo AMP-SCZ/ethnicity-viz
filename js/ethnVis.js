@@ -51,18 +51,7 @@ class LineVis {
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
-        
 
-        // Path
-        vis.path = vis.patterng.append('path').attr('class', 'path');
-        vis.path1 = vis.patterng.append('path').attr('class', 'path');
-
-
-        // Draw path
-        vis.trend = d3
-            .line()
-            .curve(d3.curveCardinal)
-            .y((d) => vis.y(d.visit));
 
         // Append tooltip
         vis.tooltip = d3.select('body').append('div').attr('class', 'tooltip')
@@ -75,38 +64,45 @@ class LineVis {
     wrangleData() {
         let vis = this;
         
-        let tmp
+        let tmp, enrollCount, totalEnroll, enrollCount1, totalEnroll1
         
         tmp= count(vis.enrollData)
-        vis.enrollCount= tmp[0]
-        vis.totalEnroll= tmp[1]
+        enrollCount= tmp[0]
+        totalEnroll= tmp[1]
         
         tmp= count(vis.expectedData)
-        vis.enrollCount1= tmp[0]
-        vis.totalEnroll1= tmp[1]
+        enrollCount1= tmp[0]
+        totalEnroll1= tmp[1]
         
+        
+        vis.x.domain(enrollCount.map(d=>d.group));
+        vis.xAxis.scale(vis.x);
+        vis.gx.transition().duration(1000).call(vis.xAxis);
+
+        vis.y.domain([0, d3.max([enrollCount.map(d=>d.visit), enrollCount1.map(d=>d.visit)].flat())]);
+        
+        vis.yAxis.scale(vis.y);
+        vis.gy.transition().duration(1000).call(vis.yAxis);      
+        
+        vis.enrollCount= enrollCount
+        vis.totalEnroll= totalEnroll
+        vis.statType='Actual'
+        vis.updateVis();
+        
+        vis.statType='Expected'
+        vis.enrollCount= enrollCount1
+        vis.totalEnroll= totalEnroll1
         vis.updateVis();
     }
 
     updateVis() {
         let vis = this;
 
-        vis.x.domain(vis.enrollCount.map(d=>d.group));
-        vis.xAxis.scale(vis.x);
-        vis.gx.transition().duration(1000).call(vis.xAxis);
-
-        vis.y.domain([0, d3.max([vis.enrollCount.map(d=>d.visit), vis.enrollCount1.map(d=>d.visit)].flat())]);
-        
-        vis.yAxis.scale(vis.y);
-        vis.gy.transition().duration(1000).call(vis.yAxis);
-
-        vis.trend.x(d => vis.x(d.group));
-
         vis.patterng.attr('transform', `translate(${vis.x.bandwidth() / 2},0)`);
         
         // Actual
         let tmp = vis.patterng
-            .selectAll('.numVisit')
+            .selectAll(`.${vis.statType}`)
             .data(vis.enrollCount, d => d.group);
 
         let circle = tmp.enter()
@@ -118,53 +114,13 @@ class LineVis {
             .duration(1000)
             .attr('cx', (d) => vis.x(d.group))
             .attr('cy', (d) => vis.y(d.visit))
-            .attr('class', 'point numVisit')
+            .attr('class', `point ${vis.statType}`)
             .attr('fill', sharedBlue);
         
         tmp.exit().remove();
-                
-        // Tooltip for actual enrollment
-        vis.showTooltip(circle, sharedBlue, "Actual", vis.totalEnroll);
         
-        vis.path
-            .datum(vis.enrollCount)
-            .transition()
-            .duration(1000)
-            .attr('d', vis.trend)
-            .attr('stroke', 'black')
-            .attr('fill', 'none');
-
+        vis.showTooltip(circle, sharedBlue, `${vis.statType}`, vis.totalEnroll);
         
-        // Expected
-        let tmp1 = vis.patterng
-            .selectAll('.numVisit1')
-            .data(vis.enrollCount1, d => d.group);
-
-        let circle1 = tmp1.enter()
-            .append('circle')
-            .merge(tmp1);
-
-        circle1
-            .transition()
-            .duration(1000)
-            .attr('cx', (d) => vis.x(d.group))
-            .attr('cy', (d) => vis.y(d.visit))
-            .attr('class', 'point numVisit1')
-            .attr('fill', sharedRed);
-            
-        vis.path1
-            .datum(vis.enrollCount1)
-            .transition()
-            .duration(1000)
-            .attr('d', vis.trend)
-            .attr('stroke', 'black')
-            .attr('fill', 'none'); 
-
-        // Tooltip for expected enrollment
-        vis.showTooltip(circle1, sharedRed, "Expected", vis.totalEnroll1);
-
-   
-
 
     }
 
