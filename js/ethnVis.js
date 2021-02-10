@@ -57,6 +57,12 @@ class LineVis {
         vis.tooltip = d3.select('body').append('div').attr('class', 'tooltip')
             .attr('style', "text-transform: capitalize;");
         
+        // Y-title
+        vis.svg.append("text")
+            .attr("x", vis.margin.left-15)
+            .attr("y", -10)
+            .attr("class", "y-title plot-title")
+            .text("Enrollment")
                 
         vis.wrangleData();
     }
