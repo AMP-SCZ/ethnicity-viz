@@ -16,7 +16,7 @@ class LineVis {
         let vis = this;
 
         const width = 1000;
-        const height = 275;
+        const height = 600;
 
         vis.margin = { top: 30, right: 20, bottom: 40, left: 90 };
         vis.width = width - vis.margin.left - vis.margin.right;
@@ -31,7 +31,7 @@ class LineVis {
             .attr('transform', `translate(0, ${vis.margin.top})`);
 
         // Scales and Axes
-        vis.x = d3.scaleBand().range([vis.margin.left, vis.width]);
+        vis.x = d3.scaleBand().range([vis.margin.left, vis.width]).paddingInner(0.1);
         vis.xAxis = d3.axisBottom();
 
         vis.y = d3.scaleLinear().range([vis.height, 0]);
@@ -88,12 +88,14 @@ class LineVis {
         vis.enrollCount= enrollCount
         vis.totalEnroll= totalEnroll
         vis.elementColor= sharedRed
+        vis.rectOffset= 0;
         vis.updateVis();
         
         vis.statType='Expected'
         vis.enrollCount= enrollCount1
         vis.totalEnroll= totalEnroll1
         vis.elementColor= sharedBlue
+        vis.rectOffset= vis.x.bandwidth()/2;
         vis.updateVis();
     }
 
@@ -108,14 +110,16 @@ class LineVis {
             .data(vis.enrollCount, d => d.group);
 
         vis.circle = tmp.enter()
-            .append('circle')
+            .append('rect')
             .merge(tmp);
 
         vis.circle
             .transition()
             .duration(1000)
-            .attr('cx', (d) => vis.x(d.group))
-            .attr('cy', (d) => vis.y(d.visit))
+            .attr('x', d=> vis.x(d.group)+vis.rectOffset-vis.x.bandwidth()/2)
+            .attr('y', d=> vis.y(d.visit))
+            .attr('width', vis.x.bandwidth()/2)
+            .attr('height', d=> vis.height-vis.y(d.visit))
             .attr('class', `point ${vis.statType}`)
             .attr('fill', vis.elementColor);
         
