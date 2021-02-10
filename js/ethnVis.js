@@ -121,12 +121,12 @@ class LineVis {
         
         tmp.exit().remove();
         
-        vis.showTooltip(vis.statType);
+        vis.showTooltip(vis.statType, vis.elementColor);
         
 
     }
 
-    showTooltip(type) {
+    showTooltip(type, color) {
         let vis = this;
 
         vis.circle
@@ -143,7 +143,7 @@ class LineVis {
                  </div>`);
             })
             .on('mouseout', function (event, d) {
-                d3.select(this).attr('fill', vis.elementColor);
+                d3.select(this).attr('fill', color);
 
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
