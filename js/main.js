@@ -6,11 +6,12 @@ let sharedGreen = '#28794C';
 let sharedBlue = '#333577';
 let sharedYellow = '#FFC900';
 let sharedRed = '#AE0000';
+let sharedBrown = '#A45C40';
 let sharedGrey = '#D3D3D3';
 let sharedLightBlue = '#6150D8';
 
 let races=["White", "Black", "Hispanic", "Asian"];
-let pieColors= {"White":sharedBlue, "Black":sharedGreen, "Hispanic":sharedYellow, "Asian":sharedRed};
+let pieColors= {"White":sharedBlue, "Black":sharedGreen, "Hispanic":sharedBrown, "Asian":sharedRed};
 
 // load data using promises
 let promises = [d3.csv('data/enroll_data.csv'), d3.csv('data/expected_data.csv')];
