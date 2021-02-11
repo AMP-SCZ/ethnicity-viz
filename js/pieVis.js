@@ -61,7 +61,7 @@ class PieVis {
 
     wrangleData() {
         let vis = this;
-                
+        
         [vis.enrollCount, vis.totalEnroll]= count(vis.enrollData)
                  
         vis.updateVis();
@@ -71,7 +71,7 @@ class PieVis {
         let vis = this;
 
         let tmp = vis.patterng
-            .selectAll('.pie-chart')
+            .selectAll('.pie')
             .data(vis.pie(vis.enrollCount), d=>d.data.group);
 
         vis.circle = tmp.enter()
@@ -79,11 +79,12 @@ class PieVis {
             .merge(tmp);
 
         vis.circle
-            .transition()
-            .duration(1000)
+            // .transition()
+            // .duration(1000)
             .attr('d', vis.arc)
             .attr('fill', d=> pieColors[d.data.group])
-            .attr('class', 'pie-chart')
+            .attr('class', `pie ${vis.statType}`)
+            .attr('opacity', vis.statType==='Actual'?1:0.5);
                 
         tmp.exit().remove();
         
@@ -99,9 +100,9 @@ class PieVis {
         vis.circle
             .on('mouseover', function (event, d) {
                 d3.select(this)
-                .attr('stroke', 'black')
-                .attr("stroke-dasharray", ("10,5"))
-                .attr('stroke-width', '3px')
+                .attr('fill', sharedYellow)
+                // .attr('stroke', sharedYellow)
+                // .attr('stroke-width', '10px')
 
                 vis.tooltip
                     .style('opacity', 1)
@@ -114,7 +115,8 @@ class PieVis {
             })
             .on('mouseout', function (event, d) {
                 d3.select(this)
-                .attr('stroke-width', '0px')
+                // .attr('stroke-width', '0px')
+                .attr('fill', d=> pieColors[d.data.group])
 
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
