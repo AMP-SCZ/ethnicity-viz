@@ -11,11 +11,6 @@ body {
     text-transform: capitalize;
 }
 
-.point {
-    r: 8px;
-    stroke: black;
-    stroke-width: 2px;
-}
 
 #legend circle {
     r: 8px;
