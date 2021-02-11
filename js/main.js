@@ -45,8 +45,10 @@ function initMainPage(dataArray) {
     // init bar chart
     barVis = new BarVis('bar-chart', dataArray[0], dataArray[1]);
     
-    // init pie chart
-    pieVis = new PieVis('pie-chart', dataArray[0]);
+    // init pie chart for actual
+    pieVis = new PieVis('pie-chart', dataArray[0], 'Actual');
+    // init pie chart for expected
+    pieVis1 = new PieVis('pie-chart', dataArray[1], 'Expected');
 
 }
 
@@ -57,6 +59,7 @@ function _wrangleData() {
     
     barVis.wrangleData()
     pieVis.wrangleData()
+    pieVis1.wrangleData()
     
 }
 

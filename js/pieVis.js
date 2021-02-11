@@ -3,10 +3,11 @@
  * * * * * * * * * * * * * */
 
 class PieVis {
-    constructor(parentElement, enrollData) {
+    constructor(parentElement, enrollData, statType) {
         this.parentElement = parentElement;
         this.enrollData = enrollData;
         this.displayData;
+        this.statType= statType;
 
         this.initVis();
     }
@@ -15,7 +16,7 @@ class PieVis {
         let vis = this;
 
         const width = 500;
-        const height = 500;
+        const height = 400;
 
         vis.margin = { top: 20, right: 20, bottom: 20, left: 20 };
         vis.width = width - vis.margin.left - vis.margin.right;
@@ -53,7 +54,7 @@ class PieVis {
             .attr("x", vis.width/2)
             .attr("y", 0)
             .attr("class", "y-title plot-title")
-            .text("Enrollment")
+            .text(`${vis.statType} Enrollment`)
                 
         vis.wrangleData();
     }
