@@ -127,7 +127,8 @@ class BarVis {
             .attr('width', vis.x.bandwidth()/2)
             .attr('height', d=> vis.height-vis.y(d.visit))
             .attr('class', `point ${vis.statType}`)
-            .attr('fill', vis.elementColor);
+            .attr('fill', d=> pieColors[d.group])
+            .attr('opacity', vis.statType==='Actual'?1:0.5)
         
         tmp.exit().remove();
         
@@ -141,7 +142,13 @@ class BarVis {
 
         vis.circle
             .on('mouseover', function (event, d) {
-                d3.select(this).attr('fill', sharedYellow);
+                d3.select(this)
+                .attr('fill', sharedYellow)
+                // .attr('stroke', sharedYellow)
+                // .attr('stroke-width', '10px');
+                
+                d3.selectAll(`.pie.${type}`)
+                    .attr('fill', p=>p.data.group===d.group?sharedYellow:pieColors[p.data.group])
 
                 vis.tooltip
                     .style('opacity', 1)
@@ -153,8 +160,13 @@ class BarVis {
                  </div>`);
             })
             .on('mouseout', function (event, d) {
-                d3.select(this).attr('fill', color);
-
+                d3.select(this)
+                // .attr('stroke-width', '0px');
+                .attr('fill', d=> pieColors[d.group])
+                
+                d3.selectAll(`.pie.${type}`)
+                    .attr('fill', p=>pieColors[p.data.group])
+                
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
     }
