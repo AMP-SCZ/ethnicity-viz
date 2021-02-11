@@ -25,7 +25,7 @@
         <hr>
         <br>
         
-    	<div class="col-6">
+    	<div class="col-8">
 			<div class="row">
                 <!-- Site selector -->
                 <div class="col-3">
@@ -39,7 +39,7 @@
                 </div>
         
                 <!-- Date range -->
-                <div class="col-8">
+                <div class="col-5">
                     Time Period
                     <br>
                     <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
@@ -49,9 +49,15 @@
             
             <hr>
             
-            <!-- Line graph -->
             <div class="row">
-                <div id="line-graph" style="height: 100%; width: 100%"></div>                
+                <!-- Bar chart -->
+                <div class="col-5">
+                    <div id="bar-chart" style="height: 100%; width: 100%"></div>
+                </div>
+                <!-- Pie chart -->
+                <div class="col-5">
+                    <div id="pie-chart" style="height: 100%; width: 100%"></div>
+                </div>
             </div>
         </div>
 
@@ -70,6 +76,7 @@
             crossorigin="anonymous"
         ></script>
         <script src="js/ethnVis.js"></script>
+        <script src="js/pieVis.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>

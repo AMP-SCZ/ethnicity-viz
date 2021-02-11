@@ -1,8 +1,8 @@
 /* * * * * * * * * * * * * *
- *          LineVis         *
+ *          BarVis         *
  * * * * * * * * * * * * * */
 
-class LineVis {
+class BarVis {
     constructor(parentElement, enrollData, expectedData) {
         this.parentElement = parentElement;
         this.enrollData = enrollData;

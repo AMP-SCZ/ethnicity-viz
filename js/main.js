@@ -1,5 +1,5 @@
 // init global variables & switches
-let myLineVis, enrollData;
+let barVis, pieVis;
 
 
 let sharedGreen = '#28794C';
@@ -10,6 +10,7 @@ let sharedGrey = '#D3D3D3';
 let sharedLightBlue = '#6150D8';
 
 let races=["White", "Black", "Hispanic", "Asian"];
+let pieColors= {"White":sharedBlue, "Black":sharedGreen, "Hispanic":sharedYellow, "Asian":sharedRed};
 
 // load data using promises
 let promises = [d3.csv('data/enroll_data.csv'), d3.csv('data/expected_data.csv')];
@@ -38,15 +39,24 @@ Promise.all(promises)
     
 // initMainPage
 function initMainPage(dataArray) {
-        
-    // init line-graph
-    myLineVis = new LineVis('line-graph', dataArray[0], dataArray[1]);
+    
+    // let enrollCount, totalEnroll, enrollCount1, totalEnroll1
+    
+    // init bar chart
+    barVis = new BarVis('bar-chart', dataArray[0], dataArray[1]);
+    
+    // init pie chart
+    pieVis = new PieVis('pie-chart', dataArray[0]);
 
 }
 
 function _wrangleData() {
     
-    myLineVis.wrangleData()
+/*     enrollCount, totalEnroll= count(dataArray[0])
+    enrollCount1, totalEnroll1= count(dataArray[1]) */
+    
+    barVis.wrangleData()
+    pieVis.wrangleData()
     
 }
 
