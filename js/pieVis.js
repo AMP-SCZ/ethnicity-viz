@@ -61,7 +61,7 @@ class PieVis {
     wrangleData() {
         let vis = this;
                 
-        vis.enrollCount= count(vis.enrollData)[0]
+        [vis.enrollCount, vis.totalEnroll]= count(vis.enrollData)
                  
         vis.updateVis();
     }
@@ -83,61 +83,37 @@ class PieVis {
             .attr('d', vis.arc)
             .attr('fill', d=> pieColors[d.data.group])
             .attr('class', 'pie-chart')
-            
-        
-        vis.circle
-            .on('mouseover', function(event, d){
-                d3.select(this)
-                    .attr('stroke-width', '2px')
-                    .attr('stroke', 'black')
-                    .attr('fill', 'rgba(173,222,255,0.62)')
-
-                vis.tooltip
-                    .style("opacity", 1)
-                    .style("left", event.pageX + 20 + "px")
-                    .style("top", event.pageY + "px")
-                    .html(`
-                     <div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 20px">
-                         <h4> Visit: ${d.data.visit}</h4>
-                     </div>`);
-
-            })
-            .on('mouseout', function(event, d){
-                d3.select(this)
-                    .attr('stroke-width', '0px')
-                    .attr("fill", d => pieColors[d.data.group])
-
-                vis.tooltip
-                    .style("opacity", 0)
-                    .style("left", 0)
-                    .style("top", 0)
-                    .html(``);
-            })
-        
+                
         tmp.exit().remove();
+        
+        vis.showTooltip();
         
         
 
     }
 
-    showTooltip(type, color) {
+    showTooltip() {
         let vis = this;
 
         vis.circle
             .on('mouseover', function (event, d) {
-                d3.select(this).attr('fill', sharedYellow);
+                d3.select(this)
+                .attr('stroke', 'black')
+                .attr("stroke-dasharray", ("10,5"))
+                .attr('stroke-width', '3px')
 
                 vis.tooltip
                     .style('opacity', 1)
                     .style('left', event.pageX + 20 + 'px')
                     .style('top', event.pageY + 20 + 'px').html(`
                  <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
-                     <h6>${d.group}</h6>
-                     ${type} ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/vis.totalEnroll)})
+                     <h6>${d.data.group}</h6>
+                     ${d3.format(',')(d.data.visit)} (${d3.format('.1%')(d.data.visit/vis.totalEnroll)})
                  </div>`);
             })
             .on('mouseout', function (event, d) {
-                d3.select(this).attr('fill', color);
+                d3.select(this)
+                .attr('stroke-width', '0px')
 
                 vis.tooltip.style('opacity', 0).style('left', 0).style('top', 0).html(``);
             });
