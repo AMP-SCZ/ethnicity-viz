@@ -132,12 +132,12 @@ class BarVis {
         
         tmp.exit().remove();
         
-        vis.showTooltip(vis.statType, vis.elementColor);
+        vis.showTooltip(vis.statType, vis.totalEnroll);
         
 
     }
 
-    showTooltip(type, color) {
+    showTooltip(type, total) {
         let vis = this;
 
         vis.circle
@@ -156,7 +156,7 @@ class BarVis {
                     .style('top', event.pageY + 20 + 'px').html(`
                  <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
                      <h6>${d.group}</h6>
-                     ${type} ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/vis.totalEnroll)})
+                     ${type} ${d3.format(',')(d.visit)} (${d3.format('.1%')(d.visit/total)})
                  </div>`);
             })
             .on('mouseout', function (event, d) {
