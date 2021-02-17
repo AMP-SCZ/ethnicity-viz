@@ -98,6 +98,7 @@ class PieVis {
                 
         tmp.exit().remove();
         
+        
         vis.showTooltip();
         
         

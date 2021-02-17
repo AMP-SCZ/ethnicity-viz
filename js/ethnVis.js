@@ -59,8 +59,8 @@ class BarVis {
         
         // Y-title
         vis.svg.append("text")
-            .attr("x", vis.margin.left-15)
-            .attr("y", -10)
+            .attr("x", vis.margin.left-5)
+            .attr("y", -15)
             .attr("class", "y-title plot-title")
             .text("Enrollment")
                 
@@ -131,6 +131,26 @@ class BarVis {
             .attr('opacity', vis.statType==='Actual'?1:0.5)
         
         tmp.exit().remove();
+        
+        
+        // labels
+        let labels = vis.patterng
+            .selectAll(`.bar.count.${vis.statType}`)
+            .data(vis.enrollCount, d => d.group)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', `label bar count ${vis.statType}`)
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d) => d3.format(',')(d.visit))
+            .attr('x', (d) => d3.max([vis.x(d.group)+vis.rectOffset-vis.x.bandwidth()/4,0]))
+            .attr('y', (d) => vis.y(d.visit)-5)
+
+        labels.exit().remove();
+        
         
         vis.showTooltip(vis.statType, vis.totalEnroll);
         
