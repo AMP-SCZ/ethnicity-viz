@@ -99,6 +99,37 @@ class PieVis {
         tmp.exit().remove();
         
         
+        // labels
+        let labels = vis.patterng
+            .selectAll(`.pie.count.${vis.statType}`)
+            .data(vis.pie(vis.enrollCount), d => d.data.group)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', `label pie count ${vis.statType}`)
+            .merge(labels)
+            //.transition()
+            //.duration(1000)
+            //.text((d) => `${d3.format('.1%')(d.data.visit/vis.totalEnroll)}`)
+            .attr('transform', d=> {
+                // Use d3.arc() to be able to suitably position the labels
+                d.innerRadius= 0
+                d.outerRadius= vis.width/2
+                return "translate("+ d3.arc().centroid(d)+")"
+                
+            })
+            .append('tspan')
+            .text((d) => `${d.data.group}`)
+            .append('tspan')
+            .attr('x',0)
+            .attr('dy',20)
+            .text((d) => `${d3.format('.1%')(d.data.visit/vis.totalEnroll)}`)
+            
+            
+        labels.exit().remove();
+        
+        
         vis.showTooltip();
         
         

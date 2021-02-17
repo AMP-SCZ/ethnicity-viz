@@ -80,11 +80,10 @@ class BarVis {
         enrollCount1= tmp[0]
         totalEnroll1= tmp[1]
         
-        
         vis.x.domain(enrollCount.map(d=>d.group));
         vis.xAxis.scale(vis.x);
         vis.gx.transition().duration(1000).call(vis.xAxis);
-
+        
         vis.y.domain([0, d3.max([enrollCount.map(d=>d.visit), enrollCount1.map(d=>d.visit)].flat())]);
         
         vis.yAxis.scale(vis.y);
@@ -134,6 +133,7 @@ class BarVis {
         
         
         // labels
+        // FIXME labels animation: vis.svg renders the animation correctly
         let labels = vis.patterng
             .selectAll(`.bar.count.${vis.statType}`)
             .data(vis.enrollCount, d => d.group)
@@ -153,7 +153,6 @@ class BarVis {
         
         
         vis.showTooltip(vis.statType, vis.totalEnroll);
-        
 
     }
 

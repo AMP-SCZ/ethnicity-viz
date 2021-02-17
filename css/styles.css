@@ -25,6 +25,13 @@ body {
     font-weight: bold;
 }
 
+.plot-title {
+    fill: black;
+    text-anchor: middle;
+    font-size: 16px;
+    font-weight: bold;
+}
+
 
 #legend svg {
     width: 100px;
@@ -35,9 +42,15 @@ hr {
     border-top: 2px solid rgba(0,0,0,.1);
 }
 
-.label {
-    fill: black;
+.bar.label {
     text-anchor: middle;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.pie.label {
+    fill: white;
+    text-anchor: middle;
+    font-size: 18px;
     font-weight: bold;
 }
