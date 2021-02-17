@@ -22,14 +22,15 @@ class PieVis {
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
 
-        // init drawing area
+        // Init drawing area
         vis.svg = d3
             .select('#' + vis.parentElement)
             .append('svg')
             .attr('viewBox', `0 0 ${width} ${height}`)
             .append('g')
             .attr('transform', `translate(${vis.margin.left}, ${vis.margin.top})`);
-
+        
+        
         
         // Pie layout
         vis.pie = d3.pie()
@@ -44,6 +45,15 @@ class PieVis {
         vis.patterng = vis.svg.append('g')
             .attr('transform', `translate(${vis.width/2}, ${vis.height/2})`);
 
+        // Draw an outer circle
+        vis.patterng
+            .append('circle')
+            .attr('cx',0)
+            .attr('cy',0)
+            .attr('r', vis.width/3)
+            .attr('fill','none')
+            .attr('stroke', 'black')
+            .attr('stroke-width', '2px')
 
         // Append tooltip
         vis.tooltip = d3.select('body').append('div').attr('class', 'tooltip')
