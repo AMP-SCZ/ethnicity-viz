@@ -1,5 +1,5 @@
 // init global variables & switches
-let barVis, pieVis;
+// let barVis, pieVis, pieVis1, tableVis;
 
 
 let sharedGreen = '#28794C';
@@ -50,6 +50,9 @@ function initMainPage(dataArray) {
     pieVis = new PieVis('pie-chart', dataArray[0], 'Actual');
     // init pie chart for expected
     pieVis1 = new PieVis('pie-chart', dataArray[1], 'Expected');
+    
+    // init table chart
+    tableVis = new TableVis('pie-chart', dataArray[0], dataArray[1]);
 
 }
 
@@ -61,6 +64,6 @@ function _wrangleData() {
     barVis.wrangleData()
     pieVis.wrangleData()
     pieVis1.wrangleData()
-    
+    tableVis.wrangleData()
 }
 
