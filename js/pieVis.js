@@ -165,7 +165,7 @@ class PieVis {
     }
 }
 
-
+/*
 function count(enrollData) {
     
     let selectedSite = $('#site-name').val();
@@ -215,4 +215,4 @@ function count(enrollData) {
     
 }
 
-
+*/
