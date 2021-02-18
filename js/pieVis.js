@@ -115,7 +115,7 @@ class PieVis {
             .attr('transform', d=> {
                 // Use d3.arc() to be able to suitably position the labels
                 d.innerRadius= 0
-                d.outerRadius= vis.width/2
+                d.outerRadius= vis.width/2-10
                 return "translate("+ d3.arc().centroid(d)+")"
                 
             })

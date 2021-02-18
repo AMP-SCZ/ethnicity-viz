@@ -61,7 +61,7 @@ class BarVis {
         vis.svg.append("text")
             .attr("x", vis.margin.left-5)
             .attr("y", -15)
-            .attr("class", "y-title plot-title")
+            .attr("class", "y-title")
             .text("Enrollment")
                 
         vis.wrangleData();
