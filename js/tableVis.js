@@ -64,8 +64,8 @@ function writeRow(table, field, value) {
     
     let row= table.insertRow(-1)
     row.insertCell(0).innerHTML= field
-    row.insertCell(1).innerHTML= value[0]
-    row.insertCell(2).innerHTML= value[1]
+    row.insertCell(1).innerHTML= value[0]>=0?d3.format(',')(value[0]):value[0]
+    row.insertCell(2).innerHTML= value[1]>=0?d3.format(',')(value[1]):value[1]
 
 }
 
