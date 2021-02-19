@@ -53,7 +53,9 @@ function initMainPage(dataArray) {
     
     // init table chart
     tableVis = new TableVis('pie-chart', dataArray[0], dataArray[1]);
-
+    
+    // init summary widget
+    summaryVis = new SummaryVis('summary', dataArray[0]);
 }
 
 function _wrangleData() {
@@ -65,5 +67,6 @@ function _wrangleData() {
     pieVis.wrangleData()
     pieVis1.wrangleData()
     tableVis.wrangleData()
+    summaryVis.wrangleData()
 }
 
