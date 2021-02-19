@@ -38,11 +38,10 @@ class SummaryVis {
 			.range([vis.height, 0]);
         
         // Initialize area function
-		vis.area = d3.area()
-			.curve(d3.curveCardinal)
+		vis.area = d3.line()
 			.x(d=> vis.x(d.date))
-			.y0(d=> vis.y(0))
-			.y1(d=> vis.y(d.cumVisit));
+			.y(d=> vis.y(d.cumVisit))
+            .interpolate('cubic')
 
         
 		// Append path
@@ -83,9 +82,7 @@ class SummaryVis {
         
         // Render path
         vis.svg.select(".area")           
-        // vis.path
-            .datum(vis.cumData)
-            .attr("d", vis.area)
+            .attr("d", vis.area(vis.cumData))
             .transition()
             .duration(1000)
             .attr('stroke', 'black')
