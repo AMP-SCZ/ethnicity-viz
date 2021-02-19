@@ -23,9 +23,9 @@
         
         <h3>Ethnicity Visualization</h3>
         <hr>
-        <br>
         
-    	<div class="col-6">
+        
+    	<div class="col-8">
 			<div class="row">
                 <!-- Site selector -->
                 <div class="col-3">
@@ -39,18 +39,39 @@
                 </div>
         
                 <!-- Date range -->
-                <div class="col-sm-3">
-                    Time Period &nbsp;<input placeholder="MM/DD/YY" id="lower"/> -- <input placeholder="MM/DD/YY" id="upper"/>&nbsp;
+                <div class="col-5">
+                    Time Period
+                    <br>
+                    <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
                     <button class="btn btn-primary" id="time-filter" onclick=_wrangleData()>Filter</button>
                 </div>
             </div>
             
-            <!-- Line graph -->
+            <hr>
+            
             <div class="row">
-                <div id="line-graph" style="height: 100%; width: 100%"></div>                
+                <!-- Bar chart -->
+                <div class="col-8">
+                    <div class="row">
+                        <div id="bar-chart" style="height: 100%; width: 100%"></div>
+                    </div>
+                    <hr style="margin: 30px">
+                    <div class="row justify-content-center">
+                    
+                        <div class="col-6">
+                            <table class="table table-striped" id="table-vis">
+                            </table>
+                        </div>
+                        
+                    </div>
+                </div>
+                <!-- Pie chart -->
+                <div class="col-4">
+                    <div id="pie-chart" style="height: 100%; width: 100%"></div>
+                </div>
             </div>
         </div>
-
+        
         
         
         <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -66,6 +87,8 @@
             crossorigin="anonymous"
         ></script>
         <script src="js/ethnVis.js"></script>
+        <script src="js/pieVis.js"></script>
+        <script src="js/tableVis.js"></script>
         <script src="js/main.js"></script>
     </body>
 </html>
