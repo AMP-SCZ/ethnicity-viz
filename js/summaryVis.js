@@ -41,7 +41,7 @@ class SummaryVis {
 		vis.area = d3.line()
 			.x(d=> vis.x(d.date))
 			.y(d=> vis.y(d.cumVisit))
-            .interpolate('cubic')
+
 
         
 		// Append path
