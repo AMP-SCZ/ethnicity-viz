@@ -50,14 +50,6 @@ class SummaryVis {
             .attr("fill", "none")
             
         
-        // Plot-title
-        /*
-        vis.title= vis.svg.append("text")
-            .attr("x", vis.width/2)
-            .attr("y", vis.height/10)
-            .attr("class", "y-title plot-title")
-        */
-        
         vis.wrangleData();
     }
 
@@ -81,10 +73,10 @@ class SummaryVis {
         vis.y.domain([0, d3.max(vis.cumData, d=>d.cumVisit)])
         
         // Render path
-        vis.svg.select(".area")           
-            .attr("d", vis.area(vis.cumData))
+        vis.svg.select(".area")
             .transition()
             .duration(1000)
+            .attr("d", vis.area(vis.cumData))
             .attr('stroke', 'black')
              
         document.getElementById('category').innerHTML= $('#site-name').val()
