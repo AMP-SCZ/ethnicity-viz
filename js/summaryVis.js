@@ -14,7 +14,7 @@ class SummaryVis {
         let vis = this;
 
         const width = 200;
-        const height = 200;
+        const height = 125;
 
         vis.margin = { top: 10, right: 10, bottom: 10, left: 10 };
         vis.width = width - vis.margin.left - vis.margin.right;
@@ -115,15 +115,22 @@ function cumCount(enrollData) {
     // Filter by date
     filteredData= siteData.filter(d => d.date>=lower && d.date<=upper)
     
-    cumData= []
-    filteredData.forEach((d,i)=> {
+    // Count visits per day
+    let count= {}
+    filteredData.forEach(d=> count[d.date]=count[d.date]?count[d.date]+=1:1)
+    
+    // Calculate cumulative sum
+    let cumData= []
+    Object.keys(count).forEach((d,i)=>
         cumData.push(
             {
-                date: d.date,
-                cumVisit: i+1
+                date: d,
+                // days[i-1] is actually d--the current date
+                cumVisit: i>0?count[d]+cumData[i-1].cumVisit:count[d]
             }
         )
-    })
+    )
+    
     
     return cumData
     
