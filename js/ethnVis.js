@@ -59,7 +59,7 @@ class BarVis {
         
         // Y-title
         vis.svg.append("text")
-            .attr("x", vis.margin.left-5)
+            .attr("x", vis.margin.left+10)
             .attr("y", -15)
             .attr("class", "y-title")
             .text("Enrollment")
