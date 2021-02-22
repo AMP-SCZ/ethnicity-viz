@@ -50,16 +50,47 @@
             <hr>
             
             <div class="row">
+                
                 <!-- Bar chart -->
                 <div class="col-8">
-                    <div class="row">
-                        <div id="bar-chart" style="height: 100%; width: 100%"></div>
+                    
+                    <div>
+                        <button class="btn btn-primary" onclick="switchView()">Switch view</button>
                     </div>
+                    <br>
+                    <!--
+                    <div class="row justify-content-center" style="height: 5%">
+                        <button class="btn btn-primary align-self-center" onclick="switchView()">Switch view</button>
+                    </div>
+                    -->
+                    
+                    <!-- Carousel start -->
+                    <div id="stateCarousel" class="carousel slide" data-ride="carousel" style=" width: 100%">
+                        <div class="carousel-inner">
+                        
+                            <!-- Element 1 -->
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div id="cumul-line" style="height: 100%; width: 100%"></div>
+                                </div>
+                            </div>
+                            
+                            <!-- Element 2 -->
+                            <div class="carousel-item">
+                                <div class="row">
+                                    <div id="bar-chart" style="height: 100%; width: 100%"></div>
+                                </div>
+                            </div>
+                                  
+                    <!-- Carousel end -->
+                        </div>
+                    </div>
+                    
                     <hr style="margin: 30px">
                     <div class="row justify-content-center">
                     
                         <div class="col-6">
-                            <table class="table table-striped" id="table-vis">
+                            <table class="table table-striped table-hover" id="table-vis">
                             </table>
                         </div>
                         
