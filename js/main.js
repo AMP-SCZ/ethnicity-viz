@@ -70,3 +70,22 @@ function _wrangleData() {
     summaryVis.wrangleData()
 }
 
+
+/* * * * * * * * * * * * * *
+*         Carousel         *
+* * * * * * * * * * * * * */
+
+// define carousel behaviour
+let carousel = $('#stateCarousel');
+
+// prevent rotating
+carousel.carousel({
+    interval: false
+})
+
+// on button click switch view
+function switchView(){
+    carousel.carousel('next')
+    $('#switchView').html() === 'bar view'  ? $('#switchView').html('line view') : $('#switchView').html('bar view');
+}
+
