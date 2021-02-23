@@ -85,7 +85,6 @@ class BarVis {
         vis.gx.transition().duration(1000).call(vis.xAxis);
         
         vis.y.domain([0, d3.max([enrollCount.map(d=>d.visit), enrollCount1.map(d=>d.visit)].flat())]);
-        
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);      
         

@@ -56,6 +56,9 @@ function initMainPage(dataArray) {
     
     // init summary widget
     summaryVis = new SummaryVis('summary', dataArray[0]);
+    
+    // init line chart
+    lineVis = new LineVis('cumul-line', dataArray[0]);
 }
 
 function _wrangleData() {
@@ -68,6 +71,7 @@ function _wrangleData() {
     pieVis1.wrangleData()
     tableVis.wrangleData()
     summaryVis.wrangleData()
+    lineVis.wrangleData()
 }
 
 

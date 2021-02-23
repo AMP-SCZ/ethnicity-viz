@@ -117,7 +117,7 @@ function cumCount(enrollData) {
         cumData.push(
             {
                 date: d,
-                // days[i-1] is actually d--the current date
+                // d is actually days[i]--the current date
                 cumVisit: i>0?count[d]+cumData[i-1].cumVisit:count[d]
             }
         )
