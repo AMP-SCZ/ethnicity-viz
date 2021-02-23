@@ -37,13 +37,14 @@ class LineVis {
 			.range([vis.height, 0]);
         
         // Axes
-        vis.xAxis = d3.axisBottom();
+        vis.xAxis = d3.axisBottom()
+            .tickFormat(d3.timeFormat("%b %y"))
         vis.yAxis = d3.axisLeft();
 
         vis.gx = vis.svg
             .append('g')
             .attr('class', 'axis x-axis')
-            .attr('transform', `translate(${vis.margin.left-15}, ${vis.height + 15})`);
+            .attr('transform', `translate(${vis.margin.left}, ${vis.height + 15})`);
 
         vis.gy = vis.svg
             .append('g')
@@ -124,8 +125,8 @@ function groupCumCount(enrollData) {
     let selectedSite = $('#site-name').val();
         
     // Filter by site
-    // let siteData = enrollData.filter(d=>d.site===selectedSite)
-    let siteData= enrollData
+    let siteData = enrollData.filter(d=>d.site===selectedSite)
+    // let siteData= enrollData
     
     // Date parser
     let parseDate = d3.timeParse("%m/%d/%Y");
