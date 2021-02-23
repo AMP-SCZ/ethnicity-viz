@@ -54,3 +54,7 @@ hr {
     font-size: 18px;
     font-weight: bold;
 }
+
+.table::after {
+    background: red;
+}
