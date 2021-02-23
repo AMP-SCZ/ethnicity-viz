@@ -38,7 +38,7 @@ class LineVis {
         
         // Axes
         vis.xAxis = d3.axisBottom()
-            .tickFormat(d3.timeFormat("%b %y"))
+            // .tickFormat(d3.timeFormat("%b %y"))
         vis.yAxis = d3.axisLeft();
 
         vis.gx = vis.svg
@@ -59,8 +59,9 @@ class LineVis {
 
         // Initialize area function
 		vis.area = d3.line()
+			// .x(d=> {console.log(d3.timeFormat("%b/%d/%y")(d.date), d.cumVisit, vis.x(d.date)); return vis.x(d.date)})
 			.x(d=> vis.x(d.date))
-			.y(d=> vis.y(d.cumVisit))
+            .y(d=> vis.y(d.cumVisit))
         
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -72,7 +73,7 @@ class LineVis {
         let vis = this;
         
         // Obtain cumulative total
-        [vis.cumData, vis.maxVisit]= groupCumCount(vis.enrollData)
+        [vis.cumData, vis.maxVisit, vis.lower, vis.upper]= groupCumCount(vis.enrollData)
                  
         vis.updateVis();
     }
@@ -82,7 +83,8 @@ class LineVis {
 
         // Set domains
         // X domain dates
-        vis.x.domain(d3.extent(vis.enrollData, d=>d.date))
+        // vis.x.domain(d3.extent(vis.cumData, d=>d.date))
+        vis.x.domain([vis.lower, vis.upper])
         vis.xAxis.scale(vis.x);
         vis.gx.transition().duration(1000).call(vis.xAxis);
         
@@ -105,7 +107,7 @@ class LineVis {
         vis.curve
             .transition()
             .duration(1000)
-            .attr("d", d=> vis.area(vis.cumData[d]))
+            .attr("d", d=> {console.log(d); return vis.area(vis.cumData[d])})
             .attr('class', `curve`)
             .attr('stroke', d=> pieColors[d])
             .attr("fill", "none")
@@ -162,9 +164,13 @@ function groupCumCount(enrollData) {
             )
             maxVisit=cumVisit>maxVisit?cumVisit:maxVisit
         })
+        
+        // sort cumData[r] by date
+        // cumData[r].sort((a,b)=>a.date>b.date?0:-1)
     })
     
+    console.log(cumData)
     
-    return [cumData, maxVisit]
+    return [cumData, maxVisit, lower, upper]
     
 }
