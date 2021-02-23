@@ -78,6 +78,7 @@ class SummaryVis {
             .duration(1000)
             .attr("d", vis.area(vis.cumData))
             .attr('stroke', 'black')
+            .attr('stroke-width', 2)
              
         document.getElementById('category').innerHTML= $('#site-name').val()
         document.getElementById('category-count').innerHTML= vis.cumData[vis.cumData.length-1].cumVisit
