@@ -111,7 +111,7 @@ class LineVis {
             .attr('class', `curve`)
             .attr('stroke', d=> pieColors[d])
             .attr("fill", "none")
-            .attr('stroke-width', 2)
+            .attr('stroke-width', 3)
         
         tmp.exit().remove();
         
