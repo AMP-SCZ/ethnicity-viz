@@ -53,7 +53,12 @@ function initMainPage(dataArray) {
     
     // init table chart
     tableVis = new TableVis('pie-chart', dataArray[0], dataArray[1]);
-
+    
+    // init summary widget
+    summaryVis = new SummaryVis('summary', dataArray[0]);
+    
+    // init line chart
+    lineVis = new LineVis('cumul-line', dataArray[0]);
 }
 
 function _wrangleData() {
@@ -65,5 +70,26 @@ function _wrangleData() {
     pieVis.wrangleData()
     pieVis1.wrangleData()
     tableVis.wrangleData()
+    summaryVis.wrangleData()
+    lineVis.wrangleData()
+}
+
+
+/* * * * * * * * * * * * * *
+*         Carousel         *
+* * * * * * * * * * * * * */
+
+// define carousel behaviour
+let carousel = $('#stateCarousel');
+
+// prevent rotating
+carousel.carousel({
+    interval: false
+})
+
+// on button click switch view
+function switchView(){
+    carousel.carousel('next')
+    $('#switchView').html() === 'bar view'  ? $('#switchView').html('line view') : $('#switchView').html('bar view');
 }
 
