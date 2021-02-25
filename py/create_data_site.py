@@ -8,9 +8,9 @@ start_date= date(2019,12,1)
 end_date= date(2021,2,24)
 delta= timedelta(days=2)
 
-races=['Asian','White','Black','Unknown']
-eths=['Hispanic or Latino','Not Hispanic or Latino','Unknown']
-sex=['Female','Male','Unknown']
+races=['Asian','White','Black','Unknown/Not Reported']
+eths=['Hispanic or Latino','Not Hispanic or Latino','Unknown/Not Reported Ethnicity']
+sex=['Female','Male','Unknown/Not Reported']
 wellness=['Patient','Healthy']
 
 races_prob= [0.20,0.50,0.25,0.05]
