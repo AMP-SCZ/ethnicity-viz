@@ -4,6 +4,7 @@ ethn_hash= {
     "Unknown/Not Reported Ethnicity": 6
 }
 
+// Sexes start from col index 1 of the html table
 // Subtract 1 for numeric operation
 sex_hash= {
     "Female": 1,
@@ -11,7 +12,7 @@ sex_hash= {
     "Unknown/Not Reported": 3
 }
 
-// Races start from row index 3
+// Races start from row index 3 of the html table
 // Subtract 3 for numeric operation
 race_hash= {
     "Asian": 3,
@@ -24,7 +25,7 @@ race_hash= {
 let ethn_count= new Array(5).fill(0).map(() => new Array(10).fill(0))
 
 
-d3.csv('../data/PRESCIENT/Sydney_metadata.csv').then(data=> {
+d3.csv('../data/PRESCIENT/Adelaide_metadata.csv').then(data=> {
     
     data.forEach(d=> {
         
@@ -63,7 +64,6 @@ d3.csv('../data/PRESCIENT/Sydney_metadata.csv').then(data=> {
     
     // Write table separately so we don't modify innerText over and over again
     ethn_count.forEach((row,i)=> {
-        
         row.forEach((col,j)=> {
             table.rows[i+3].cells[j+1].innerText=d3.format(',')(col)
         })
