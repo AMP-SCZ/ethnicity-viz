@@ -24,7 +24,7 @@ race_hash= {
 let ethn_count= new Array(5).fill(0).map(() => new Array(10).fill(0))
 
 
-d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> {
+d3.csv('../data/PRESCIENT/Sydney_metadata.csv').then(data=> {
     
     data.forEach(d=> {
         
@@ -39,24 +39,27 @@ d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> {
         // console.log(r,row_ind)
         ethn_count[row_ind][col_ind]+=1
         
-        
-        
-        
-        // table.rows[race_hash-3][ethn_hash+sex_hash].innerText=''
-        // Convert to number
-        // Increment by 1
-        // Write back
-    
     })
     
-    console.log(ethn_count)
-    
+
     table= document.getElementById('ethnic-report')
-    
+    R= 4
+    C= 9
     ethn_count.forEach((row,i)=> {
+        
         row.forEach((col,j)=> {
+            
+            if (i<R && j<C) {
+                ethn_count[i][C]+= ethn_count[i][j]
+                ethn_count[R][j]+= ethn_count[i][j]
+            } else if (i==R && j<C) {
+                ethn_count[R][C]+= ethn_count[R][j]
+            }
+            
             table.rows[i+3].cells[j+1].innerText=d3.format(',')(ethn_count[i][j])
         })
     })
     
+    console.log(ethn_count)
+
 })
