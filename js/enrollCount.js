@@ -50,16 +50,23 @@ d3.csv('../data/PRESCIENT/Sydney_metadata.csv').then(data=> {
         row.forEach((col,j)=> {
             
             if (i<R && j<C) {
-                ethn_count[i][C]+= ethn_count[i][j]
-                ethn_count[R][j]+= ethn_count[i][j]
+                ethn_count[i][C]+= col
+                ethn_count[R][j]+= col
             } else if (i==R && j<C) {
-                ethn_count[R][C]+= ethn_count[R][j]
-            }
+                ethn_count[R][C]+= col
+            }            
             
-            table.rows[i+3].cells[j+1].innerText=d3.format(',')(ethn_count[i][j])
         })
     })
     
     console.log(ethn_count)
-
+    
+    // Write table separately so we don't modify innerText over and over again
+    ethn_count.forEach((row,i)=> {
+        
+        row.forEach((col,j)=> {
+            table.rows[i+3].cells[j+1].innerText=d3.format(',')(col)
+        })
+    })
+    
 })
