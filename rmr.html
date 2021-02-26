@@ -29,7 +29,7 @@
                 
                     <!-- Network selector -->
                     <div class="col-3">
-                        U01 Network &nbsp;
+                        U01 Network&nbsp;
                         <select class="form-control" id="site-name" onchange=_wrangleData()>
                             <option value="All" selected>All</option>
                             <option value="ProNET">ProNET</option>
@@ -41,12 +41,23 @@
                     <!-- Site selector -->
                     <div class="col-4">
                         Imaging Site (Ctrl/Cmd+Click for multi select)&nbsp;
-                        <select class="form-control" id="site-name" onchange=_wrangleData()>
+                        <select class="form-control" id="site-name" multiple onchange=_wrangleData()>
+                            <option value="All" selected>All</option>
                             <!-- Generate dynamic list -->
-                            <option value="BWH" selected>BWH</option>
+                            <option value="BWH">BWH</option>
                             <option value="MGH">MGH</option>
                             <option value="McLean">McLean</option>
                             <option value="PNC">PNC</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Wellness selector -->
+                    <div class="col-4">
+                        Wellness&nbsp;
+                        <select class="form-control" id="site-name" onchange=_wrangleData()>
+                            <option value="All" selected>All</option>
+                            <option value="Healthy">Healthy</option>
+                            <option value="Patient">Patient</option>
                         </select>
                     </div>
                     
@@ -69,7 +80,7 @@
                 .tg .tg-0lax{text-align:left;vertical-align:top}
                 thead {font-weight:bold}
                 </style>
-                <table class="tg table-striped">
+                <table class="tg table-striped" id='rmr-report'>
                 <thead>
                   <tr>
                     <th class="tg-0pky">Tri Yearly Milestones</th>
@@ -353,6 +364,8 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
+        
+        <script>enrollCount.js</script>
 
     </body>
 
