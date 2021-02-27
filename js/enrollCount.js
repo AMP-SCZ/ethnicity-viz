@@ -1,3 +1,4 @@
+// the following categories are priori
 ethn_hash= {
     "Not Hispanic or Latino": 0,
     "Hispanic or Latino": 3,
@@ -22,10 +23,20 @@ race_hash= {
 }
 
 
-let ethn_count= new Array(5).fill(0).map(() => new Array(10).fill(0))
+// Site name is extracted from {site}_matadata.csv
+// ProNET and PRESCIENT folder names are used to realize which csvs belong to them
+
+// Append all csvs to generate combined `data`
+// Filter them by date range in O(n) time
+// Show count for either healthy or patient
 
 
-d3.csv('../data/PRESCIENT/Adelaide_metadata.csv').then(data=> {
+d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> ethnCount(data))
+
+
+function ethnCount(data) {
+    
+    let ethn_count= new Array(5).fill(0).map(() => new Array(10).fill(0))
     
     data.forEach(d=> {
         
@@ -44,8 +55,8 @@ d3.csv('../data/PRESCIENT/Adelaide_metadata.csv').then(data=> {
     
 
     table= document.getElementById('ethnic-report')
-    R= 4
-    C= 9
+    R= ethn_count.length-1
+    C= ethn_count[0].length-1
     ethn_count.forEach((row,i)=> {
         
         row.forEach((col,j)=> {
@@ -69,4 +80,4 @@ d3.csv('../data/PRESCIENT/Adelaide_metadata.csv').then(data=> {
         })
     })
     
-})
+}
