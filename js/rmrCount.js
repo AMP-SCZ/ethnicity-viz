@@ -53,7 +53,7 @@ function rmrCount(data) {
     })
     
     
-    report_dates.map((d,i)=> {
+    report_dates.forEach((d,i)=> {
         if (i>0 && total[i]) {
             total[i]=total[i]+total[i-1]
             totalHisp[i]=totalHisp[i]+totalHisp[i-1]
@@ -65,9 +65,21 @@ function rmrCount(data) {
     console.log("Total")
     console.log(total)
     
+    console.log("Racial Minority")
+    console.log(totalMinor)
+    
     console.log("Hispanic or Latino")
     console.log(totalHisp)
     
-    console.log("Racial Minority")
-    console.log(totalMinor)
+    
+    table= document.getElementById('rmr-report')
+    
+    report_dates.forEach((d,i)=> {
+        if (total[i]) {
+            table.rows[2].cells[i+1].innerText=d3.format(',')(total[i])
+            table.rows[6].cells[i+1].innerText=d3.format(',')(totalMinor[i])
+            table.rows[10].cells[i+1].innerText=d3.format(',')(totalHisp[i])
+        }
+    })
 }
+
