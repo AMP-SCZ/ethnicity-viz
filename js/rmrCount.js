@@ -9,8 +9,8 @@ let total= new Array(7).fill(0)
 let totalHisp= new Array(7).fill(0)
 let totalMinor= new Array(7).fill(0)
 
-let report_dates= ["12-1-2019", "4-1-2020", "8-1-2020", "12-1-2020", "4-1-2021", "8-1-2021", "12-1-2021"].map(
-    d=> d3.timeParse("%m-%d-%Y")(d).getTime()
+let report_dates= ["12/1/2019", "4/1/2020", "8/1/2020", "12/1/2020", "4/1/2021", "8/1/2021", "12/1/2021"].map(
+    d=> d3.timeParse("%m/%d/%Y")(d).getTime()
 )
 console.log(report_dates)
 
