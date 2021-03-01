@@ -30,7 +30,7 @@
                     <!-- Network selector -->
                     <div class="col-3">
                         U01 Network&nbsp;
-                        <select class="form-control" id="network-name" onchange=populateSites()>
+                        <select class="form-control" id="network-name" style="width:fit-content" onchange=populateSites()>
                             <option value="All" selected>All</option>
                             <option value="ProNET">ProNET</option>
                             <option value="PRESCIENT">PRESCIENT</option>
@@ -41,7 +41,7 @@
                     <!-- Site selector -->
                     <div class="col-4">
                         Imaging Site (Ctrl/Cmd+Click for multi select)&nbsp;
-                        <select class="form-control" id="site-name" multiple onchange=getPrefixes()>
+                        <select class="form-control" id="site-name" multiple style="width:fit-content" onchange=getPrefixes()>
                             <!-- Generate dynamic list -->
                         </select>
                     </div>
@@ -49,7 +49,7 @@
                     <!-- Wellness selector -->
                     <div class="col-4">
                         Wellness&nbsp;
-                        <select class="form-control" id="site-name" onchange=_wrangleData()>
+                        <select class="form-control" id="site-name" style="width:fit-content" onchange=_wrangleData()>
                             <option value="All" selected>All</option>
                             <option value="Healthy">Healthy</option>
                             <option value="Patient">Patient</option>
