@@ -30,7 +30,7 @@
                     <!-- Network selector -->
                     <div class="col-3">
                         U01 Network&nbsp;
-                        <select class="form-control" id="network-name" onchange=populateSite()>
+                        <select class="form-control" id="network-name" onchange=populateSites()>
                             <option value="All" selected>All</option>
                             <option value="ProNET">ProNET</option>
                             <option value="PRESCIENT">PRESCIENT</option>
@@ -41,7 +41,7 @@
                     <!-- Site selector -->
                     <div class="col-4">
                         Imaging Site (Ctrl/Cmd+Click for multi select)&nbsp;
-                        <select class="form-control" id="site-name" multiple onchange=_wrangleData()>
+                        <select class="form-control" id="site-name" multiple onchange=getPrefixes()>
                             <!-- Generate dynamic list -->
                         </select>
                     </div>
@@ -224,7 +224,7 @@
             
             <div class="row">
                 <!-- Date range -->
-                <div class="col-5">
+                <div class="col">
                     Time Period
                     <br>
                     <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
@@ -361,6 +361,7 @@
         ></script>
         
         <script src="data/network_site.js"></script>
+        <script src="js/rmrMain.js"></script>
         <script src="js/enrollCount.js"></script>
         <script src="js/rmrCount.js"></script>
         
