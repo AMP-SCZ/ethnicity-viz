@@ -1,3 +1,7 @@
+/* * * * * * * * * * * * * * * * * * * *
+ *         Actual Enrollment Table     *
+ * * * * * * * * * * * * * * * * * * * */
+
 // the following categories are priori
 ethn_hash= {
     "Not Hispanic or Latino": 0,
@@ -23,16 +27,8 @@ race_hash= {
 }
 
 
-// Site name is extracted from {site}_matadata.csv
-// ProNET and PRESCIENT folder names are used to realize which csvs belong to them
-
-// Append all csvs to generate combined `data`
-// Filter them by date range in O(n) time
-// Show count for either healthy or patient
-
-
-d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> ethnCount(data))
-
+// useful for debugging
+// d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> ethnCount(data))
 
 function ethnCount(data) {
     

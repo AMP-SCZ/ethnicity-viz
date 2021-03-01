@@ -1,32 +1,30 @@
-// Populate table with targets from csvs
-
-
-// Calculate actuals
-
+/* * * * * * * * * * * * * *
+ *          RMR Table      *
+ * * * * * * * * * * * * * */
+ 
 let parseDate = d3.timeParse("%Y-%m-%d");
-
-
 
 let report_dates= ["12/1/2019", "4/1/2020", "8/1/2020", "12/1/2020", "4/1/2021", "8/1/2021", "12/1/2021"].map(
     d=> d3.timeParse("%m/%d/%Y")(d).getTime()
 )
 console.log(report_dates)
 
-// TODO
-// apply filter on files
-// do not load all of them
-// or should we load all of them and then filter out dynamically
+// ENH
+// Can we define an object so all csvs are loaded when the page loads and then filter as we go?
+// Currently, desired csvs are loaded on demand.
 
 
-// populateSites()
+// useful for debugging
+// let filePrefixes= ['../data/ProNET/MGH', '../data/ProNET/BWH']
 
 function loadRmrData(filePrefixes) {
-    // let files= ['../data/ProNET/MGH_metadata.csv', '../data/ProNET/BWH_metadata.csv'].map(file=>d3.csv(file))
+    
     let files= filePrefixes.map(file=>d3.csv(file+'_metadata.csv'))
     Promise.all(files).then(data => {
         data= data.flat()
         console.log(data)
         rmrCount(data)
+        ethnCount(data)
     })
 }
     
@@ -101,5 +99,4 @@ function rmrCount(data) {
         }
     })
 }
-
 
