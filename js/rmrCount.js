@@ -23,11 +23,55 @@ function loadRmrData(filePrefixes) {
     Promise.all(files).then(data => {
         data= data.flat()
         console.log(data)
+        
+        // filter by wellness here
+        data= filterByWellness(data)
         rmrCount(data)
+        
+        // filter by date here
+        data= filterByDate(data)
         ethnCount(data)
     })
 }
+
+
+function filterByWellness(data) {
+    wellness= $('#wellness').val()
+    if (wellness!=='All') {
+        filteredData= data.filter(d=> d["Wellness"]===wellness && d)
+    }
+    else
+        filteredData= data
     
+    return filteredData
+}
+
+function filterByDate(siteData) {
+    
+    // Date parser
+    let parseDate = d3.timeParse("%m/%d/%Y");
+
+    // Get input field values and filter
+    let lower= document.getElementById("lower").value
+    let upper= document.getElementById("upper").value
+    
+    lower && (lower=parseDate(lower).getTime())
+    upper && (upper=parseDate(upper).getTime())
+    
+    // FIXME how is date loaded as %Y-%m-%d while we wrote %m/%d/%Y in the csvs?
+    parseDate = d3.timeParse("%Y-%m-%d");
+    if (lower && upper) {
+        // Filter by date
+        filteredData= siteData.filter(d => {
+            let curr_date= parseDate(d["Consent Date"]).getTime()
+            return (curr_date>=lower && curr_date<=upper)
+        })
+    }
+    else
+        filteredData= siteData
+    
+    return filteredData
+}
 
 function rmrCount(data) {
     
