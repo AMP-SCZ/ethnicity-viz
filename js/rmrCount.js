@@ -5,9 +5,7 @@
 
 let parseDate = d3.timeParse("%Y-%m-%d");
 
-let total= new Array(7).fill(0)
-let totalHisp= new Array(7).fill(0)
-let totalMinor= new Array(7).fill(0)
+
 
 let report_dates= ["12/1/2019", "4/1/2020", "8/1/2020", "12/1/2020", "4/1/2021", "8/1/2021", "12/1/2021"].map(
     d=> d3.timeParse("%m/%d/%Y")(d).getTime()
@@ -22,15 +20,22 @@ console.log(report_dates)
 
 // populateSites()
 
-let files= ['../data/ProNET/MGH_metadata.csv', '../data/ProNET/BWH_metadata.csv'].map(file=>d3.csv(file))
-Promise.all(files).then(data => {
-    data= data.flat()
-    console.log(data)
-    rmrCount(data)
-})
+function loadRmrData(filePrefixes) {
+    // let files= ['../data/ProNET/MGH_metadata.csv', '../data/ProNET/BWH_metadata.csv'].map(file=>d3.csv(file))
+    let files= filePrefixes.map(file=>d3.csv(file+'_metadata.csv'))
+    Promise.all(files).then(data => {
+        data= data.flat()
+        console.log(data)
+        rmrCount(data)
+    })
+}
     
 
 function rmrCount(data) {
+    
+    let total= new Array(7).fill(0)
+    let totalHisp= new Array(7).fill(0)
+    let totalMinor= new Array(7).fill(0)
     
     data.forEach(d=> {
         curr_date= parseDate(d["Consent Date"]).getTime()
