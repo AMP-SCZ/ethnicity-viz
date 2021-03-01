@@ -14,7 +14,21 @@ let report_dates= ["12/1/2019", "4/1/2020", "8/1/2020", "12/1/2020", "4/1/2021",
 )
 console.log(report_dates)
 
-d3.csv('../data/ProNET/MGH_metadata.csv').then(data=> rmrCount(data))
+// TODO
+// apply filter on files
+// do not load all of them
+// or should we load all of them and then filter out dynamically
+
+
+populateSite()
+
+let files= ['../data/ProNET/MGH_metadata.csv', '../data/ProNET/BWH_metadata.csv'].map(file=>d3.csv(file))
+Promise.all(files).then(data => {
+    data= data.flat()
+    console.log(data)
+    rmrCount(data)
+})
+    
 
 function rmrCount(data) {
     
@@ -83,3 +97,23 @@ function rmrCount(data) {
     })
 }
 
+
+function populateSite() {
+    
+    let network= $('#network-name').val()
+    $('#site-name').empty();
+    $('#site-name').append(new Option('All', 'All'))
+    
+    if (network==="All") {
+        combinedSites= [networkSite['ProNET'], networkSite['PRESCIENT']].flat()
+        combinedSites.sort((a,b)=> a>b?1:-1)
+        combinedSites.forEach(s=> $('#site-name').append(new Option(s, s)))
+        
+    }
+    else {
+        networkSite[network].sort((a,b)=> a>b?1:-1)
+        networkSite[network].forEach(s=> $('#site-name').append(new Option(s, s)))
+    
+    }
+    
+}
