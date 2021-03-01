@@ -20,7 +20,7 @@ console.log(report_dates)
 // or should we load all of them and then filter out dynamically
 
 
-populateSite()
+// populateSites()
 
 let files= ['../data/ProNET/MGH_metadata.csv', '../data/ProNET/BWH_metadata.csv'].map(file=>d3.csv(file))
 Promise.all(files).then(data => {
@@ -98,22 +98,3 @@ function rmrCount(data) {
 }
 
 
-function populateSite() {
-    
-    let network= $('#network-name').val()
-    $('#site-name').empty();
-    $('#site-name').append(new Option('All', 'All'))
-    
-    if (network==="All") {
-        combinedSites= [networkSite['ProNET'], networkSite['PRESCIENT']].flat()
-        combinedSites.sort((a,b)=> a>b?1:-1)
-        combinedSites.forEach(s=> $('#site-name').append(new Option(s, s)))
-        
-    }
-    else {
-        networkSite[network].sort((a,b)=> a>b?1:-1)
-        networkSite[network].forEach(s=> $('#site-name').append(new Option(s, s)))
-    
-    }
-    
-}
