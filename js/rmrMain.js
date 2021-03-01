@@ -44,7 +44,7 @@ function getPrefixes() {
     }
     
     network.forEach(n=> {
-        networkSite[n].forEach(s=> filePrefixes.push(`../data/${n}/${s}_`))
+        networkSite[n].forEach(s=> filePrefixes.push(`../data/${n}/${s}`))
     })
     
     
@@ -67,5 +67,7 @@ function getPrefixes() {
     }    
     
     console.log(selectedPrefixes)
+    loadRmrData(selectedPrefixes)
     
 }
+
