@@ -66,9 +66,9 @@ function loadRmrData(filePrefixes) {
                     table.rows[9].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
                     
                     // actual/target ratio
-                    table.rows[3].cells[i+1].innerText=calcRatio(table.rows[2].cells[i+1], totalTarget[i])
-                    table.rows[7].cells[i+1].innerText=calcRatio(table.rows[6].cells[i+1], totalMinorTarget[i])
-                    table.rows[11].cells[i+1].innerText=calcRatio(table.rows[10].cells[i+1], totalHispTarget[i])
+                    table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
+                    table.rows[7].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
+                    table.rows[11].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
                     
                     // status
                     /*
@@ -85,10 +85,6 @@ function loadRmrData(filePrefixes) {
 
 
 function calcRatio(actual, target) {
-    if (actual.innerText==='')
-        return ''
-    
-    actual= +actual.innerText.replace(/,/g, '')
     
     if (actual==0 && target==0)
         return '~'
@@ -138,11 +134,13 @@ function filterByDate(siteData) {
     return filteredData
 }
 
+let total, totalHisp, totalMinor
+
 function rmrCount(data) {
     
-    let total= new Array(7).fill(0)
-    let totalHisp= new Array(7).fill(0)
-    let totalMinor= new Array(7).fill(0)
+    total= new Array(7).fill(0)
+    totalHisp= new Array(7).fill(0)
+    totalMinor= new Array(7).fill(0)
     
     data.forEach(d=> {
         curr_date= parseDate(d["Consent Date"]).getTime()
