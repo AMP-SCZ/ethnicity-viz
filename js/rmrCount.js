@@ -37,14 +37,8 @@ function loadMetaData(filePrefixes) {
 
 function calcRatio(actual, target) {
     
-    if (actual==0 && target==0)
-        return '~'
-    else if (actual>0 && target==0)
-        ratio=1
-    else
-        ratio=actual/target
+    return target>0?`${Math.round(actual/target*100)}%`:'~'
     
-    return `${Math.round(ratio*100)}%`
 }
 
 function filterByWellness(data) {
