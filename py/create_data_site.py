@@ -6,7 +6,7 @@ from datetime import date, timedelta
 
 start_date= date(2019,11,1)
 end_date= date(2021,2,24)
-delta= timedelta(days=2)
+delta= timedelta(days=5)
 
 races=['Asian','White','Black','Unknown/Not Reported']
 eths=['Hispanic or Latino','Not Hispanic or Latino','Unknown/Not Reported Ethnicity']
@@ -15,7 +15,7 @@ wellness=['Patient','Healthy']
 
 races_prob= [0.20,0.50,0.25,0.05]
 races_prob= [0.10,0.70,0.15,0.05]
-races_prob= [0.10,0.60,0.05,0.25]
+races_prob= [0.05,0.90,0.05,0.00]
 # races_prob= [0.10,0.70,0.10,0.10]
 
 eths_prob= [0.15,0.75,0.10]
@@ -31,13 +31,13 @@ sex_prob= [0.50,0.50,0.00]
 wellness_prob= [0.8,0.2]
 # wellness_prob= [0.90,0.10]
 
-outfile= f'../data/ProNET/MGH_metadata.csv'
-outfie= f'../data/ProNET/BWH_metadata.csv'
-outfie= f'../data/ProNET/Yale_metadata.csv'
+# outfile= f'../data/ProNET/MGH_metadata.csv'
+outfile= f'../data/ProNET/BWH_metadata.csv'
+# outfile= f'../data/ProNET/Yale_metadata.csv'
 
-outfie= f'../data/PRESCIENT/Adelaide_metadata.csv'
-outfie= f'../data/PRESCIENT/Melbourne_metadata.csv'
-outfie= f'../data/PRESCIENT/Sydney_metadata.csv'
+# outfile= f'../data/PRESCIENT/Adelaide_metadata.csv'
+# outfile= f'../data/PRESCIENT/Melbourne_metadata.csv'
+# outfile= f'../data/PRESCIENT/Sydney_metadata.csv'
 
 
 df= pd.DataFrame(columns=['Consent Date','Race','Ethnicity','Sex','Wellness'])
