@@ -17,7 +17,7 @@ console.log(report_dates)
 // useful for debugging
 // let filePrefixes= ['../data/ProNET/MGH', '../data/ProNET/BWH']
 
-function loadRmrData(filePrefixes) {
+function loadMetaData(filePrefixes) {
     
     let files= filePrefixes.map(file=>d3.csv(file+'_metadata.csv'))
     Promise.all(files).then(data => {
@@ -34,6 +34,41 @@ function loadRmrData(filePrefixes) {
     })
 }
 
+
+function loadRmrData(filePrefixes) {
+    let totalTarget= new Array(7).fill(0)
+    let totalMinorTarget= new Array(7).fill(0)
+    let totalHispTarget= new Array(7).fill(0)
+    
+    let files= filePrefixes.map(file=>d3.csv(file+'_plan.csv'))
+    
+    let currTarget
+    files.forEach(f=> {
+        Promise.any([f]).then(data => {
+            
+            currTarget= Object.values(data[0]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalTarget[i]+=d)
+            
+            currTarget= Object.values(data[4]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalMinorTarget[i]+=d)
+            
+            currTarget= Object.values(data[8]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalHispTarget[i]+=d)
+            
+            
+            table= document.getElementById('rmr-report')
+            
+            report_dates.forEach((d,i)=> {
+                if (totalTarget[i]) {
+                    table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
+                    table.rows[5].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
+                    table.rows[9].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                }
+            })
+        
+        })
+    })
+}
 
 function filterByWellness(data) {
     wellness= $('#wellness').val()
