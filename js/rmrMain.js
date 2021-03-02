@@ -51,7 +51,7 @@ function getPrefixes() {
     selectedPrefixes=[]
     selectedSites= $('#site-name').val().length?$('#site-name').val():['All']
     
-    // one of more network + few sites
+    // one or more network + few sites
     if (selectedSites[0]!=='All') {
         selectedSites.forEach(s=> {
             filePrefixes.forEach(f=> {
@@ -67,6 +67,8 @@ function getPrefixes() {
     }    
     
     console.log(selectedPrefixes)
+    
+    loadMetaData(selectedPrefixes)
     loadRmrData(selectedPrefixes)
     
 }
