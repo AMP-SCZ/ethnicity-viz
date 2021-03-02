@@ -34,8 +34,11 @@ function loadMetaData(filePrefixes) {
     })
 }
 
+
 today= new Date().getTime()
 today= d3.timeParse("%m/%d/%Y")("4/1/2021")
+let total, totalHisp, totalMinor
+
 function loadRmrData(filePrefixes) {
     let totalTarget= new Array(7).fill(0)
     let totalMinorTarget= new Array(7).fill(0)
@@ -137,7 +140,6 @@ function filterByDate(siteData) {
     return filteredData
 }
 
-let total, totalHisp, totalMinor
 
 function rmrCount(data) {
     
