@@ -60,14 +60,44 @@ function loadRmrData(filePrefixes) {
             
             report_dates.forEach((d,i)=> {
                 if (totalTarget[i]) {
+                    // total target
                     table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
                     table.rows[5].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
                     table.rows[9].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                    
+                    // actual/target ratio
+                    table.rows[3].cells[i+1].innerText=calcRatio(table.rows[2].cells[i+1], totalTarget[i])
+                    table.rows[7].cells[i+1].innerText=calcRatio(table.rows[6].cells[i+1], totalMinorTarget[i])
+                    table.rows[11].cells[i+1].innerText=calcRatio(table.rows[10].cells[i+1], totalHispTarget[i])
+                    
+                    // status
+                    /*
+                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalTarget[i])
+                    table.rows[8].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
+                    table.rows[12].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                    */
                 }
             })
         
         })
     })
+}
+
+
+function calcRatio(actual, target) {
+    if (actual.innerText==='')
+        return ''
+    
+    actual= +actual.innerText.replace(/,/g, '')
+    
+    if (actual==0 && target==0)
+        return '~'
+    else if (actual>=target)
+        ratio=1
+    else
+        ratio=actual/target
+    
+    return d3.format('.0%')(ratio)
 }
 
 function filterByWellness(data) {
