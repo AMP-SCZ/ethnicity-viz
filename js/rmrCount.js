@@ -34,7 +34,8 @@ function loadMetaData(filePrefixes) {
     })
 }
 
-
+today= new Date().getTime()
+today= d3.timeParse("%m/%d/%Y")("4/1/2021")
 function loadRmrData(filePrefixes) {
     let totalTarget= new Array(7).fill(0)
     let totalMinorTarget= new Array(7).fill(0)
@@ -66,9 +67,11 @@ function loadRmrData(filePrefixes) {
                     table.rows[9].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
                     
                     // actual/target ratio
-                    table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
-                    table.rows[7].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
-                    table.rows[11].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
+                    if  (d<=today) {
+                        table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
+                        table.rows[7].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
+                        table.rows[11].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
+                    }
                     
                     // status
                     /*
@@ -88,12 +91,12 @@ function calcRatio(actual, target) {
     
     if (actual==0 && target==0)
         return '~'
-    else if (actual>=target)
+    else if (actual>0 && target==0)
         ratio=1
     else
         ratio=actual/target
     
-    return d3.format('.0%')(ratio)
+    return `${Math.round(ratio*100)}%`
 }
 
 function filterByWellness(data) {
