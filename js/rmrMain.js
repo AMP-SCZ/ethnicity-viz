@@ -44,7 +44,7 @@ function getPrefixes() {
     }
     
     network.forEach(n=> {
-        networkSite[n].forEach(s=> filePrefixes.push(`../data/${n}/${s}`))
+        networkSite[n].forEach(s=> filePrefixes.push(`data/${n}/${s}`))
     })
     
     
