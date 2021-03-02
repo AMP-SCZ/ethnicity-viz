@@ -35,61 +35,6 @@ function loadMetaData(filePrefixes) {
 }
 
 
-today= new Date().getTime()
-today= d3.timeParse("%m/%d/%Y")("4/1/2021")
-let total, totalHisp, totalMinor
-
-function loadRmrData(filePrefixes) {
-    let totalTarget= new Array(7).fill(0)
-    let totalMinorTarget= new Array(7).fill(0)
-    let totalHispTarget= new Array(7).fill(0)
-    
-    let files= filePrefixes.map(file=>d3.csv(file+'_plan.csv'))
-    
-    let currTarget
-    files.forEach(f=> {
-        Promise.any([f]).then(data => {
-            
-            currTarget= Object.values(data[0]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalTarget[i]+=d)
-            
-            currTarget= Object.values(data[4]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalMinorTarget[i]+=d)
-            
-            currTarget= Object.values(data[8]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalHispTarget[i]+=d)
-            
-            
-            table= document.getElementById('rmr-report')
-            
-            report_dates.forEach((d,i)=> {
-                if (totalTarget[i]) {
-                    // total target
-                    table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
-                    table.rows[5].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
-                    table.rows[9].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
-                    
-                    // actual/target ratio
-                    if  (d<=today) {
-                        table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
-                        table.rows[7].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
-                        table.rows[11].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
-                    }
-                    
-                    // status
-                    /*
-                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalTarget[i])
-                    table.rows[8].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
-                    table.rows[12].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
-                    */
-                }
-            })
-        
-        })
-    })
-}
-
-
 function calcRatio(actual, target) {
     
     if (actual==0 && target==0)
@@ -141,6 +86,7 @@ function filterByDate(siteData) {
 }
 
 
+let total, totalHisp, totalMinor
 function rmrCount(data) {
     
     total= new Array(7).fill(0)
@@ -206,9 +152,62 @@ function rmrCount(data) {
     report_dates.forEach((d,i)=> {
         if (total[i]) {
             table.rows[2].cells[i+1].innerText=d3.format(',')(total[i])
-            table.rows[6].cells[i+1].innerText=d3.format(',')(totalMinor[i])
-            table.rows[10].cells[i+1].innerText=d3.format(',')(totalHisp[i])
+            table.rows[5].cells[i+1].innerText=d3.format(',')(totalMinor[i])
+            table.rows[8].cells[i+1].innerText=d3.format(',')(totalHisp[i])
         }
+    })
+}
+
+
+today= new Date().getTime()
+today= d3.timeParse("%m/%d/%Y")("4/1/2021")
+function loadRmrData(filePrefixes) {
+    let totalTarget= new Array(7).fill(0)
+    let totalMinorTarget= new Array(7).fill(0)
+    let totalHispTarget= new Array(7).fill(0)
+    
+    let files= filePrefixes.map(file=>d3.csv(file+'_plan.csv'))
+    
+    let currTarget
+    files.forEach(f=> {
+        Promise.any([f]).then(data => {
+            
+            currTarget= Object.values(data[0]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalTarget[i]+=d)
+            
+            currTarget= Object.values(data[4]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalMinorTarget[i]+=d)
+            
+            currTarget= Object.values(data[8]).filter((d,i)=>i>0).map(d=>+d)
+            currTarget.forEach((d,i)=> totalHispTarget[i]+=d)
+            
+            
+            table= document.getElementById('rmr-report')
+            
+            report_dates.forEach((d,i)=> {
+                if (totalTarget[i]) {
+                    // total target
+                    table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
+                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
+                    table.rows[7].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                    
+                    // actual/target ratio
+                    if  (d<=today) {
+                        table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
+                        table.rows[6].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
+                        table.rows[9].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
+                    }
+                    
+                    // status
+                    /*
+                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalTarget[i])
+                    table.rows[8].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
+                    table.rows[12].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                    */
+                }
+            })
+        
+        })
     })
 }
 
