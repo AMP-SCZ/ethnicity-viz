@@ -1,0 +1,354 @@
+Consent Date,Race,Ethnicity,Sex,Wellness
+2019-11-01,White,Not Hispanic or Latino,Female,Patient
+2019-11-01,Asian,Not Hispanic or Latino,Male,Patient
+2019-11-03,Unknown/Not Reported,Not Hispanic or Latino,Unknown/Not Reported,Healthy
+2019-11-05,Asian,Not Hispanic or Latino,Female,Patient
+2019-11-07,White,Unknown/Not Reported Ethnicity,Male,Patient
+2019-11-09,White,Not Hispanic or Latino,Male,Patient
+2019-11-09,White,Not Hispanic or Latino,Male,Patient
+2019-11-11,White,Not Hispanic or Latino,Male,Patient
+2019-11-13,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2019-11-13,White,Hispanic or Latino,Male,Patient
+2019-11-15,White,Hispanic or Latino,Female,Patient
+2019-11-15,Asian,Not Hispanic or Latino,Female,Healthy
+2019-11-17,White,Not Hispanic or Latino,Female,Patient
+2019-11-17,White,Unknown/Not Reported Ethnicity,Male,Patient
+2019-11-19,White,Not Hispanic or Latino,Female,Patient
+2019-11-21,White,Not Hispanic or Latino,Male,Patient
+2019-11-21,Black,Hispanic or Latino,Male,Patient
+2019-11-23,White,Hispanic or Latino,Male,Healthy
+2019-11-23,White,Unknown/Not Reported Ethnicity,Female,Patient
+2019-11-25,White,Not Hispanic or Latino,Female,Patient
+2019-11-27,White,Not Hispanic or Latino,Female,Patient
+2019-11-29,Black,Not Hispanic or Latino,Female,Healthy
+2019-12-01,White,Not Hispanic or Latino,Male,Patient
+2019-12-01,Black,Not Hispanic or Latino,Female,Healthy
+2019-12-03,White,Not Hispanic or Latino,Female,Patient
+2019-12-05,White,Hispanic or Latino,Female,Patient
+2019-12-05,Black,Not Hispanic or Latino,Female,Healthy
+2019-12-07,White,Not Hispanic or Latino,Female,Patient
+2019-12-07,Asian,Not Hispanic or Latino,Male,Patient
+2019-12-09,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2019-12-11,Black,Not Hispanic or Latino,Female,Patient
+2019-12-11,Black,Not Hispanic or Latino,Female,Patient
+2019-12-13,Black,Not Hispanic or Latino,Female,Healthy
+2019-12-15,White,Unknown/Not Reported Ethnicity,Male,Patient
+2019-12-17,White,Unknown/Not Reported Ethnicity,Female,Patient
+2019-12-19,White,Not Hispanic or Latino,Female,Patient
+2019-12-19,Asian,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2019-12-21,White,Hispanic or Latino,Male,Healthy
+2019-12-21,White,Not Hispanic or Latino,Female,Patient
+2019-12-23,White,Unknown/Not Reported Ethnicity,Male,Patient
+2019-12-25,Asian,Not Hispanic or Latino,Male,Patient
+2019-12-25,White,Unknown/Not Reported Ethnicity,Female,Patient
+2019-12-27,White,Not Hispanic or Latino,Female,Patient
+2019-12-29,White,Not Hispanic or Latino,Male,Patient
+2019-12-29,White,Unknown/Not Reported Ethnicity,Female,Patient
+2019-12-31,White,Not Hispanic or Latino,Female,Patient
+2020-01-02,Asian,Not Hispanic or Latino,Female,Patient
+2020-01-04,Black,Not Hispanic or Latino,Female,Patient
+2020-01-04,Asian,Not Hispanic or Latino,Male,Patient
+2020-01-06,White,Not Hispanic or Latino,Male,Patient
+2020-01-08,White,Not Hispanic or Latino,Male,Patient
+2020-01-10,Asian,Not Hispanic or Latino,Female,Patient
+2020-01-10,Black,Not Hispanic or Latino,Female,Healthy
+2020-01-12,White,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-01-14,Asian,Not Hispanic or Latino,Male,Patient
+2020-01-14,White,Not Hispanic or Latino,Male,Patient
+2020-01-16,Black,Not Hispanic or Latino,Female,Patient
+2020-01-18,Black,Hispanic or Latino,Female,Patient
+2020-01-18,Black,Not Hispanic or Latino,Female,Healthy
+2020-01-20,Black,Hispanic or Latino,Female,Patient
+2020-01-22,Asian,Not Hispanic or Latino,Male,Patient
+2020-01-24,White,Not Hispanic or Latino,Male,Patient
+2020-01-24,White,Not Hispanic or Latino,Female,Healthy
+2020-01-26,Asian,Not Hispanic or Latino,Female,Patient
+2020-01-28,Asian,Unknown/Not Reported Ethnicity,Female,Patient
+2020-01-28,White,Not Hispanic or Latino,Female,Patient
+2020-01-30,White,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-02-01,White,Not Hispanic or Latino,Male,Patient
+2020-02-03,White,Not Hispanic or Latino,Female,Patient
+2020-02-03,White,Hispanic or Latino,Female,Healthy
+2020-02-05,White,Not Hispanic or Latino,Female,Patient
+2020-02-07,White,Hispanic or Latino,Unknown/Not Reported,Healthy
+2020-02-09,Black,Not Hispanic or Latino,Female,Patient
+2020-02-11,White,Not Hispanic or Latino,Female,Patient
+2020-02-13,White,Not Hispanic or Latino,Female,Patient
+2020-02-15,Black,Hispanic or Latino,Male,Patient
+2020-02-17,Asian,Not Hispanic or Latino,Male,Patient
+2020-02-19,White,Not Hispanic or Latino,Female,Patient
+2020-02-19,Black,Not Hispanic or Latino,Female,Healthy
+2020-02-21,White,Not Hispanic or Latino,Female,Patient
+2020-02-23,Black,Not Hispanic or Latino,Male,Patient
+2020-02-25,White,Not Hispanic or Latino,Female,Patient
+2020-02-25,White,Not Hispanic or Latino,Male,Healthy
+2020-02-27,White,Not Hispanic or Latino,Female,Patient
+2020-02-29,Black,Not Hispanic or Latino,Male,Patient
+2020-02-29,White,Not Hispanic or Latino,Female,Healthy
+2020-03-02,Black,Not Hispanic or Latino,Male,Patient
+2020-03-02,Black,Not Hispanic or Latino,Male,Patient
+2020-03-04,White,Not Hispanic or Latino,Female,Healthy
+2020-03-06,Black,Not Hispanic or Latino,Male,Patient
+2020-03-06,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-03-08,Asian,Not Hispanic or Latino,Female,Patient
+2020-03-08,White,Not Hispanic or Latino,Male,Patient
+2020-03-10,White,Not Hispanic or Latino,Female,Patient
+2020-03-10,White,Unknown/Not Reported Ethnicity,Female,Healthy
+2020-03-12,Asian,Not Hispanic or Latino,Female,Patient
+2020-03-14,Asian,Not Hispanic or Latino,Female,Patient
+2020-03-16,Unknown/Not Reported,Not Hispanic or Latino,Female,Patient
+2020-03-16,Asian,Not Hispanic or Latino,Male,Patient
+2020-03-18,Black,Not Hispanic or Latino,Male,Patient
+2020-03-20,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2020-03-20,Asian,Not Hispanic or Latino,Male,Patient
+2020-03-22,Asian,Not Hispanic or Latino,Female,Patient
+2020-03-22,White,Not Hispanic or Latino,Female,Patient
+2020-03-24,White,Not Hispanic or Latino,Female,Patient
+2020-03-26,White,Not Hispanic or Latino,Female,Healthy
+2020-03-26,White,Not Hispanic or Latino,Male,Patient
+2020-03-28,Asian,Not Hispanic or Latino,Female,Patient
+2020-03-30,White,Not Hispanic or Latino,Female,Patient
+2020-03-30,Black,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-04-01,Unknown/Not Reported,Unknown/Not Reported Ethnicity,Female,Healthy
+2020-04-03,White,Not Hispanic or Latino,Female,Patient
+2020-04-05,White,Hispanic or Latino,Female,Patient
+2020-04-07,White,Hispanic or Latino,Female,Patient
+2020-04-09,Black,Not Hispanic or Latino,Female,Healthy
+2020-04-09,Black,Not Hispanic or Latino,Female,Healthy
+2020-04-11,Black,Not Hispanic or Latino,Unknown/Not Reported,Healthy
+2020-04-11,Unknown/Not Reported,Not Hispanic or Latino,Male,Patient
+2020-04-13,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-04-15,Unknown/Not Reported,Not Hispanic or Latino,Male,Patient
+2020-04-15,Black,Unknown/Not Reported Ethnicity,Male,Patient
+2020-04-17,Black,Hispanic or Latino,Male,Patient
+2020-04-19,White,Unknown/Not Reported Ethnicity,Male,Healthy
+2020-04-19,White,Hispanic or Latino,Female,Patient
+2020-04-21,Black,Hispanic or Latino,Male,Healthy
+2020-04-23,White,Not Hispanic or Latino,Female,Patient
+2020-04-23,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-04-25,White,Not Hispanic or Latino,Female,Healthy
+2020-04-27,Asian,Not Hispanic or Latino,Female,Patient
+2020-04-27,White,Not Hispanic or Latino,Female,Patient
+2020-04-29,Asian,Not Hispanic or Latino,Female,Patient
+2020-04-29,White,Not Hispanic or Latino,Female,Patient
+2020-05-01,White,Not Hispanic or Latino,Female,Patient
+2020-05-01,Black,Not Hispanic or Latino,Male,Healthy
+2020-05-03,White,Not Hispanic or Latino,Male,Patient
+2020-05-05,White,Hispanic or Latino,Male,Patient
+2020-05-05,White,Not Hispanic or Latino,Male,Patient
+2020-05-07,Asian,Not Hispanic or Latino,Female,Patient
+2020-05-07,Black,Not Hispanic or Latino,Male,Healthy
+2020-05-09,White,Not Hispanic or Latino,Female,Healthy
+2020-05-09,White,Not Hispanic or Latino,Female,Healthy
+2020-05-11,White,Not Hispanic or Latino,Female,Patient
+2020-05-13,Black,Not Hispanic or Latino,Female,Patient
+2020-05-13,White,Not Hispanic or Latino,Female,Patient
+2020-05-15,Asian,Hispanic or Latino,Female,Patient
+2020-05-17,White,Not Hispanic or Latino,Female,Patient
+2020-05-17,Black,Not Hispanic or Latino,Female,Patient
+2020-05-19,White,Hispanic or Latino,Female,Healthy
+2020-05-21,Asian,Not Hispanic or Latino,Male,Patient
+2020-05-21,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-05-23,White,Not Hispanic or Latino,Male,Patient
+2020-05-23,Unknown/Not Reported,Not Hispanic or Latino,Female,Patient
+2020-05-25,White,Not Hispanic or Latino,Male,Patient
+2020-05-25,Unknown/Not Reported,Hispanic or Latino,Unknown/Not Reported,Patient
+2020-05-27,White,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-05-29,White,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-05-29,Asian,Not Hispanic or Latino,Female,Patient
+2020-05-31,Asian,Not Hispanic or Latino,Female,Healthy
+2020-05-31,White,Hispanic or Latino,Female,Patient
+2020-06-02,Asian,Not Hispanic or Latino,Male,Patient
+2020-06-02,White,Hispanic or Latino,Unknown/Not Reported,Patient
+2020-06-04,White,Not Hispanic or Latino,Male,Patient
+2020-06-06,Black,Not Hispanic or Latino,Female,Patient
+2020-06-08,Black,Not Hispanic or Latino,Female,Patient
+2020-06-10,Black,Not Hispanic or Latino,Female,Patient
+2020-06-12,White,Not Hispanic or Latino,Male,Healthy
+2020-06-14,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-06-16,Unknown/Not Reported,Not Hispanic or Latino,Female,Patient
+2020-06-18,Black,Not Hispanic or Latino,Female,Patient
+2020-06-20,Black,Hispanic or Latino,Male,Patient
+2020-06-22,White,Not Hispanic or Latino,Female,Patient
+2020-06-24,Asian,Not Hispanic or Latino,Male,Patient
+2020-06-26,Black,Not Hispanic or Latino,Female,Patient
+2020-06-28,Asian,Hispanic or Latino,Female,Patient
+2020-06-30,Unknown/Not Reported,Unknown/Not Reported Ethnicity,Male,Patient
+2020-07-02,Asian,Hispanic or Latino,Unknown/Not Reported,Patient
+2020-07-02,Black,Not Hispanic or Latino,Male,Healthy
+2020-07-04,White,Hispanic or Latino,Female,Patient
+2020-07-04,White,Not Hispanic or Latino,Female,Healthy
+2020-07-06,White,Not Hispanic or Latino,Male,Patient
+2020-07-08,White,Not Hispanic or Latino,Female,Patient
+2020-07-10,Asian,Not Hispanic or Latino,Female,Patient
+2020-07-12,White,Not Hispanic or Latino,Female,Patient
+2020-07-12,Unknown/Not Reported,Not Hispanic or Latino,Male,Patient
+2020-07-14,White,Not Hispanic or Latino,Female,Healthy
+2020-07-16,Black,Not Hispanic or Latino,Female,Patient
+2020-07-18,White,Not Hispanic or Latino,Male,Patient
+2020-07-18,Black,Not Hispanic or Latino,Female,Patient
+2020-07-20,White,Hispanic or Latino,Female,Patient
+2020-07-22,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-07-24,White,Hispanic or Latino,Female,Healthy
+2020-07-24,White,Not Hispanic or Latino,Male,Patient
+2020-07-26,Unknown/Not Reported,Hispanic or Latino,Female,Healthy
+2020-07-28,Black,Not Hispanic or Latino,Female,Patient
+2020-07-30,White,Not Hispanic or Latino,Female,Patient
+2020-08-01,White,Hispanic or Latino,Female,Patient
+2020-08-03,Black,Not Hispanic or Latino,Male,Patient
+2020-08-05,White,Hispanic or Latino,Female,Patient
+2020-08-05,White,Not Hispanic or Latino,Female,Patient
+2020-08-07,White,Unknown/Not Reported Ethnicity,Female,Healthy
+2020-08-07,White,Hispanic or Latino,Male,Patient
+2020-08-09,Black,Not Hispanic or Latino,Male,Healthy
+2020-08-09,White,Not Hispanic or Latino,Female,Patient
+2020-08-11,Asian,Not Hispanic or Latino,Female,Patient
+2020-08-13,Asian,Not Hispanic or Latino,Female,Patient
+2020-08-13,Black,Not Hispanic or Latino,Female,Patient
+2020-08-15,Asian,Not Hispanic or Latino,Female,Patient
+2020-08-15,White,Not Hispanic or Latino,Female,Healthy
+2020-08-17,Black,Not Hispanic or Latino,Female,Patient
+2020-08-17,Black,Not Hispanic or Latino,Male,Patient
+2020-08-19,White,Not Hispanic or Latino,Male,Patient
+2020-08-19,Black,Unknown/Not Reported Ethnicity,Male,Patient
+2020-08-21,White,Not Hispanic or Latino,Male,Patient
+2020-08-23,White,Unknown/Not Reported Ethnicity,Female,Patient
+2020-08-25,White,Hispanic or Latino,Female,Patient
+2020-08-25,White,Not Hispanic or Latino,Male,Patient
+2020-08-27,White,Not Hispanic or Latino,Male,Patient
+2020-08-29,Black,Not Hispanic or Latino,Female,Patient
+2020-08-31,White,Unknown/Not Reported Ethnicity,Female,Healthy
+2020-08-31,Black,Not Hispanic or Latino,Female,Healthy
+2020-09-02,Black,Not Hispanic or Latino,Male,Patient
+2020-09-02,Black,Not Hispanic or Latino,Female,Healthy
+2020-09-04,Black,Not Hispanic or Latino,Female,Patient
+2020-09-06,Black,Not Hispanic or Latino,Female,Patient
+2020-09-08,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2020-09-08,Asian,Not Hispanic or Latino,Male,Patient
+2020-09-10,Unknown/Not Reported,Unknown/Not Reported Ethnicity,Male,Patient
+2020-09-12,Black,Not Hispanic or Latino,Female,Patient
+2020-09-12,Asian,Not Hispanic or Latino,Female,Patient
+2020-09-14,White,Not Hispanic or Latino,Male,Healthy
+2020-09-14,Asian,Hispanic or Latino,Female,Patient
+2020-09-16,White,Not Hispanic or Latino,Female,Patient
+2020-09-18,White,Hispanic or Latino,Female,Healthy
+2020-09-18,White,Not Hispanic or Latino,Female,Patient
+2020-09-20,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2020-09-20,White,Not Hispanic or Latino,Male,Healthy
+2020-09-22,Asian,Not Hispanic or Latino,Female,Healthy
+2020-09-22,Unknown/Not Reported,Not Hispanic or Latino,Male,Patient
+2020-09-24,White,Not Hispanic or Latino,Female,Healthy
+2020-09-26,White,Not Hispanic or Latino,Female,Patient
+2020-09-28,Asian,Not Hispanic or Latino,Female,Patient
+2020-09-30,Black,Not Hispanic or Latino,Male,Patient
+2020-10-02,White,Not Hispanic or Latino,Male,Patient
+2020-10-02,White,Not Hispanic or Latino,Male,Patient
+2020-10-04,White,Not Hispanic or Latino,Female,Patient
+2020-10-06,Black,Not Hispanic or Latino,Female,Healthy
+2020-10-06,White,Hispanic or Latino,Female,Healthy
+2020-10-08,White,Not Hispanic or Latino,Male,Patient
+2020-10-10,White,Not Hispanic or Latino,Female,Patient
+2020-10-12,Black,Not Hispanic or Latino,Female,Patient
+2020-10-12,White,Not Hispanic or Latino,Female,Patient
+2020-10-14,Black,Hispanic or Latino,Female,Patient
+2020-10-16,Black,Not Hispanic or Latino,Female,Patient
+2020-10-16,Black,Not Hispanic or Latino,Female,Patient
+2020-10-18,White,Hispanic or Latino,Male,Patient
+2020-10-20,White,Not Hispanic or Latino,Male,Healthy
+2020-10-20,Asian,Not Hispanic or Latino,Male,Healthy
+2020-10-22,White,Unknown/Not Reported Ethnicity,Male,Patient
+2020-10-22,White,Hispanic or Latino,Female,Patient
+2020-10-24,White,Hispanic or Latino,Male,Patient
+2020-10-24,Asian,Not Hispanic or Latino,Female,Patient
+2020-10-26,White,Not Hispanic or Latino,Female,Patient
+2020-10-26,White,Hispanic or Latino,Male,Patient
+2020-10-28,Asian,Not Hispanic or Latino,Female,Patient
+2020-10-30,Black,Not Hispanic or Latino,Male,Patient
+2020-11-01,Asian,Unknown/Not Reported Ethnicity,Male,Patient
+2020-11-01,White,Not Hispanic or Latino,Female,Healthy
+2020-11-03,Asian,Not Hispanic or Latino,Female,Patient
+2020-11-03,White,Not Hispanic or Latino,Female,Patient
+2020-11-05,Asian,Not Hispanic or Latino,Female,Patient
+2020-11-07,White,Not Hispanic or Latino,Male,Healthy
+2020-11-09,Black,Not Hispanic or Latino,Male,Patient
+2020-11-11,White,Not Hispanic or Latino,Male,Patient
+2020-11-13,White,Not Hispanic or Latino,Male,Patient
+2020-11-13,White,Not Hispanic or Latino,Female,Patient
+2020-11-15,Black,Not Hispanic or Latino,Female,Patient
+2020-11-17,Black,Not Hispanic or Latino,Male,Patient
+2020-11-19,Black,Not Hispanic or Latino,Female,Patient
+2020-11-21,Asian,Not Hispanic or Latino,Female,Patient
+2020-11-23,White,Not Hispanic or Latino,Female,Patient
+2020-11-23,Asian,Hispanic or Latino,Male,Patient
+2020-11-25,Black,Not Hispanic or Latino,Female,Patient
+2020-11-25,Black,Not Hispanic or Latino,Male,Patient
+2020-11-27,Asian,Not Hispanic or Latino,Female,Patient
+2020-11-29,White,Not Hispanic or Latino,Male,Healthy
+2020-12-01,Black,Not Hispanic or Latino,Male,Patient
+2020-12-01,White,Not Hispanic or Latino,Male,Healthy
+2020-12-03,Asian,Not Hispanic or Latino,Female,Patient
+2020-12-03,Asian,Not Hispanic or Latino,Female,Healthy
+2020-12-05,White,Not Hispanic or Latino,Male,Patient
+2020-12-07,Black,Not Hispanic or Latino,Male,Patient
+2020-12-09,Black,Hispanic or Latino,Male,Patient
+2020-12-09,White,Unknown/Not Reported Ethnicity,Female,Healthy
+2020-12-11,White,Not Hispanic or Latino,Female,Healthy
+2020-12-11,White,Not Hispanic or Latino,Female,Patient
+2020-12-13,Asian,Not Hispanic or Latino,Female,Patient
+2020-12-13,White,Not Hispanic or Latino,Male,Patient
+2020-12-15,White,Not Hispanic or Latino,Male,Patient
+2020-12-15,Asian,Not Hispanic or Latino,Unknown/Not Reported,Patient
+2020-12-17,Unknown/Not Reported,Hispanic or Latino,Female,Patient
+2020-12-17,White,Not Hispanic or Latino,Female,Patient
+2020-12-19,White,Hispanic or Latino,Female,Patient
+2020-12-19,White,Not Hispanic or Latino,Male,Healthy
+2020-12-21,White,Not Hispanic or Latino,Male,Healthy
+2020-12-21,Black,Not Hispanic or Latino,Female,Patient
+2020-12-23,White,Not Hispanic or Latino,Female,Patient
+2020-12-25,White,Hispanic or Latino,Female,Patient
+2020-12-27,Black,Not Hispanic or Latino,Male,Patient
+2020-12-27,Asian,Not Hispanic or Latino,Female,Patient
+2020-12-29,White,Hispanic or Latino,Female,Patient
+2020-12-29,White,Unknown/Not Reported Ethnicity,Male,Patient
+2020-12-31,Asian,Not Hispanic or Latino,Female,Patient
+2020-12-31,White,Not Hispanic or Latino,Male,Patient
+2021-01-02,Unknown/Not Reported,Not Hispanic or Latino,Female,Patient
+2021-01-04,Black,Not Hispanic or Latino,Male,Patient
+2021-01-04,Asian,Not Hispanic or Latino,Female,Patient
+2021-01-06,White,Not Hispanic or Latino,Male,Patient
+2021-01-08,Black,Unknown/Not Reported Ethnicity,Female,Patient
+2021-01-10,Asian,Not Hispanic or Latino,Male,Healthy
+2021-01-12,White,Not Hispanic or Latino,Female,Patient
+2021-01-12,White,Unknown/Not Reported Ethnicity,Female,Healthy
+2021-01-14,Black,Not Hispanic or Latino,Male,Patient
+2021-01-16,Asian,Not Hispanic or Latino,Female,Healthy
+2021-01-16,White,Hispanic or Latino,Male,Healthy
+2021-01-18,Asian,Not Hispanic or Latino,Male,Patient
+2021-01-20,White,Not Hispanic or Latino,Female,Patient
+2021-01-20,Black,Not Hispanic or Latino,Male,Healthy
+2021-01-22,Black,Not Hispanic or Latino,Female,Patient
+2021-01-24,Black,Not Hispanic or Latino,Male,Patient
+2021-01-24,White,Not Hispanic or Latino,Male,Patient
+2021-01-26,Asian,Not Hispanic or Latino,Female,Patient
+2021-01-26,White,Not Hispanic or Latino,Male,Patient
+2021-01-28,White,Not Hispanic or Latino,Male,Patient
+2021-01-28,White,Not Hispanic or Latino,Female,Patient
+2021-01-30,White,Not Hispanic or Latino,Female,Healthy
+2021-01-30,White,Not Hispanic or Latino,Female,Patient
+2021-02-01,Asian,Unknown/Not Reported Ethnicity,Male,Patient
+2021-02-01,Asian,Hispanic or Latino,Female,Patient
+2021-02-03,Black,Not Hispanic or Latino,Female,Patient
+2021-02-05,Black,Not Hispanic or Latino,Female,Patient
+2021-02-05,Asian,Not Hispanic or Latino,Male,Patient
+2021-02-07,White,Not Hispanic or Latino,Female,Patient
+2021-02-09,Black,Not Hispanic or Latino,Female,Patient
+2021-02-09,Asian,Not Hispanic or Latino,Male,Patient
+2021-02-11,White,Not Hispanic or Latino,Female,Patient
+2021-02-13,Asian,Hispanic or Latino,Female,Patient
+2021-02-13,Asian,Not Hispanic or Latino,Female,Patient
+2021-02-15,White,Not Hispanic or Latino,Female,Patient
+2021-02-17,White,Not Hispanic or Latino,Female,Patient
+2021-02-19,White,Not Hispanic or Latino,Female,Healthy
+2021-02-19,White,Not Hispanic or Latino,Male,Patient
+2021-02-21,White,Not Hispanic or Latino,Female,Healthy
+2021-02-23,White,Not Hispanic or Latino,Male,Patient
