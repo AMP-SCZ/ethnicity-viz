@@ -19,7 +19,7 @@ let promises = [d3.csv('data/enroll_data.csv'), d3.csv('data/expected_data.csv')
 Promise.all(promises)
     .then(function (dataArray) {
         
-        // date pareser
+        // date parser
         let parseDate = d3.timeParse("%Y-%m-%d");        
         
         dataArray.forEach(data=> {

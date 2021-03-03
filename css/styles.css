@@ -55,3 +55,6 @@ hr {
     font-weight: bold;
 }
 
+.form-control {
+    width: 200px;
+}
