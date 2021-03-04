@@ -19,19 +19,35 @@ class RmrVis {
         let vis = this;
         
         // filter selected networks and sites
-        vis.filteredData= vis.givenData.filter(d=>selectedPrefixes.includes(d.prefix))
+        vis.selectedNetSiteData= vis.givenData.filter(d=>selectedPrefixes.includes(d.prefix))
         
-        console.log(vis.filteredData)
+        // console.log(vis.selectedNetSiteData)
         vis.updateVis();
     }
 
     updateVis() {
         let vis = this;
         
-        rmrActualCount(vis.filteredData.map(d=>d.metaData).flat())
+        /*
+        let allMetaData= vis.filteredData.map(d=>d.metaData).flat()
+        rmrActualCount(allMetaData)
         rmrPlanCount(vis.filteredData.map(d=>d.planData))
+        ethnCount(allMetaData)
+        */
         
-        ethnCount(vis.filteredData.map(d=>d.metaData).flat())
+        let cohortData= filterByCohort(vis.selectedNetSiteData)
+        
+        // filter actual metaData by cohort and populate RMR table
+        let allMetaData= vis.selectedNetSiteData.map(d=>d.metaData).flat()
+        let cohortMetaData= filterByCohort(allMetaData)
+        rmrActualCount(cohortMetaData)
+        
+        // no more filter for rmrPlanCount
+        rmrPlanCount(vis.selectedNetSiteData.map(d=>d.planData))
+        
+        // filter actual cohortMetaData by date and populate ethnicity table
+        let cohortMetaByDate= filterByDate(cohortMetaData)
+        ethnCount(cohortMetaByDate)        
         
     }
 

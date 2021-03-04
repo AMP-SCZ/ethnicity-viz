@@ -104,6 +104,10 @@ function siteChange() {
     rmrVis && rmrVis.wrangleData()
 }
 
+function cohortChange() {
+    rmrVis && rmrVis.updateVis()
+}
+
 /*
 // ENH can we do the above block using jQuery bind/trigger?
 

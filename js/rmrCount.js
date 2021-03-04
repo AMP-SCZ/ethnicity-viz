@@ -16,7 +16,7 @@ function calcRatio(actual, target) {
     
 }
 
-function filterByWellness(data) {
+function filterByCohort(data) {
     wellness= $('#wellness').val()
     if (wellness!=='All') {
         filteredData= data.filter(d=> d["Wellness"]===wellness && d)

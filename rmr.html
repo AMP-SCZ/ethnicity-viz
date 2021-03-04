@@ -49,7 +49,7 @@
                     <!-- Wellness selector -->
                     <div class="col-4">
                         Wellness&nbsp;
-                        <select class="form-control" id="wellness" style="width:fit-content" onchange=getPrefixes()>
+                        <select class="form-control" id="wellness" style="width:fit-content" onchange=cohortChange()>
                             <option value="All" selected>All</option>
                             <option value="Healthy">Healthy</option>
                             <option value="Patient">Patient</option>
@@ -233,7 +233,7 @@
                     Time Period
                     <br>
                     <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
-                    <button class="btn btn-primary" id="time-filter" onclick=getPrefixes()>Filter</button>
+                    <button class="btn btn-primary" id="time-filter" onclick=cohortChange()>Filter</button>
                 </div>
             </div>
             
