@@ -1,5 +1,7 @@
 let selectedPrefixes, selectedFiles
 
+// let total, totalHisp, totalMinor
+
 function populateSites() {
     
     let network= $('#network-name').val()
