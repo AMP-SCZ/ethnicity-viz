@@ -1,15 +1,4 @@
-
-
-populateSites()
-
-// loadData()
-
-// filterData()
-
-// rmrCount()
-
-// ethnCount()
-
+let selectedPrefixes, selectedFiles
 
 function populateSites() {
     
@@ -66,10 +55,62 @@ function getPrefixes() {
         selectedPrefixes= filePrefixes
     }    
     
-    console.log(selectedPrefixes)
+    selectedFiles= selectedPrefixes.map(file=>
+        [d3.csv(file+'_metadata.csv'), d3.csv(file+'_plan.csv')])
     
-    loadMetaData(selectedPrefixes)
-    loadRmrData(selectedPrefixes)
+    // console.log(selectedPrefixes)
+    
     
 }
+
+populateSites()
+
+Promise.all(selectedFiles.flat()).then(obj=> {
+    let dataArray=[]
+    
+    selectedPrefixes.forEach((p,i)=> {
+        dataArray.push({
+            prefix:p,
+            metaData:obj[2*i],
+            planData:obj[2*i+1]
+        })
+    })
+    
+    initMainPage(dataArray)
+    
+})
+
+
+let rmrVis
+function initMainPage(dataArray) {
+    
+    // console.log(dataArray)
+    
+    // init tabular report
+    rmrVis = new RmrVis(dataArray)
+    
+}
+
+
+function networkChange() {
+    populateSites()
+    rmrVis && rmrVis.wrangleData()
+}
+
+function siteChange() {
+    getPrefixes()
+    rmrVis && rmrVis.wrangleData()
+}
+
+/*
+// ENH can we do the above block using jQuery bind/trigger?
+
+$(document).ready(function() {
+    $('#network-name').change(populateSites)
+})
+
+$(document).ready(function() {
+    $('#site-name').change(getPrefixes)
+})
+*/
 
