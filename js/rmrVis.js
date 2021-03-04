@@ -28,8 +28,8 @@ class RmrVis {
     updateVis() {
         let vis = this;
         
-        // rmrPlanCount(vis.filteredData.map(d=>d.planData))
-        // rmrActualCount(vis.filteredData.map(d=>d.metaData))
+        rmrActualCount(vis.filteredData.map(d=>d.metaData).flat())
+        rmrPlanCount(vis.filteredData.map(d=>d.planData))
         
         ethnCount(vis.filteredData.map(d=>d.metaData).flat())
         
