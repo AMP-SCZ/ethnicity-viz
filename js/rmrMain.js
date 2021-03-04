@@ -120,3 +120,22 @@ $(document).ready(function() {
 })
 */
 
+
+/* * * * * * * * * * * * * *
+*         Carousel         *
+* * * * * * * * * * * * * */
+
+// define carousel behaviour
+let carousel = $('#tableCarousel');
+
+// prevent rotating
+carousel.carousel({
+    interval: false
+})
+
+// on button click switch view
+function switchTableView(){
+    carousel.carousel('next')
+    $('#switchTable').html($('#switchTable').html().includes('Details')?'Switch to RMR View':'Switch to Details View')
+}
+
