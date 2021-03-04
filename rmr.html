@@ -30,7 +30,7 @@
                     <!-- Network selector -->
                     <div class="col-3">
                         U01 Network&nbsp;
-                        <select class="form-control" id="network-name" style="width:fit-content" onchange=populateSites()>
+                        <select class="form-control" id="network-name" style="width:fit-content" onchange=networkChange()>
                             <option value="All" selected>All</option>
                             <option value="ProNET">ProNET</option>
                             <option value="PRESCIENT">PRESCIENT</option>
@@ -41,7 +41,7 @@
                     <!-- Site selector -->
                     <div class="col-4">
                         Imaging Site (Ctrl/Cmd+Click for multi select)&nbsp;
-                        <select class="form-control" id="site-name" multiple style="width:fit-content" onchange=getPrefixes()>
+                        <select class="form-control" id="site-name" multiple style="width:fit-content" onchange=siteChange()>
                             <!-- Generate dynamic list -->
                         </select>
                     </div>
@@ -367,10 +367,18 @@
             crossorigin="anonymous"
         ></script>
         
+        
+        <script src="data/network_site.js"></script>
+        <script src="js/enrollCount.js"></script>
+        <script src="js/rmrVis.js"></script>
+        <script src="js/rmrMain.js"></script>
+        
+        <!--
         <script src="data/network_site.js"></script>
         <script src="js/rmrCount.js"></script>
         <script src="js/enrollCount.js"></script>
         <script src="js/rmrMain.js"></script>
+        -->
         
     </body>
 
