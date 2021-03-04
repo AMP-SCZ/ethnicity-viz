@@ -25,12 +25,13 @@
         <div class="row justify-content-center">
         
             <div class="col-8">
+            
                 <div class="row">
                 
                     <!-- Network selector -->
                     <div class="col-3">
                         U01 Network&nbsp;
-                        <select class="form-control" id="network-name" style="width:fit-content" onchange=populateSites()>
+                        <select class="form-control" id="network-name" style="width:fit-content" onchange=networkChange()>
                             <option value="All" selected>All</option>
                             <option value="ProNET">ProNET</option>
                             <option value="PRESCIENT">PRESCIENT</option>
@@ -41,15 +42,15 @@
                     <!-- Site selector -->
                     <div class="col-4">
                         Imaging Site (Ctrl/Cmd+Click for multi select)&nbsp;
-                        <select class="form-control" id="site-name" multiple style="width:fit-content" onchange=getPrefixes()>
+                        <select class="form-control" id="site-name" multiple style="width:fit-content" onchange=siteChange()>
                             <!-- Generate dynamic list -->
                         </select>
                     </div>
                     
                     <!-- Wellness selector -->
                     <div class="col-4">
-                        Wellness&nbsp;
-                        <select class="form-control" id="wellness" style="width:fit-content" onchange=getPrefixes()>
+                        Cohort&nbsp;
+                        <select class="form-control" id="wellness" style="width:fit-content" onchange=cohortChange()>
                             <option value="All" selected>All</option>
                             <option value="Healthy">Healthy</option>
                             <option value="Patient">Patient</option>
@@ -58,298 +59,320 @@
                     
                 </div>
                 
-            
-            
-            
-            <br>
-            <br>
-            
-            <div class="row">
-                <style type="text/css">
-                .tg  {border-collapse:collapse;border-spacing:0;}
-                .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                  overflow:hidden;padding:10px 5px;word-break:normal;}
-                .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                  font-weight:bold;overflow:hidden;padding:10px 5px;word-break:normal;}
-                .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-                .tg .tg-0lax{text-align:left;vertical-align:top}
-                thead {font-weight:bold; background:lightblue;}
-                .tg .thick-border{border-bottom:dashed 5px}
-                </style>
-                <table class="tg" id='rmr-report'>
-                <thead>
-                  <tr>
-                    <th class="tg-0pky">Tri Yearly Milestones</th>
-                    <th class="tg-0lax">12/1/2019</th>
-                    <th class="tg-0lax">4/1/2020</th>
-                    <th class="tg-0lax">8/1/2020</th>
-                    <th class="tg-0lax">12/1/2020</th>
-                    <th class="tg-0lax">4/1/2021</th>
-                    <th class="tg-0lax">8/1/2021</th>
-                    <th class="tg-0lax">12/1/2021</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <!-- Total -->
-                  <tr>
-                    <td class="tg-0lax">Target: Total Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Actual: Total Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax thick-border">Actual/Target Ratio: Total Recruitment</td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                  </tr>
-                  <!--
-                  <tr>
-                    <td class="tg-0lax">Status: Total Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  -->                  
-                  <!-- Racial Minority -->
-                  <tr>
-                    <td class="tg-0lax">Target: Racial Minority Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Actual: Racial Minority Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax thick-border">Actual/Target Ratio: Racial Minority Recruitment</td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                    <td class="tg-0lax thick-border"></td>
-                  </tr>
-                  <!--
-                  <tr>
-                    <td class="tg-0lax">Status: Racial Minority Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  -->                  
-                  <!-- Hispanic -->
-                  <tr>
-                    <td class="tg-0lax">Target: Hispanic Ethnicity Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Actual: Hispanic Ethnicity Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax">Actual/Target Ratio: Hispanic Ethnicity Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>                  
-                  <!--
-                  <tr>
-                    <td class="tg-0lax">Status: Hispanic Ethnicity Recruitment</td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  -->                  
-                </tbody>
-                </table>
                 
-            </div>
-            
-            <br>
-            <br>
-            
-            <div class="row">
-                <!-- Date range -->
-                <div class="col">
-                    Time Period
-                    <br>
-                    <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
-                    <button class="btn btn-primary" id="time-filter" onclick=getPrefixes()>Filter</button>
+                <br>
+                
+                <div>
+                    <button class="btn btn-primary" onclick="switchTableView()" id="switchTable">Switch to Details View</button>
                 </div>
-            </div>
+                
+                <br>                
+                
+                <!-- Carousel start -->
+                <div id="tableCarousel" class="carousel slide" data-ride="carousel" style="width: 100%;">
+                    <div class="carousel-inner" style="padding: 15px">
             
-            <br>
-            <br>
-            
-            <div class="row">
-                <style type="text/css">
-                    .tg  {border-collapse:collapse;border-spacing:0;}
-                    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                      overflow:hidden;padding:10px 5px;word-break:normal;}
-                    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
-                      font-weight:bold;overflow:hidden;padding:10px 5px;word-break:normal;}
-                    .tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-                    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-                    .tg .thick-bottom{border-bottom:dashed 5px}
-                    .tg .thick-left{border-left:dashed 5px}
-                </style>
-                <table class="tg" id="ethnic-report">
-                <thead>
-                  <tr>
-                    <th class="tg-0pky" rowspan="3"><br><br><br>Racial Categories</th>
-                    <th class="tg-c3ow" colspan="10">Ethnic Categories</th>
-                  </tr>
-                  <tr>
-                    <td class="tg-c3ow" colspan="3">Not Hispanic or Latino</td>
-                    <td class="tg-c3ow" colspan="3">Hispanic or Latino</td>
-                    <td class="tg-c3ow" colspan="3">Unknown/Not Reported Ethnicity</td>
-                    <td class="tg-0pky thick-left" rowspan="2"><br>Total</td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0pky">Female</td>
-                    <td class="tg-0pky">Male</td>
-                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
-                    <td class="tg-0pky">Female</td>
-                    <td class="tg-0pky">Male</td>
-                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
-                    <td class="tg-0pky">Female</td>
-                    <td class="tg-0pky">Male</td>
-                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="tg-0pky">Asian</td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky thick-left"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0pky">White</td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky thick-left"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0pky">Black</td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky thick-left"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0pky thick-bottom">Unknown/<br>Not Reported</td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-c3ow thick-bottom"></td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-c3ow thick-bottom"></td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-0pky thick-bottom"></td>
-                    <td class="tg-c3ow thick-bottom"></td>
-                    <td class="tg-0pky thick-left"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0pky">Total</td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-0pky"></td>
-                    <td class="tg-c3ow"></td>
-                    <td class="tg-0pky"></td>
-                  </tr>
-                </tbody>
-                </table>
-            
-            </div>
-            
-            <br>
-            <br>
-        
+                        <!-- Carousel item #1 -->
+                        <div class="carousel-item active">
+
+                            
+                            <div class="row">
+                                <style type="text/css">
+                                .tg  {border-collapse:collapse;border-spacing:0;}
+                                .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                  overflow:hidden;padding:10px 5px;word-break:normal;}
+                                .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                  font-weight:bold;overflow:hidden;padding:10px 5px;word-break:normal;}
+                                .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+                                .tg .tg-0lax{text-align:left;vertical-align:top}
+                                thead {font-weight:bold; background:lightblue;}
+                                .tg .thick-border{border-bottom:dashed 5px}
+                                </style>
+                                <table class="tg" id='rmr-report'>
+                                <thead>
+                                  <tr>
+                                    <th class="tg-0pky">Tri Yearly Milestones</th>
+                                    <th class="tg-0lax">12/1/2019</th>
+                                    <th class="tg-0lax">4/1/2020</th>
+                                    <th class="tg-0lax">8/1/2020</th>
+                                    <th class="tg-0lax">12/1/2020</th>
+                                    <th class="tg-0lax">4/1/2021</th>
+                                    <th class="tg-0lax">8/1/2021</th>
+                                    <th class="tg-0lax">12/1/2021</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!-- Total -->
+                                  <tr>
+                                    <td class="tg-0lax">Target: Total Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax">Actual: Total Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax thick-border">Actual/Target Ratio: Total Recruitment</td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                  </tr>
+                                  <!--
+                                  <tr>
+                                    <td class="tg-0lax">Status: Total Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  -->                  
+                                  <!-- Racial Minority -->
+                                  <tr>
+                                    <td class="tg-0lax">Target: Racial Minority Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax">Actual: Racial Minority Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax thick-border">Actual/Target Ratio: Racial Minority Recruitment</td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                    <td class="tg-0lax thick-border"></td>
+                                  </tr>
+                                  <!--
+                                  <tr>
+                                    <td class="tg-0lax">Status: Racial Minority Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  -->                  
+                                  <!-- Hispanic -->
+                                  <tr>
+                                    <td class="tg-0lax">Target: Hispanic Ethnicity Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax">Actual: Hispanic Ethnicity Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0lax">Actual/Target Ratio: Hispanic Ethnicity Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>                  
+                                  <!--
+                                  <tr>
+                                    <td class="tg-0lax">Status: Hispanic Ethnicity Recruitment</td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                    <td class="tg-0lax"></td>
+                                  </tr>
+                                  -->                  
+                                </tbody>
+                                </table>
+                                
+                            </div>
+                            
+                            <br>
+                            <br>
+                        
+                        <!-- end item #1 -->
+                        </div>
+                        
+                        <!-- Carousel item #2 -->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <!-- Date range -->
+                                <div class="col">
+                                    Time Period
+                                    <br>
+                                    <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
+                                    <button class="btn btn-primary" id="time-filter" onclick=cohortChange()>Filter</button>
+                                </div>
+                            </div>
+                            
+                            <br>
+                            <br>
+                            
+                            <div class="row">
+                                <style type="text/css">
+                                    .tg  {border-collapse:collapse;border-spacing:0;}
+                                    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                      overflow:hidden;padding:10px 5px;word-break:normal;}
+                                    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+                                      font-weight:bold;overflow:hidden;padding:10px 5px;word-break:normal;}
+                                    .tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+                                    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+                                    .tg .thick-bottom{border-bottom:dashed 5px}
+                                    .tg .thick-left{border-left:dashed 5px}
+                                </style>
+                                <table class="tg" id="ethnic-report">
+                                <thead>
+                                  <tr>
+                                    <th class="tg-0pky" rowspan="3"><br><br><br>Racial Categories</th>
+                                    <th class="tg-c3ow" colspan="10">Ethnic Categories</th>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-c3ow" colspan="3">Not Hispanic or Latino</td>
+                                    <td class="tg-c3ow" colspan="3">Hispanic or Latino</td>
+                                    <td class="tg-c3ow" colspan="3">Unknown/Not Reported Ethnicity</td>
+                                    <td class="tg-0pky thick-left" rowspan="2"><br>Total</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">Female</td>
+                                    <td class="tg-0pky">Male</td>
+                                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
+                                    <td class="tg-0pky">Female</td>
+                                    <td class="tg-0pky">Male</td>
+                                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
+                                    <td class="tg-0pky">Female</td>
+                                    <td class="tg-0pky">Male</td>
+                                    <td class="tg-c3ow">Unknown/<br>Not Reported</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td class="tg-0pky">Asian</td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky thick-left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">White</td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky thick-left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">Black</td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky thick-left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky thick-bottom">Unknown/<br>Not Reported</td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-c3ow thick-bottom"></td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-c3ow thick-bottom"></td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-0pky thick-bottom"></td>
+                                    <td class="tg-c3ow thick-bottom"></td>
+                                    <td class="tg-0pky thick-left"></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="tg-0pky">Total</td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-0pky"></td>
+                                    <td class="tg-c3ow"></td>
+                                    <td class="tg-0pky"></td>
+                                  </tr>
+                                </tbody>
+                                </table>
+                            
+                            </div>
+                            
+                            <br>
+                        
+                        <!-- end item #2 -->
+                        </div>
+                
+                
+                <!-- Carousel end -->    
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -367,10 +390,13 @@
             crossorigin="anonymous"
         ></script>
         
+        
         <script src="data/network_site.js"></script>
-        <script src="js/rmrCount.js"></script>
         <script src="js/enrollCount.js"></script>
+        <script src="js/rmrCount.js"></script>
+        <script src="js/rmrVis.js"></script>
         <script src="js/rmrMain.js"></script>
+        
         
     </body>
 

@@ -9,31 +9,6 @@ let report_dates= ["12/1/2019", "4/1/2020", "8/1/2020", "12/1/2020", "4/1/2021",
 )
 console.log(report_dates)
 
-// ENH
-// Can we define an object so all csvs are loaded when the page loads and then filter as we go?
-// Currently, desired csvs are loaded on demand.
-
-
-// useful for debugging
-// let filePrefixes= ['../data/ProNET/MGH', '../data/ProNET/BWH']
-
-function loadMetaData(filePrefixes) {
-    
-    let files= filePrefixes.map(file=>d3.csv(file+'_metadata.csv'))
-    Promise.all(files).then(data => {
-        data= data.flat()
-        console.log(data)
-        
-        // filter by wellness here
-        data= filterByWellness(data)
-        rmrCount(data)
-        
-        // filter by date here
-        data= filterByDate(data)
-        ethnCount(data)
-    })
-}
-
 
 function calcRatio(actual, target) {
     
@@ -41,7 +16,7 @@ function calcRatio(actual, target) {
     
 }
 
-function filterByWellness(data) {
+function filterByCohort(data) {
     wellness= $('#wellness').val()
     if (wellness!=='All') {
         filteredData= data.filter(d=> d["Wellness"]===wellness && d)
@@ -81,7 +56,7 @@ function filterByDate(siteData) {
 
 
 let total, totalHisp, totalMinor
-function rmrCount(data) {
+function rmrActualCount(data) {
     
     total= new Array(7).fill(0)
     totalHisp= new Array(7).fill(0)
@@ -155,53 +130,45 @@ function rmrCount(data) {
 
 today= new Date().getTime()
 today= d3.timeParse("%m/%d/%Y")("4/1/2021")
-function loadRmrData(filePrefixes) {
+function rmrPlanCount(planData) {
     let totalTarget= new Array(7).fill(0)
     let totalMinorTarget= new Array(7).fill(0)
     let totalHispTarget= new Array(7).fill(0)
-    
-    let files= filePrefixes.map(file=>d3.csv(file+'_plan.csv'))
-    
+       
     let currTarget
-    files.forEach(f=> {
-        Promise.any([f]).then(data => {
-            
-            currTarget= Object.values(data[0]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalTarget[i]+=d)
-            
-            currTarget= Object.values(data[4]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalMinorTarget[i]+=d)
-            
-            currTarget= Object.values(data[8]).filter((d,i)=>i>0).map(d=>+d)
-            currTarget.forEach((d,i)=> totalHispTarget[i]+=d)
-            
-            
-            table= document.getElementById('rmr-report')
-            
-            report_dates.forEach((d,i)=> {
-                if (totalTarget[i]) {
-                    // total target
-                    table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
-                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
-                    table.rows[7].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
-                    
-                    // actual/target ratio
-                    if  (d<=today) {
-                        table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
-                        table.rows[6].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
-                        table.rows[9].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
-                    }
-                    
-                    // status
-                    /*
-                    table.rows[4].cells[i+1].innerText=d3.format(',')(totalTarget[i])
-                    table.rows[8].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
-                    table.rows[12].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
-                    */
-                }
-            })
+    
+    planData.forEach(data => {
         
+        currTarget= Object.values(data[0]).filter((d,i)=>i>0).map(d=>+d)
+        currTarget.forEach((d,i)=> totalTarget[i]+=d)
+        
+        currTarget= Object.values(data[4]).filter((d,i)=>i>0).map(d=>+d)
+        currTarget.forEach((d,i)=> totalMinorTarget[i]+=d)
+        
+        currTarget= Object.values(data[8]).filter((d,i)=>i>0).map(d=>+d)
+        currTarget.forEach((d,i)=> totalHispTarget[i]+=d)
+        
+        
+        table= document.getElementById('rmr-report')
+        
+        report_dates.forEach((d,i)=> {
+            if (totalTarget[i]) {
+                // total target
+                table.rows[1].cells[i+1].innerText=d3.format(',')(totalTarget[i])
+                table.rows[4].cells[i+1].innerText=d3.format(',')(totalMinorTarget[i])
+                table.rows[7].cells[i+1].innerText=d3.format(',')(totalHispTarget[i])
+                
+                // actual/target ratio
+                if  (d<=today) {
+                    table.rows[3].cells[i+1].innerText=calcRatio(total[i], totalTarget[i])
+                    table.rows[6].cells[i+1].innerText=calcRatio(totalMinor[i], totalMinorTarget[i])
+                    table.rows[9].cells[i+1].innerText=calcRatio(totalHisp[i], totalHispTarget[i])
+                }
+                
+            }
         })
+    
     })
+    
 }
 

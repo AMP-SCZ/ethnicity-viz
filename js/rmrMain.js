@@ -1,15 +1,6 @@
+let selectedPrefixes, selectedFiles
 
-
-populateSites()
-
-// loadData()
-
-// filterData()
-
-// rmrCount()
-
-// ethnCount()
-
+// let total, totalHisp, totalMinor
 
 function populateSites() {
     
@@ -66,10 +57,85 @@ function getPrefixes() {
         selectedPrefixes= filePrefixes
     }    
     
-    console.log(selectedPrefixes)
+    selectedFiles= selectedPrefixes.map(file=>
+        [d3.csv(file+'_metadata.csv'), d3.csv(file+'_plan.csv')])
     
-    loadMetaData(selectedPrefixes)
-    loadRmrData(selectedPrefixes)
+    // console.log(selectedPrefixes)
     
+    
+}
+
+populateSites()
+
+Promise.all(selectedFiles.flat()).then(obj=> {
+    let dataArray=[]
+    
+    selectedPrefixes.forEach((p,i)=> {
+        dataArray.push({
+            prefix:p,
+            metaData:obj[2*i],
+            planData:obj[2*i+1]
+        })
+    })
+    
+    initMainPage(dataArray)
+    
+})
+
+
+let rmrVis
+function initMainPage(dataArray) {
+    
+    // console.log(dataArray)
+    
+    // init tabular report
+    rmrVis = new RmrVis(dataArray)
+    
+}
+
+
+function networkChange() {
+    populateSites()
+    rmrVis && rmrVis.wrangleData()
+}
+
+function siteChange() {
+    getPrefixes()
+    rmrVis && rmrVis.wrangleData()
+}
+
+function cohortChange() {
+    rmrVis && rmrVis.updateVis()
+}
+
+/*
+// ENH can we do the above block using jQuery bind/trigger?
+
+$(document).ready(function() {
+    $('#network-name').change(populateSites)
+})
+
+$(document).ready(function() {
+    $('#site-name').change(getPrefixes)
+})
+*/
+
+
+/* * * * * * * * * * * * * *
+*         Carousel         *
+* * * * * * * * * * * * * */
+
+// define carousel behaviour
+let carousel = $('#tableCarousel');
+
+// prevent rotating
+carousel.carousel({
+    interval: false
+})
+
+// on button click switch view
+function switchTableView(){
+    carousel.carousel('next')
+    $('#switchTable').html($('#switchTable').html().includes('Details')?'Switch to RMR View':'Switch to Details View')
 }
 
