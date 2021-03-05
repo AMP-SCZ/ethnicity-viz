@@ -170,15 +170,31 @@ class SiteVis {
 
         vis.bar
             .on('mouseover', function (event, d) {
-
+                
+                let target= vis.currTarget.filter(s=> d.prefix.includes(s['Site']) && s)[0]
+                
                 vis.tooltip
                     .style('opacity', 1)
                     .style('left', event.pageX + 20 + 'px')
                     .style('top', event.pageY + 20 + 'px').html(`
                 <div style="background: rgba(0, 0, 0, 0.8); color: #fff; border-radius: 2px; padding: 12px">
                     <h6>${d.prefix.split('/')[2]}</h6>
-                    Actual ${d3.format(',')(d.metaData.length)}
-                 </div>`);
+                    <table class="table" style="margin-bottom: 0; font-family: Monospace; font-size: 14px">
+                    <tbody>
+                        <tr>
+                            <td>Actual</td>
+                            <td>${d.metaData.length}</td>
+                        </tr>
+                        <tr>
+                            <td>Target</td>
+                            <td>${target['Target']}</td>
+                        </tr>
+                        <tr>
+                            <td>Actual/Target</td>
+                            <td>${d3.format('.0%')(d.metaData.length/target['Target'])}</td>
+                        </tr>
+                    </tbody>
+                </div>`);
             })
             .on('mouseout', function (event, d) {
                 d3.select(this)
