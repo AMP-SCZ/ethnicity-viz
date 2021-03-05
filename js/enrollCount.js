@@ -32,6 +32,7 @@ race_hash= {
 
 function ethnCount(data) {
     
+    // this variable should be made global so it could be used for d3 visualizations
     let ethn_count= new Array(5).fill(0).map(() => new Array(10).fill(0))
     
     data.forEach(d=> {
