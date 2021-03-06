@@ -50,10 +50,21 @@ class SiteVis {
             .attr('class', 'axis y-axis')
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
+        
+        vis.targetLabelOffset= -10
         vis.gy.append('text')
-            .attr('y', 0)
+            .attr('y', vis.targetLabelOffset)
             .attr('class', 'title y-title')
-            .text('Enrollment')
+            .text('Target')
+        
+        
+        vis.actualLabelOffset= 10
+        vis.gy.append('text')
+            .attr('y', vis.actualLabelOffset)
+            .attr('class', 'title y-title')
+            .text('Actual')
+        
+        vis.statusLabelOffset= 30
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -65,17 +76,10 @@ class SiteVis {
             .attr('style', "text-transform: capitalize;");
         
         
-        // fixed domain Y axis: [0,100]
-        // variable domain X axis: selected sites
-        
-        // fixed plot title
+        // TODO
         // fixed 85% green line
         // fixed CHR and HC legends
         
-        // variable horizontal labels: number of enrollment per site
-        // variable horizontal labels: x/tick mark
-        
-        // variable bar labels: percentage of target achieved        
         // variable CHR percentage labels
         // variable HC percentage labels
         
@@ -85,6 +89,12 @@ class SiteVis {
 
     wrangleData() {
         let vis = this;
+        
+        // FIXME
+        // PRESCIENT network
+        // sorting isn't right unless planData is also filtered for network
+        vis.planData.sort((a,b)=> a.Network+'/'+a.Site > b.Network+'/'+b.Site?-1:1)
+        vis.metaData.sort((a,b)=> a.prefix > b.prefix?-1:1)
         
         // filter selected networks and sites
         vis.selectedNetSiteData= vis.metaData.filter(d=>selectedPrefixes.includes(d.prefix))
@@ -141,7 +151,7 @@ class SiteVis {
         tmp.exit().remove();
         
         
-        // labels        
+        // bar labels
         let labels = vis.patterng
             .selectAll('.label.count')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -150,15 +160,78 @@ class SiteVis {
             .enter()
             .append('text')
             .attr('class', 'label count')
+            .attr('text-anchor', 'middle')
             .merge(labels)
             .transition()
             .duration(1000)
-            .text((d) => d3.format(',')(d.metaData.length))
-            .attr('x', (d,i)=> vis.x(sites[i]))
+            .text((d,i) => d3.format('.0%')(d.metaData.length/vis.currTarget[i]['Target']))
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
             .attr('y', (d,i)=> vis.y(d.metaData.length/vis.currTarget[i]['Target']*100)-5)
 
         labels.exit().remove();
         
+        
+        // actual labels
+        labels = vis.patterng
+            .selectAll('.actual.label')
+            .data(vis.cohortMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'actual label')
+            .attr('text-anchor', 'middle')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => d.metaData.length)
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', vis.actualLabelOffset)
+
+        labels.exit().remove();
+        
+        
+        // target labels
+        labels = vis.patterng
+            .selectAll('.target.label')
+            .data(vis.cohortMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'target label')
+            .attr('text-anchor', 'middle')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => vis.currTarget[i]['Target'])
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', vis.targetLabelOffset)
+
+        labels.exit().remove();
+        
+        
+        
+        // status markers
+        labels = vis.patterng
+            .selectAll('.status.label')
+            .data(vis.cohortMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'status label')
+            .attr('text-anchor', 'middle')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i)=> d.metaData.length/vis.currTarget[i]['Target']>0.85?'✓':'x')
+            .attr('fill', (d,i)=> d.metaData.length/vis.currTarget[i]['Target']>0.85?'green':'red')
+            .attr('style', 'font-weight:bold')
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', vis.statusLabelOffset)
+
+        labels.exit().remove();
         
         vis.showTooltip();
 
