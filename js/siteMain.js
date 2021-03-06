@@ -72,6 +72,9 @@ function initMainPage(dataArray) {
     let metaData= dataArray.filter((d,i)=> i<L-1)
     let combinedPlan= dataArray[L-1]
     
+    combinedPlan.sort((a,b)=> a.Network+'/'+a.Site > b.Network+'/'+b.Site?-1:1)
+    metaData.sort((a,b)=> a.prefix > b.prefix?-1:1)
+    
     // init site summary
     siteVis = new SiteVis('site-bar', metaData, combinedPlan)
     
