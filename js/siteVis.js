@@ -225,17 +225,18 @@ function interpTarget(planData) {
     lower=lower?parseDate(lower).getTime():l_given
     upper=upper?parseDate(upper).getTime():u_given
     
-    planData.map(d=> {
+    let interpData= planData.map(d=> {
         
         d["Target"]= Math.round((upper-l_given)/(u_given-l_given)*(+d["Target"]))
         d["CHR%"]= Math.round(+d["CHR%"]/100*d["Target"])
         d["HC%"]= Math.round(+d["HC%"]/100*d["Target"])
         d["Minority%"]= Math.round(+d["Minority%"]/100*d["Target"])
         d["Hispanic%"]= Math.round(+d["Hispanic%"]/100*d["Target"])
-    
+        
+        return d
     })
     
-    return planData
+    return interpData
     
 }
 
