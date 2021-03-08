@@ -108,6 +108,8 @@ class SiteVis {
         vis.planData.sort((a,b)=> a.Network+'/'+a.Site > b.Network+'/'+b.Site?-1:1)
         vis.metaData.sort((a,b)=> a.prefix > b.prefix?-1:1)
         
+        // console.log(vis.planData)
+        
         // filter selected networks and sites
         vis.selectedNetSiteData= vis.metaData.filter(d=>selectedPrefixes.includes(d.prefix))
         
@@ -316,14 +318,18 @@ function interpTarget(planData) {
     // On the other hand, it should not be because target should always be counted from the beginning i.e. l_given
     let interpData= planData.map(d=> {
         
-        d["Target"]= Math.round((upper-l_given)/(u_given-l_given)*(+d["Target"]))
-        d["CHR%"]= Math.round(+d["CHR%"]/100*d["Target"])
-        d["HC%"]= Math.round(+d["HC%"]/100*d["Target"])
-        d["Minority%"]= Math.round(+d["Minority%"]/100*d["Target"])
-        d["Hispanic%"]= Math.round(+d["Hispanic%"]/100*d["Target"])
+        let dnew= JSON.parse(JSON.stringify(d))
         
-        return d
+        dnew["Target"]= Math.round((upper-l_given)/(u_given-l_given)*(+d["Target"]))
+        dnew["CHR%"]= Math.ceil(+d["CHR%"]/100*dnew["Target"])
+        dnew["HC%"]= Math.floor(+d["HC%"]/100*dnew["Target"])
+        dnew["Minority%"]= Math.round(+d["Minority%"]/100*dnew["Target"])
+        dnew["Hispanic%"]= Math.round(+d["Hispanic%"]/100*dnew["Target"])
+        
+        return dnew
     })
+    
+    // console.log(interpData)
     
     return interpData
     
