@@ -58,3 +58,9 @@ hr {
 .form-control {
     width: 200px;
 }
+
+#thresh-line {
+  stroke-dasharray: 7;
+  stroke: green;
+  stroke-width: 3;
+}

@@ -51,20 +51,20 @@ class SiteVis {
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
         
-        vis.targetLabelOffset= -10
+        vis.targetLabelOffset= -20
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
             .attr('class', 'title y-title')
             .text('Target')
         
         
-        vis.actualLabelOffset= 10
+        vis.actualLabelOffset= 0
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
             .attr('class', 'title y-title')
             .text('Actual')
         
-        vis.statusLabelOffset= 30
+        vis.statusLabelOffset= 20
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -75,9 +75,21 @@ class SiteVis {
             .attr('class', 'tooltip')
             .attr('style', "text-transform: capitalize;");
         
+        vis.patterng.append("line")
+            .attr("x1", vis.margin.left)
+            .attr("y1", vis.y(85))
+            .attr("x2", vis.width)
+            .attr("y2", vis.y(85))
+            .attr("id", "thresh-line")
+            
+        vis.patterng.append("text")
+            .attr("x", vis.margin.left-30)
+            .attr("y", vis.y(84))
+            .text("85%")
+            .attr("fill", "green")
+            .attr("text-anchor", "end")
         
         // TODO
-        // fixed 85% green line
         // fixed CHR and HC legends
         
         // variable CHR percentage labels
@@ -298,6 +310,10 @@ function interpTarget(planData) {
     lower=lower?parseDate(lower).getTime():l_given
     upper=upper?parseDate(upper).getTime():u_given
     
+    // FIXME
+    // Should l_given be replaced by lower?
+    // It should be because actual is within lower and upper
+    // On the other hand, it should not be because target should always be counted from the beginning i.e. l_given
     let interpData= planData.map(d=> {
         
         d["Target"]= Math.round((upper-l_given)/(u_given-l_given)*(+d["Target"]))
