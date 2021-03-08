@@ -109,15 +109,18 @@ class SiteVis {
         vis.metaData.sort((a,b)=> a.prefix > b.prefix?-1:1)
         
         // console.log(vis.planData)
+        // console.log(vis.metaData)
         
         // filter selected networks and sites
         vis.selectedNetSiteData= vis.metaData.filter(d=>selectedPrefixes.includes(d.prefix))
         
         // filter actual metaData by date
         vis.cohortMetaByDate= vis.selectedNetSiteData.map(d=> {
-            d.metaData=filterByDate(d.metaData)
-            return d
-        })        
+            let dnew= JSON.parse(JSON.stringify(d))
+            dnew.metaData=filterByDate(d.metaData)
+            return dnew
+        })
+        
         // console.log(vis.cohortMetaByDate)
         
         // obtain target for the date range
