@@ -155,6 +155,10 @@ class SiteVis {
             .append('rect')
             .merge(tmp);
 
+        let color1= 'lightblue'
+        let color2= 'blue'
+        let defs= vis.patterng.append('defs')
+        
         vis.bar
             .transition()
             .duration(1000)
@@ -163,7 +167,32 @@ class SiteVis {
             .attr('width', vis.x.bandwidth())
             .attr('height', (d,i)=> vis.height-vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('class', 'bar')
-            .attr('fill', 'lightblue')
+            // .attr('fill', 'lightblue')
+            .attr('fill', (d, i)=> {
+
+                let grad = defs.append("linearGradient")
+                    .attr("id", "grad_" + i)
+                    .attr("x1", "0%")
+                    .attr("x2", "0%")
+                    .attr("y1", "0%")
+                    .attr("y2", "100%")
+
+                grad.append("stop")
+                  .attr("offset", "0%")
+                  .attr("stop-color", color1);
+                grad.append("stop")
+                  .attr("offset", "50%") //`${d['CHR%']}%`)
+                  .attr("stop-color", color1);
+                grad.append("stop")
+                  .attr("offset", "50%") // `${d['HC%']}%`)
+                  .attr("stop-color", color2);
+                grad.append("stop")
+                  .attr("offset", "100%")
+                  .attr("stop-color", color2);
+
+                return "url(#grad_" + i + ")";
+            
+            })
             
         tmp.exit().remove();
         
