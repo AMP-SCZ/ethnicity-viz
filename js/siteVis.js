@@ -197,6 +197,7 @@ class SiteVis {
         
         
         // bar labels
+        /*
         let labels = vis.patterng
             .selectAll('.label.count')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -212,6 +213,57 @@ class SiteVis {
             .text((d,i) => d3.format('.0%')(d.metaData.length/vis.currTarget[i]['Target']))
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
             .attr('y', (d,i)=> vis.y(d.metaData.length/vis.currTarget[i]['Target']*100)-5)
+
+        labels.exit().remove();
+        */
+        
+        vis.chrMetaByDate= vis.cohortMetaByDate.map(d=> {
+            let dnew= JSON.parse(JSON.stringify(d))
+            dnew.metaData= d.metaData.filter(w=>w.Wellness==='Patient' && w)
+            return dnew
+        })
+        
+        
+        // CHR percentage
+        let labels = vis.patterng
+            .selectAll('.label.chr')
+            .data(vis.chrMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'label chr')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => d3.format('.0%')(d.metaData.length/vis.currTarget[i]['Target']))
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', (d,i)=> 
+                vis.y((vis.cohortMetaByDate[i].metaData.length-d.metaData.length/2)/vis.currTarget[i]['Target']*100))
+
+        labels.exit().remove();
+        
+        
+        // HC percentage
+        labels = vis.patterng
+            .selectAll('.label.hc')
+            .data(vis.chrMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'label hc')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => d3.format('.0%')((vis.cohortMetaByDate[i].metaData.length-d.metaData.length)/vis.currTarget[i]['Target']))
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', (d,i)=> 
+                vis.y(((vis.cohortMetaByDate[i].metaData.length-d.metaData.length)/2)/vis.currTarget[i]['Target']*100))
 
         labels.exit().remove();
         
