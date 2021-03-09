@@ -155,8 +155,7 @@ class SiteVis {
             .append('rect')
             .merge(tmp);
 
-        let color1= 'lightblue'
-        let color2= 'blue'
+
         let defs= vis.patterng.append('defs')
         
         vis.bar
@@ -169,28 +168,27 @@ class SiteVis {
             .attr('class', 'bar')
             // .attr('fill', 'lightblue')
             .attr('fill', (d, i)=> {
-
+                
+                let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
+                
                 let grad = defs.append("linearGradient")
                     .attr("id", "grad_" + i)
                     .attr("x1", "0%")
                     .attr("x2", "0%")
                     .attr("y1", "0%")
                     .attr("y2", "100%")
+                    .selectAll("stop")
+                    .data([
+                        {offset: d3.format(".0%")(chrFrac), color: "blue"},
+                        {offset: d3.format(".0%")(1-chrFrac), color: "lightblue"}
+                    ])
+                    .enter()
+                    .append("stop")
+                    .attr("offset", d => d.offset)
+                    .attr("stop-color", d => d.color)
+                    
 
-                grad.append("stop")
-                  .attr("offset", "0%")
-                  .attr("stop-color", color1);
-                grad.append("stop")
-                  .attr("offset", "50%") //`${d['CHR%']}%`)
-                  .attr("stop-color", color1);
-                grad.append("stop")
-                  .attr("offset", "50%") // `${d['HC%']}%`)
-                  .attr("stop-color", color2);
-                grad.append("stop")
-                  .attr("offset", "100%")
-                  .attr("stop-color", color2);
-
-                return "url(#grad_" + i + ")";
+                return `url(#grad_${i})`;
             
             })
             
