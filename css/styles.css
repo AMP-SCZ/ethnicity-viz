@@ -69,3 +69,14 @@ hr {
 .target.label {
     fill: magenta;
 }
+
+.label.chr {
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.label.hc {
+    font-size: 10px;
+    font-weight: bold;
+}
+
