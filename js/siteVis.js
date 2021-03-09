@@ -51,11 +51,12 @@ class SiteVis {
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
         
-        vis.targetLabelOffset= -30
-        vis.actualLabelOffset= -10
-        vis.statusLabelOffset= 10
-        vis.legendRectOffset= 25
-        vis.legendTextOffset= 38
+        vis.legendRectOffset= -45
+        vis.legendTextOffset= -35
+        vis.targetLabelOffset= -10
+        vis.actualLabelOffset= 10
+        vis.statusLabelOffset= 30
+        
         
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
@@ -123,10 +124,6 @@ class SiteVis {
             .attr('class', 'text legend')
             .text(d=>d)
         
-        // legends
-        
-        // TODO
-        // fixed CHR and HC legends
         
         vis.wrangleData();
     }
