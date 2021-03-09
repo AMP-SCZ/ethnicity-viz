@@ -94,19 +94,12 @@ class SiteVis {
         // TODO
         // fixed CHR and HC legends
         
-        // variable CHR percentage labels
-        // variable HC percentage labels
-        
-        
         vis.wrangleData();
     }
 
     wrangleData() {
         let vis = this;
         
-        // FIXME
-        // PRESCIENT network
-        // sorting isn't right unless planData is also filtered for network
         vis.planData.sort((a,b)=> a.Network+'/'+a.Site > b.Network+'/'+b.Site?-1:1)
         vis.metaData.sort((a,b)=> a.prefix > b.prefix?-1:1)
         
@@ -115,6 +108,8 @@ class SiteVis {
         
         // filter selected networks and sites
         vis.selectedNetSiteData= vis.metaData.filter(d=>selectedPrefixes.includes(d.prefix))
+        vis.selectedNetSitePlanData= vis.planData.filter(d=>selectedPrefixes.includes(`data/${d.Network}/${d.Site}`))
+
         
         // filter actual metaData by date
         vis.cohortMetaByDate= vis.selectedNetSiteData.map(d=> {
@@ -126,7 +121,7 @@ class SiteVis {
         // console.log(vis.cohortMetaByDate)
         
         // obtain target for the date range
-        vis.currTarget= interpTarget(vis.planData)
+        vis.currTarget= interpTarget(vis.selectedNetSitePlanData)
         // console.log(vis.currTarget)
         
         
