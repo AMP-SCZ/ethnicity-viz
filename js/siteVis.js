@@ -17,7 +17,7 @@ class SiteVis {
         const width = 900;
         const height = 500;
 
-        vis.margin = { top: 50, right: 20, bottom: 50, left: 50 };
+        vis.margin = { top: 50, right: 20, bottom: 50, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -60,14 +60,14 @@ class SiteVis {
         
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
-            .attr('class', 'title y-title label target')
-            .text('Target')  
+            .attr('class', 'title y-title label actual')
+            .text('Actual/Target')
         
         
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
-            .attr('class', 'title y-title label actual')
-            .text('Actual')
+            .attr('class', 'title y-title label target')
+            .text('Ratio%')
         
 
         // Group of pattern elements
@@ -78,13 +78,7 @@ class SiteVis {
             .append('div')
             .attr('class', 'tooltip')
             .attr('style', "text-transform: capitalize;");
-        
-        vis.patterng.append("line")
-            .attr("x1", vis.margin.left)
-            .attr("y1", vis.y(85))
-            .attr("x2", vis.width)
-            .attr("y2", vis.y(85))
-            .attr("id", "thresh-line")
+            
             
         vis.patterng.append("text")
             .attr("x", vis.margin.left-30)
@@ -182,8 +176,6 @@ class SiteVis {
         vis.bar = tmp.enter()
             .append('rect')
             .merge(tmp);
-
-
         
         vis.bar
             .transition()
@@ -220,6 +212,16 @@ class SiteVis {
             })
             
         tmp.exit().remove();
+        
+        
+        vis.patterng.select('#thresh-line').remove()
+        vis.patterng
+            .append("line")
+            .attr("x1", vis.margin.left)
+            .attr("y1", vis.y(85))
+            .attr("x2", vis.width)
+            .attr("y2", vis.y(85))
+            .attr("id", "thresh-line")
         
         
         // bar labels
@@ -294,7 +296,7 @@ class SiteVis {
         labels.exit().remove();
         
         
-        // actual labels
+        // actual/target labels
         labels = vis.patterng
             .selectAll('.actual.label')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -307,14 +309,14 @@ class SiteVis {
             .merge(labels)
             .transition()
             .duration(1000)
-            .text((d,i) => d.metaData.length)
+            .text((d,i) => `${d.metaData.length}/${vis.currTarget[i]['Target']}`)
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
-            .attr('y', vis.actualLabelOffset)
+            .attr('y', vis.targetLabelOffset)
 
         labels.exit().remove();
         
         
-        // target labels
+        // ratio labels
         labels = vis.patterng
             .selectAll('.target.label')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -327,9 +329,9 @@ class SiteVis {
             .merge(labels)
             .transition()
             .duration(1000)
-            .text((d,i) => vis.currTarget[i]['Target'])
+            .text((d,i) => Math.round(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
-            .attr('y', vis.targetLabelOffset)
+            .attr('y', vis.actualLabelOffset)
 
         labels.exit().remove();
         
@@ -368,6 +370,8 @@ class SiteVis {
             .on('mouseover', function (event, d) {
                 
                 let target= vis.currTarget.filter(s=> d.prefix.includes(s['Site']) && s)[0]
+                let chrCount= d.metaData.filter(w=>w.Wellness==='Patient' && w).length
+                let hcCount= d.metaData.length-chrCount
                 
                 vis.tooltip
                     .style('opacity', 1)
@@ -378,15 +382,15 @@ class SiteVis {
                     <table class="table" style="margin-bottom: 0; font-family: Monospace; font-size: 14px">
                     <tbody>
                         <tr>
-                            <td>Actual</td>
-                            <td>${d.metaData.length}</td>
+                            <td>CHR</td>
+                            <td>${chrCount}</td>
                         </tr>
                         <tr>
-                            <td>Target</td>
-                            <td>${target['Target']}</td>
+                            <td>HC</td>
+                            <td>${hcCount}</td>
                         </tr>
                         <tr>
-                            <td>Actual/Target</td>
+                            <td>(CHR+HC)/Target</td>
                             <td>${d3.format('.0%')(d.metaData.length/target['Target'])}</td>
                         </tr>
                     </tbody>
@@ -421,10 +425,10 @@ function interpTarget(planData) {
     lower=lower?parseDate(lower).getTime():l_given
     upper=upper?parseDate(upper).getTime():u_given
     
-    // FIXME
-    // Should numerator (upper-l_given) be replaced by (upper-lower)?
-    // It should be because actual is within lower and upper
-    // On the other hand, it should not be because target should always be counted from the beginning i.e. l_given
+    /*
+    Interpolated target is calculated for the input date range: (upper-lower)
+    Alternatively, it could be calculated from the beginning: (upper-l_given)
+    */
     let interpData= planData.map(d=> {
         
         let dnew= JSON.parse(JSON.stringify(d))
