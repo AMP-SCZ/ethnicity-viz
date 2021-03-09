@@ -343,14 +343,14 @@ function interpTarget(planData) {
     upper=upper?parseDate(upper).getTime():u_given
     
     // FIXME
-    // Should l_given be replaced by lower?
+    // Should numerator (upper-l_given) be replaced by (upper-lower)?
     // It should be because actual is within lower and upper
     // On the other hand, it should not be because target should always be counted from the beginning i.e. l_given
     let interpData= planData.map(d=> {
         
         let dnew= JSON.parse(JSON.stringify(d))
         
-        dnew["Target"]= Math.round((upper-l_given)/(u_given-l_given)*(+d["Target"]))
+        dnew["Target"]= Math.round((upper-lower)/(u_given-l_given)*(+d["Target"]))
         dnew["CHR%"]= Math.ceil(+d["CHR%"]/100*dnew["Target"])
         dnew["HC%"]= Math.floor(+d["HC%"]/100*dnew["Target"])
         dnew["Minority%"]= Math.round(+d["Minority%"]/100*dnew["Target"])
