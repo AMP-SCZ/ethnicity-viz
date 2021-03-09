@@ -88,6 +88,8 @@ class SiteVis {
             .text("85%")
             .attr("fill", "green")
             .attr("text-anchor", "end")
+            
+        vis.defs= vis.patterng.append('defs')
         
         // TODO
         // fixed CHR and HC legends
@@ -156,7 +158,6 @@ class SiteVis {
             .merge(tmp);
 
 
-        let defs= vis.patterng.append('defs')
         
         vis.bar
             .transition()
@@ -171,7 +172,7 @@ class SiteVis {
                 
                 let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
                 
-                let grad = defs.append("linearGradient")
+                let grad = vis.defs.append("linearGradient")
                     .attr("id", "grad_" + i)
                     .attr("x1", "0%")
                     .attr("x2", "0%")
