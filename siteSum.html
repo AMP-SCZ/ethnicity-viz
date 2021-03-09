@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+        <title>CHR data visualization</title>
+
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+        <link rel="stylesheet" href="css/styles.css" />
+    </head>
+
+    <body>        
+    
+        <div class="row justify-content-center">
+            
+            <div class="col-8">
+            
+                <h3>Enrollment Status of Sites</h3>                
+                <hr>
+                
+                <div class="row">
+                    <!-- Network selector -->
+                    <div class="col-3">
+                        U01 Network&nbsp;
+                        <select class="form-control" id="network-name" style="width:fit-content" onchange=networkChange()>
+                            <option value="All" selected>All</option>
+                            <option value="ProNET">ProNET</option>
+                            <option value="PRESCIENT">PRESCIENT</option>
+                        </select>
+                    </div>
+                <!--
+                </div>
+                
+                <br>
+                
+                <div class="row">
+                -->
+                    <!-- Date range -->
+                    <div class="col">
+                        Time Period
+                        <br>
+                        <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
+                        <button class="btn btn-primary" id="time-filter" onclick=networkChange()>Filter</button>
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="row">
+                    <div id="site-bar" style="height: 100%; width: 100%"></div>
+                </div>
+                
+                <br>
+                <br>
+                <br>
+                
+            </div>
+            
+        </div>
+        
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"
+        ></script>
+        
+        
+        <script src="data/network_site.js"></script>
+        <script src="js/rmrCount.js"></script>
+        <script src="js/siteVis.js"></script>
+        <script src="js/siteMain.js"></script>
+    
+    </body>
+
+</html>
+        
+                    

@@ -11,13 +11,6 @@ body {
     text-transform: capitalize;
 }
 
-
-#legend circle {
-    r: 8px;
-    cy: 8px;
-    cx: 8px;
-}
-
 .y-title {
     fill: black;
     text-anchor: end;
@@ -58,3 +51,29 @@ hr {
 .form-control {
     width: 200px;
 }
+
+#thresh-line {
+  stroke-dasharray: 7;
+  stroke: green;
+  stroke-width: 3;
+}
+
+
+.target.label {
+    fill: magenta;
+}
+
+.label.chr {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.label.hc {
+    font-size: 11px;
+    font-weight: bold;
+}
+
+input {
+    width: 120px;
+}
+
