@@ -11,13 +11,6 @@ body {
     text-transform: capitalize;
 }
 
-
-#legend circle {
-    r: 8px;
-    cy: 8px;
-    cx: 8px;
-}
-
 .y-title {
     fill: black;
     text-anchor: end;
@@ -71,12 +64,16 @@ hr {
 }
 
 .label.chr {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
 }
 
 .label.hc {
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
+}
+
+input {
+    width: 120px;
 }
 
