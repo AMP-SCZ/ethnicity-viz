@@ -370,6 +370,8 @@ class SiteVis {
             .on('mouseover', function (event, d) {
                 
                 let target= vis.currTarget.filter(s=> d.prefix.includes(s['Site']) && s)[0]
+                let chrCount= d.metaData.filter(w=>w.Wellness==='Patient' && w).length
+                let hcCount= d.metaData.length-chrCount
                 
                 vis.tooltip
                     .style('opacity', 1)
@@ -380,15 +382,15 @@ class SiteVis {
                     <table class="table" style="margin-bottom: 0; font-family: Monospace; font-size: 14px">
                     <tbody>
                         <tr>
-                            <td>Actual</td>
-                            <td>${d.metaData.length}</td>
+                            <td>CHR</td>
+                            <td>${chrCount}</td>
                         </tr>
                         <tr>
-                            <td>Target</td>
-                            <td>${target['Target']}</td>
+                            <td>HC</td>
+                            <td>${hcCount}</td>
                         </tr>
                         <tr>
-                            <td>Actual/Target</td>
+                            <td>(CHR+HC)/Target</td>
                             <td>${d3.format('.0%')(d.metaData.length/target['Target'])}</td>
                         </tr>
                     </tbody>
