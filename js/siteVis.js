@@ -54,14 +54,14 @@ class SiteVis {
         vis.targetLabelOffset= -20
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
-            .attr('class', 'title y-title')
+            .attr('class', 'title y-title label target')
             .text('Target')
         
         
         vis.actualLabelOffset= 0
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
-            .attr('class', 'title y-title')
+            .attr('class', 'title y-title label actual')
             .text('Actual')
         
         vis.statusLabelOffset= 20

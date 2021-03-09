@@ -64,3 +64,8 @@ hr {
   stroke: green;
   stroke-width: 3;
 }
+
+
+.target.label {
+    fill: magenta;
+}
