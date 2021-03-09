@@ -78,13 +78,7 @@ class SiteVis {
             .append('div')
             .attr('class', 'tooltip')
             .attr('style', "text-transform: capitalize;");
-        
-        vis.patterng.append("line")
-            .attr("x1", vis.margin.left)
-            .attr("y1", vis.y(85))
-            .attr("x2", vis.width)
-            .attr("y2", vis.y(85))
-            .attr("id", "thresh-line")
+            
             
         vis.patterng.append("text")
             .attr("x", vis.margin.left-30)
@@ -182,8 +176,6 @@ class SiteVis {
         vis.bar = tmp.enter()
             .append('rect')
             .merge(tmp);
-
-
         
         vis.bar
             .transition()
@@ -220,6 +212,16 @@ class SiteVis {
             })
             
         tmp.exit().remove();
+        
+        
+        vis.patterng.select('#thresh-line').remove()
+        vis.patterng
+            .append("line")
+            .attr("x1", vis.margin.left)
+            .attr("y1", vis.y(85))
+            .attr("x2", vis.width)
+            .attr("y2", vis.y(85))
+            .attr("id", "thresh-line")
         
         
         // bar labels
@@ -421,10 +423,10 @@ function interpTarget(planData) {
     lower=lower?parseDate(lower).getTime():l_given
     upper=upper?parseDate(upper).getTime():u_given
     
-    // FIXME
-    // Should numerator (upper-l_given) be replaced by (upper-lower)?
-    // It should be because actual is within lower and upper
-    // On the other hand, it should not be because target should always be counted from the beginning i.e. l_given
+    /*
+    Interpolated target is calculated for the input date range: (upper-lower)
+    Alternatively, it could be calculated from the beginning: (upper-l_given)
+    */
     let interpData= planData.map(d=> {
         
         let dnew= JSON.parse(JSON.stringify(d))
