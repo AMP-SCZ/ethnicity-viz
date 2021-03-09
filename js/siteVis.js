@@ -20,7 +20,7 @@ class SiteVis {
         vis.margin = { top: 50, right: 20, bottom: 50, left: 50 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
-
+        
         // init drawing area
         vis.svg = d3
             .select('#' + vis.parentElement)
@@ -51,20 +51,23 @@ class SiteVis {
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
         
-        vis.targetLabelOffset= -20
+        vis.targetLabelOffset= -30
+        vis.actualLabelOffset= -10
+        vis.statusLabelOffset= 10
+        vis.legendRectOffset= 25
+        vis.legendTextOffset= 38
+        
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
             .attr('class', 'title y-title label target')
-            .text('Target')
+            .text('Target')  
         
         
-        vis.actualLabelOffset= 0
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
             .attr('class', 'title y-title label actual')
             .text('Actual')
         
-        vis.statusLabelOffset= 20
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -90,6 +93,37 @@ class SiteVis {
             .attr("text-anchor", "end")
             
         vis.defs= vis.patterng.append('defs')
+        
+        vis.colors= d3.schemeCategory10
+        
+        
+        let legendWidth= 15
+        vis.cohorts= ['CHR', 'HC']
+        vis.patterng
+            .selectAll('.rect.legend')
+            .data(vis.cohorts)
+            .enter()
+            .append('rect')
+            .attr('width', legendWidth)
+            .attr('height', legendWidth)
+            .attr('x', (d,i)=> vis.width/4*(i+1))
+            .attr('y', vis.legendRectOffset)
+            .attr('fill', (d,i)=> vis.colors[i])
+            .attr('class', 'rect legend')
+        
+        
+        vis.patterng
+            .selectAll('.text.legend')
+            .data(vis.cohorts)
+            .enter()
+            .append('text')
+            .attr('x', (d,i)=> vis.width/4*(i+1)+legendWidth+5)
+            .attr('y', vis.legendTextOffset)
+            .attr('fill', 'black')
+            .attr('class', 'text legend')
+            .text(d=>d)
+        
+        // legends
         
         // TODO
         // fixed CHR and HC legends
@@ -175,8 +209,8 @@ class SiteVis {
                     .attr("y2", "100%")
                     .selectAll("stop")
                     .data([
-                        {offset: d3.format(".0%")(chrFrac), color: "blue"},
-                        {offset: d3.format(".0%")(1-chrFrac), color: "lightblue"}
+                        {offset: d3.format(".0%")(chrFrac), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(1-chrFrac), color: vis.colors[1]}
                     ])
                     .enter()
                     .append("stop")
