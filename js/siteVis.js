@@ -17,7 +17,7 @@ class SiteVis {
         const width = 900;
         const height = 500;
 
-        vis.margin = { top: 50, right: 20, bottom: 50, left: 50 };
+        vis.margin = { top: 50, right: 20, bottom: 50, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -60,14 +60,14 @@ class SiteVis {
         
         vis.gy.append('text')
             .attr('y', vis.targetLabelOffset)
-            .attr('class', 'title y-title label target')
-            .text('Target')  
+            .attr('class', 'title y-title label actual')
+            .text('Actual/Target')
         
         
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
-            .attr('class', 'title y-title label actual')
-            .text('Actual')
+            .attr('class', 'title y-title label target')
+            .text('Ratio%')
         
 
         // Group of pattern elements
@@ -296,7 +296,7 @@ class SiteVis {
         labels.exit().remove();
         
         
-        // actual labels
+        // actual/target labels
         labels = vis.patterng
             .selectAll('.actual.label')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -309,14 +309,14 @@ class SiteVis {
             .merge(labels)
             .transition()
             .duration(1000)
-            .text((d,i) => d.metaData.length)
+            .text((d,i) => `${d.metaData.length}/${vis.currTarget[i]['Target']}`)
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
-            .attr('y', vis.actualLabelOffset)
+            .attr('y', vis.targetLabelOffset)
 
         labels.exit().remove();
         
         
-        // target labels
+        // ratio labels
         labels = vis.patterng
             .selectAll('.target.label')
             .data(vis.cohortMetaByDate, d => d.prefix)
@@ -329,9 +329,9 @@ class SiteVis {
             .merge(labels)
             .transition()
             .duration(1000)
-            .text((d,i) => vis.currTarget[i]['Target'])
+            .text((d,i) => Math.round(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
-            .attr('y', vis.targetLabelOffset)
+            .attr('y', vis.actualLabelOffset)
 
         labels.exit().remove();
         
