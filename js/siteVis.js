@@ -15,9 +15,9 @@ class SiteVis {
         let vis = this
         
         const width = 900;
-        const height = 500;
+        const height = 550;
 
-        vis.margin = { top: 50, right: 20, bottom: 50, left: 60 };
+        vis.margin = { top: 50, right: 20, bottom: 90, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -161,7 +161,13 @@ class SiteVis {
         let sites= vis.cohortMetaByDate.map(d=>d.prefix.split('/')[2])
         vis.x.domain(sites);
         vis.xAxis.scale(vis.x);
-        vis.gx.transition().duration(1000).call(vis.xAxis);
+        vis.gx.transition().duration(1000).call(vis.xAxis)
+            .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
         
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);
