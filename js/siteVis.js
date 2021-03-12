@@ -172,7 +172,6 @@ class SiteVis {
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);
         
-        // vis.patterng.attr('transform', `translate(${vis.x.bandwidth()/2},0)`);
         
         // bars
         let tmp = vis.patterng
@@ -187,14 +186,16 @@ class SiteVis {
             .transition()
             .duration(1000)
             .attr('x', (d,i)=> vis.x(sites[i]))
-            .attr('y', (d,i)=> vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
+            .attr('y', (d,i)=> vis.y(100)) // vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('width', vis.x.bandwidth())
-            .attr('height', (d,i)=> vis.height-vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
+            .attr('height', (d,i)=> vis.height-vis.y(100)) // vis.height-vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('class', 'bar')
             // .attr('fill', 'lightblue')
             .attr('fill', (d, i)=> {
                 
-                let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
+                // let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
+                let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/vis.currTarget[i]['Target']
+                let hcFrac= d.metaData.filter(w=>w.Wellness==='Healthy' && w).length/vis.currTarget[i]['Target']
                 
                 let grad = vis.defs.append("linearGradient")
                     .attr("id", "grad_" + i)
@@ -204,13 +205,22 @@ class SiteVis {
                     .attr("y2", "100%")
                     .selectAll("stop")
                     .data([
+                        /*
                         {offset: d3.format(".0%")(chrFrac), color: vis.colors[0]},
                         {offset: d3.format(".0%")(1-chrFrac), color: vis.colors[1]}
+                        */
+                        {offset: d3.format(".0%")(0), color: emptyColor},
+                        {offset: d3.format(".0%")(1-chrFrac-hcFrac), color: emptyColor},
+                        {offset: d3.format(".0%")(1-chrFrac-hcFrac), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(1-hcFrac), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(1-hcFrac), color: vis.colors[1]},
+                        {offset: d3.format(".0%")(1), color: vis.colors[1]}
                     ])
                     .enter()
                     .append("stop")
-                    .attr("offset", d => d.offset)
-                    .attr("stop-color", d => d.color)
+                    .attr("offset", c => c.offset)
+                    .attr("stop-color", c => c.color)
+                    
                     
 
                 return `url(#grad_${i})`;
