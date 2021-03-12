@@ -93,7 +93,7 @@ class SiteVis {
         
         
         let legendWidth= 15
-        vis.cohorts= ['CHR', 'HC']
+        vis.cohorts= ['CHR', 'HC', 'Empty']
         vis.patterng
             .selectAll('.rect.legend')
             .data(vis.cohorts)
@@ -103,7 +103,7 @@ class SiteVis {
             .attr('height', legendWidth)
             .attr('x', (d,i)=> vis.width/4*(i+1))
             .attr('y', vis.legendRectOffset)
-            .attr('fill', (d,i)=> vis.colors[i])
+            .attr('fill', (d,i)=> d==='Empty'?emptyColor:vis.colors[i])
             .attr('class', 'rect legend')
         
         
