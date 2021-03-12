@@ -312,6 +312,30 @@ class SiteVis {
         labels.exit().remove();
         
         
+        // empty percentage
+        labels = vis.patterng
+            .selectAll('.label.empty')
+            .data(vis.cohortMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'label empty')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => d3.format('.0%')(1-(d.metaData.length/vis.currTarget[i]['Target'])))
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', (d,i)=> 
+                // vis.y((1-(d.metaData.length/vis.currTarget[i]['Target']/4))*100))
+                vis.y(100-(1-(d.metaData.length/vis.currTarget[i]['Target']))/2*100))
+                
+
+        labels.exit().remove();
+        
+        
         // actual/target labels
         labels = vis.patterng
             .selectAll('.actual.label')
