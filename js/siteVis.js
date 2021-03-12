@@ -182,6 +182,9 @@ class SiteVis {
             .append('rect')
             .merge(tmp);
         
+        
+        vis.defs.selectAll('linearGradient').remove()
+        
         vis.bar
             .transition()
             .duration(1000)
@@ -196,6 +199,7 @@ class SiteVis {
                 // let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
                 let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/vis.currTarget[i]['Target']
                 let hcFrac= d.metaData.filter(w=>w.Wellness==='Healthy' && w).length/vis.currTarget[i]['Target']
+                
                 
                 let grad = vis.defs.append("linearGradient")
                     .attr("id", "grad_" + i)
