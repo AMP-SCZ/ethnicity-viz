@@ -350,13 +350,13 @@ class SiteVis {
             .append('text')
             .attr('class', 'actual label')
             .attr('text-anchor', 'middle')
-            .attr('fill', (d,i)=> d.metaData.length/vis.currTarget[i]['Target']>=0.85?'green':'red')
             .merge(labels)
             .transition()
             .duration(1000)
             .text((d,i) => `${d.metaData.length}/${vis.currTarget[i]['Target']}`)
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
             .attr('y', vis.targetLabelOffset)
+            .attr('fill', (d,i)=> d.metaData.length/vis.currTarget[i]['Target']>=0.85?'green':'red')
 
         labels.exit().remove();
         
