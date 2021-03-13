@@ -17,7 +17,7 @@ class SiteVis {
         const width = 900;
         const height = 550;
 
-        vis.margin = { top: 20, right: 20, bottom: 90, left: 60 };
+        vis.margin = { top: 30, right: 20, bottom: 90, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -51,11 +51,11 @@ class SiteVis {
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
         
-        vis.legendRectOffset= -45
-        vis.legendTextOffset= -35
-        vis.targetLabelOffset= 0
-        vis.actualLabelOffset= 10
-        vis.statusLabelOffset= 30
+        vis.legendRectOffset= -25
+        vis.legendTextOffset= -12
+        vis.targetLabelOffset= 15
+        // vis.actualLabelOffset= 10
+        // vis.statusLabelOffset= 30
         
         
         vis.gy.append('text')
