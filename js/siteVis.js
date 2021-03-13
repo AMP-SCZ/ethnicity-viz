@@ -17,7 +17,7 @@ class SiteVis {
         const width = 900;
         const height = 550;
 
-        vis.margin = { top: 50, right: 20, bottom: 90, left: 60 };
+        vis.margin = { top: 20, right: 20, bottom: 90, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -53,7 +53,7 @@ class SiteVis {
         
         vis.legendRectOffset= -45
         vis.legendTextOffset= -35
-        vis.targetLabelOffset= -10
+        vis.targetLabelOffset= 0
         vis.actualLabelOffset= 10
         vis.statusLabelOffset= 30
         
@@ -63,12 +63,12 @@ class SiteVis {
             .attr('class', 'title y-title label actual')
             .text('Actual/Target')
         
-        
+        /*
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
             .attr('class', 'title y-title label target')
             .text('Ratio%')
-        
+        */
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -163,10 +163,10 @@ class SiteVis {
         vis.xAxis.scale(vis.x);
         vis.gx.transition().duration(1000).call(vis.xAxis)
             .selectAll("text")
-            .attr("y", 0)
+            .attr("y", 12)
             .attr("x", 9)
             .attr("dy", ".35em")
-            .attr("transform", "rotate(90)")
+            .attr("transform", "rotate(45)")
             .style("text-anchor", "start");
         
         vis.yAxis.scale(vis.y);
@@ -214,10 +214,10 @@ class SiteVis {
                         {offset: d3.format(".0%")(1-chrFrac), color: vis.colors[1]}
                         */
                         {offset: d3.format(".0%")(0), color: emptyColor},
-                        {offset: d3.format(".0%")(1-chrFrac-hcFrac), color: emptyColor},
-                        {offset: d3.format(".0%")(1-chrFrac-hcFrac), color: vis.colors[0]},
-                        {offset: d3.format(".0%")(1-hcFrac), color: vis.colors[0]},
-                        {offset: d3.format(".0%")(1-hcFrac), color: vis.colors[1]},
+                        {offset: d3.format(".0%")(d3.max([0,1-chrFrac-hcFrac])), color: emptyColor},
+                        {offset: d3.format(".0%")(d3.max([0,1-chrFrac-hcFrac])), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(d3.max([0,1-hcFrac])), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(d3.max([0,1-hcFrac])), color: vis.colors[1]},
                         {offset: d3.format(".0%")(1), color: vis.colors[1]}
                     ])
                     .enter()
@@ -280,7 +280,7 @@ class SiteVis {
         labels
             .enter()
             .append('text')
-            .attr('class', 'label chr')
+            .attr('class', 'bar label chr')
             .attr('text-anchor', 'middle')
             .attr('fill', 'white')
             .merge(labels)
@@ -302,7 +302,7 @@ class SiteVis {
         labels
             .enter()
             .append('text')
-            .attr('class', 'label hc')
+            .attr('class', 'bar label hc')
             .attr('text-anchor', 'middle')
             .attr('fill', 'white')
             .merge(labels)
@@ -324,7 +324,7 @@ class SiteVis {
         labels
             .enter()
             .append('text')
-            .attr('class', 'label empty')
+            .attr('class', 'bar label empty')
             .attr('text-anchor', 'middle')
             .attr('fill', 'white')
             .merge(labels)
@@ -350,6 +350,7 @@ class SiteVis {
             .append('text')
             .attr('class', 'actual label')
             .attr('text-anchor', 'middle')
+            .attr('fill', (d,i)=> d.metaData.length/vis.currTarget[i]['Target']>=0.85?'green':'red')
             .merge(labels)
             .transition()
             .duration(1000)
@@ -360,6 +361,7 @@ class SiteVis {
         labels.exit().remove();
         
         
+        /*
         // ratio labels
         labels = vis.patterng
             .selectAll('.target.label')
@@ -401,6 +403,18 @@ class SiteVis {
             .attr('y', vis.statusLabelOffset)
 
         labels.exit().remove();
+        */
+        
+        $(document).ready(function() {
+            let v
+            labels= vis.patterng.selectAll('.bar.label')
+            
+            for(let i=0; i< labels._groups[0].length; i++) {
+                v= +labels._groups[0][i].innerHTML.split('%')[0]
+                // console.log(v)
+                v<5 && (labels._groups[0][i].innerHTML='')
+            }
+        })
         
         vis.showTooltip();
 
