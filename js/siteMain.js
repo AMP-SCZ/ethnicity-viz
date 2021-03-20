@@ -3,6 +3,11 @@ let selectedPrefixes, selectedFiles
 let start_date= "1/11/2019"
 let end_date= "2/24/2021"
 
+// Ivory
+emptyColor="#EEEDE7"
+// Gray
+emptyColor="#868B8E"
+
 function getPrefixes() {
     
     let filePrefixes=[]

@@ -15,9 +15,9 @@ class SiteVis {
         let vis = this
         
         const width = 900;
-        const height = 500;
+        const height = 550;
 
-        vis.margin = { top: 50, right: 20, bottom: 50, left: 60 };
+        vis.margin = { top: 30, right: 20, bottom: 90, left: 60 };
         vis.width = width - vis.margin.left - vis.margin.right;
         vis.height = height - vis.margin.top - vis.margin.bottom;
         
@@ -51,11 +51,11 @@ class SiteVis {
             .attr('transform', `translate(${vis.margin.left-10}, 0)`);
 
         
-        vis.legendRectOffset= -45
-        vis.legendTextOffset= -35
-        vis.targetLabelOffset= -10
-        vis.actualLabelOffset= 10
-        vis.statusLabelOffset= 30
+        vis.legendRectOffset= -25
+        vis.legendTextOffset= -12
+        vis.targetLabelOffset= 15
+        // vis.actualLabelOffset= 10
+        // vis.statusLabelOffset= 30
         
         
         vis.gy.append('text')
@@ -63,12 +63,12 @@ class SiteVis {
             .attr('class', 'title y-title label actual')
             .text('Actual/Target')
         
-        
+        /*
         vis.gy.append('text')
             .attr('y', vis.actualLabelOffset)
             .attr('class', 'title y-title label target')
             .text('Ratio%')
-        
+        */
 
         // Group of pattern elements
         vis.patterng = vis.svg.append('g');
@@ -93,7 +93,7 @@ class SiteVis {
         
         
         let legendWidth= 15
-        vis.cohorts= ['CHR', 'HC']
+        vis.cohorts= ['CHR', 'HC', 'Empty']
         vis.patterng
             .selectAll('.rect.legend')
             .data(vis.cohorts)
@@ -103,7 +103,7 @@ class SiteVis {
             .attr('height', legendWidth)
             .attr('x', (d,i)=> vis.width/4*(i+1))
             .attr('y', vis.legendRectOffset)
-            .attr('fill', (d,i)=> vis.colors[i])
+            .attr('fill', (d,i)=> d==='Empty'?emptyColor:vis.colors[i])
             .attr('class', 'rect legend')
         
         
@@ -161,12 +161,17 @@ class SiteVis {
         let sites= vis.cohortMetaByDate.map(d=>d.prefix.split('/')[2])
         vis.x.domain(sites);
         vis.xAxis.scale(vis.x);
-        vis.gx.transition().duration(1000).call(vis.xAxis);
+        vis.gx.transition().duration(1000).call(vis.xAxis)
+            .selectAll("text")
+            .attr("y", 12)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(45)")
+            .style("text-anchor", "start");
         
         vis.yAxis.scale(vis.y);
         vis.gy.transition().duration(1000).call(vis.yAxis);
         
-        // vis.patterng.attr('transform', `translate(${vis.x.bandwidth()/2},0)`);
         
         // bars
         let tmp = vis.patterng
@@ -177,18 +182,24 @@ class SiteVis {
             .append('rect')
             .merge(tmp);
         
+        
+        vis.defs.selectAll('linearGradient').remove()
+        
         vis.bar
             .transition()
             .duration(1000)
             .attr('x', (d,i)=> vis.x(sites[i]))
-            .attr('y', (d,i)=> vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
+            .attr('y', (d,i)=> vis.y(100)) // vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('width', vis.x.bandwidth())
-            .attr('height', (d,i)=> vis.height-vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
+            .attr('height', (d,i)=> vis.height-vis.y(100)) // vis.height-vis.y(d.metaData.length/vis.currTarget[i]['Target']*100))
             .attr('class', 'bar')
             // .attr('fill', 'lightblue')
             .attr('fill', (d, i)=> {
                 
-                let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
+                // let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/d.metaData.length
+                let chrFrac= d.metaData.filter(w=>w.Wellness==='Patient' && w).length/vis.currTarget[i]['Target']
+                let hcFrac= d.metaData.filter(w=>w.Wellness==='Healthy' && w).length/vis.currTarget[i]['Target']
+                
                 
                 let grad = vis.defs.append("linearGradient")
                     .attr("id", "grad_" + i)
@@ -198,13 +209,22 @@ class SiteVis {
                     .attr("y2", "100%")
                     .selectAll("stop")
                     .data([
+                        /*
                         {offset: d3.format(".0%")(chrFrac), color: vis.colors[0]},
                         {offset: d3.format(".0%")(1-chrFrac), color: vis.colors[1]}
+                        */
+                        {offset: d3.format(".0%")(0), color: emptyColor},
+                        {offset: d3.format(".0%")(d3.max([0,1-chrFrac-hcFrac])), color: emptyColor},
+                        {offset: d3.format(".0%")(d3.max([0,1-chrFrac-hcFrac])), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(d3.max([0,1-hcFrac])), color: vis.colors[0]},
+                        {offset: d3.format(".0%")(d3.max([0,1-hcFrac])), color: vis.colors[1]},
+                        {offset: d3.format(".0%")(1), color: vis.colors[1]}
                     ])
                     .enter()
                     .append("stop")
-                    .attr("offset", d => d.offset)
-                    .attr("stop-color", d => d.color)
+                    .attr("offset", c => c.offset)
+                    .attr("stop-color", c => c.color)
+                    
                     
 
                 return `url(#grad_${i})`;
@@ -260,7 +280,7 @@ class SiteVis {
         labels
             .enter()
             .append('text')
-            .attr('class', 'label chr')
+            .attr('class', 'bar label chr')
             .attr('text-anchor', 'middle')
             .attr('fill', 'white')
             .merge(labels)
@@ -282,7 +302,7 @@ class SiteVis {
         labels
             .enter()
             .append('text')
-            .attr('class', 'label hc')
+            .attr('class', 'bar label hc')
             .attr('text-anchor', 'middle')
             .attr('fill', 'white')
             .merge(labels)
@@ -292,6 +312,30 @@ class SiteVis {
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
             .attr('y', (d,i)=> 
                 vis.y(((vis.cohortMetaByDate[i].metaData.length-d.metaData.length)/2)/vis.currTarget[i]['Target']*100))
+
+        labels.exit().remove();
+        
+        
+        // empty percentage
+        labels = vis.patterng
+            .selectAll('.label.empty')
+            .data(vis.cohortMetaByDate, d => d.prefix)
+
+        labels
+            .enter()
+            .append('text')
+            .attr('class', 'bar label empty')
+            .attr('text-anchor', 'middle')
+            .attr('fill', 'white')
+            .merge(labels)
+            .transition()
+            .duration(1000)
+            .text((d,i) => d3.format('.0%')(1-(d.metaData.length/vis.currTarget[i]['Target'])))
+            .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
+            .attr('y', (d,i)=> 
+                // vis.y((1-(d.metaData.length/vis.currTarget[i]['Target']/4))*100))
+                vis.y(100-(1-(d.metaData.length/vis.currTarget[i]['Target']))/2*100))
+                
 
         labels.exit().remove();
         
@@ -312,10 +356,12 @@ class SiteVis {
             .text((d,i) => `${d.metaData.length}/${vis.currTarget[i]['Target']}`)
             .attr('x', (d,i)=> vis.x(sites[i])+vis.x.bandwidth()/2)
             .attr('y', vis.targetLabelOffset)
+            .attr('fill', (d,i)=> d.metaData.length/vis.currTarget[i]['Target']>=0.85?'green':'red')
 
         labels.exit().remove();
         
         
+        /*
         // ratio labels
         labels = vis.patterng
             .selectAll('.target.label')
@@ -357,6 +403,18 @@ class SiteVis {
             .attr('y', vis.statusLabelOffset)
 
         labels.exit().remove();
+        */
+        
+        $(document).ready(function() {
+            let v
+            labels= vis.patterng.selectAll('.bar.label')
+            
+            for(let i=0; i< labels._groups[0].length; i++) {
+                v= +labels._groups[0][i].innerHTML.split('%')[0]
+                // console.log(v)
+                v<5 && (labels._groups[0][i].innerHTML='')
+            }
+        })
         
         vis.showTooltip();
 
