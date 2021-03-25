@@ -4,7 +4,7 @@
         <meta charset="utf-8" />
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" />
+        
         <title>CHR data visualization</title>
 
         <link
@@ -17,100 +17,54 @@
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         />
-        <link rel="stylesheet" href="css/styles.css" />
+        <link rel="stylesheet" href='sketch/styles.css' />
+        
     </head>
+
     <body>
         
-        <h3>Ethnicity Visualization</h3>
-        <hr>
-        
-        
-    	<div class="col-8">
-			<div class="row">
-                <!-- Site selector -->
-                <div class="col-3">
-                    Site &nbsp;
-                    <select class="form-control" id="site-name" onchange=_wrangleData()>
-                        <option value="BWH" selected>BWH</option>
-                        <option value="MGH">MGH</option>
-                        <option value="McLean">McLean</option>
-                        <option value="PNC">PNC</option>
-                    </select>
-                </div>
-        
-                <!-- Date range -->
-                <div class="col">
-                    Time Period
-                    <br>
-                    <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
-                    <button class="btn btn-primary" id="time-filter" onclick=_wrangleData()>Filter</button>
-                </div>
-            </div>
-            
-            <hr>
-            
-            <div class="row">
-                
-                <!-- Bar chart -->
-                <div class="col-8">
-                    
-                    <div>
-                        <button class="btn btn-primary" onclick="switchView()">Switch view</button>
-                    </div>
-                    <br>
-                    
-                    <!-- Carousel start -->
-                    <div id="stateCarousel" class="carousel slide" data-ride="carousel" style=" width: 100%">
-                        <div class="carousel-inner" style="padding: 15px">
-                        
-                            <!-- Element 1 -->
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div id="cumul-line" style="height: 100%; width: 100%"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- Element 2 -->
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div id="bar-chart" style="height: 100%; width: 100%"></div>
-                                </div>
-                            </div>
-                                  
-                    <!-- Carousel end -->
-                        </div>
-                    </div>
-                    
-                    <hr style="margin: 30px">
-                    <div class="row justify-content-center">
-                    
-                        <div class="col-6">
-                            <table class="table table-striped" id="table-vis">
-                            </table>
-                        </div>
-                        
-                    </div>
-                </div>
-                <!-- Pie chart -->
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                        <div class="col-5" style="background: orange; text-align: center;">
-                            <h5 id="category" style="background: yellow; margin-top: 10px;"></h5>
-                            <h6 id="category-count" style="font-size: 28px;"></h6>
-                            <div id="summary" style="height: 30%; width: 100%"></div>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-                    <div clas="row">
-                        <div id="pie-chart" style="height: 100%; width: 100%"></div>
-                    </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col" style="text-align:center">
+                    <h3>U24 Enrollment Report</h3>
                 </div>
             </div>
         </div>
+        <hr>
+        <div class="row">
+            <div class="col-3" style="border: solid 2px gray; border-radius: 5px; margin: 10px">
+                <ul>
+                    <li>Interactive Viz</li>
+                        <ul>
+                            <li><a href='siteSum.html' target='_blank'>Summary Bar Chart</a></li>
+                            <li><a href='siteDet.html' target='_blank'>Summary Line Chart</a></li>
+                            <li>Details</li>
+                                <ul>
+                                    <li onclick='intDetFil()'>Filter by Variables<br><i>(All sites together)</i></li>
+                                    <li><a href='siteDet.html' target='_blank'>Group by Variables<br><i>(One site at a time)</i></a></li>
+                                </ul>
+                        </ul>
+                    
+                    <li>Tabular Viz</li>
+                        <ul>
+                            <li><a href='rmr.html' target='_blank'>Research Milestone Report</a></li>                            
+                            <li><a href='rmr.html' target='_blank'>Inclusion Enrollment Report</a></li>
+                        </ul>
+                </ul>
+            </div>
+            <div class="col-8" style="border: solid 2px gray; border-radius: 5px;">
+                <img id="picture">
+                <div class="row justify-content-center" style='font-size: 28px'>
+                    <div class="col" style="text-align:center">
+                        <p style='color: red'>In future, things will populate here ^_^</p>
+                        <br>
+                        <p style='color: green'>For now, continue to new tabs :)</p>
+                    </div>
+                </div>
+            <div>
+        </div>
         
-        
-        <script src="https://d3js.org/d3.v6.min.js"></script>
+    
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
@@ -122,11 +76,9 @@
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"
         ></script>
-        <script src="js/ethnVis.js"></script>
-        <script src="js/pieVis.js"></script>
-        <script src="js/tableVis.js"></script>
-        <script src="js/summaryVis.js"></script>
-        <script src="js/lineVis.js"></script>
-        <script src="js/main.js"></script>
+        
+        <script src='sketch/main.js'></script>
+    
     </body>
+    
 </html>
