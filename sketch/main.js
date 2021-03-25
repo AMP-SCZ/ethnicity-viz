@@ -13,7 +13,7 @@ function intDet() {
 */
 
 function intDetFil() {
-    document.getElementById("picture").src= "sketch/intDetFil.png"
+    document.getElementById("picture").src= "sketch/intDetFil.PNG"
 }
 
 function intDetGrpOne() {
