@@ -24,89 +24,90 @@
         <h3>Category-Wise Report</h3>
         <hr>
         
-        
-    	<div class="col-8">
-			<div class="row">
-                <!-- Site selector -->
-                <div class="col-3">
-                    Site &nbsp;
-                    <select class="form-control" id="site-name" onchange=_wrangleData()>
-                        <option value="BWH" selected>BWH</option>
-                        <option value="MGH">MGH</option>
-                        <option value="McLean">McLean</option>
-                        <option value="PNC">PNC</option>
-                    </select>
-                </div>
-        
-                <!-- Date range -->
-                <div class="col">
-                    Time Period
-                    <br>
-                    <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
-                    <button class="btn btn-primary" id="time-filter" onclick=_wrangleData()>Filter</button>
-                </div>
+        <div class="row">
+            <!-- Site selector -->
+            <div class="col-3">
+                Site &nbsp;
+                <select class="form-control" id="site-name" onchange=_wrangleData()>
+                    <option value="BWH" selected>BWH</option>
+                    <option value="MGH">MGH</option>
+                    <option value="McLean">McLean</option>
+                    <option value="PNC">PNC</option>
+                </select>
             </div>
+    
+            <!-- Date range -->
+            <div class="col">
+                Time Period
+                <br>
+                <input placeholder="MM/DD/YYYY" id="lower"/> -- <input placeholder="MM/DD/YYYY" id="upper"/>&nbsp;
+                <button class="btn btn-primary" id="time-filter" onclick=_wrangleData()>Filter</button>
+            </div>
+        </div>
+        
+        <hr>
+			
             
-            <hr>
+        <div class="row">
             
-            <div class="row">
+            <!-- Bar chart -->
+            <div class="col-6">
                 
-                <!-- Bar chart -->
-                <div class="col-8">
+                <div>
+                    <button class="btn btn-primary" onclick="switchView()">Switch View</button>
+                </div>
+                <br>
+                
+                <!-- Carousel start -->
+                <div id="stateCarousel" class="carousel slide" data-ride="carousel" style=" width: 100%">
+                    <div class="carousel-inner" style="padding: 15px">
                     
-                    <div>
-                        <button class="btn btn-primary" onclick="switchView()">Switch View</button>
-                    </div>
-                    <br>
-                    
-                    <!-- Carousel start -->
-                    <div id="stateCarousel" class="carousel slide" data-ride="carousel" style=" width: 100%">
-                        <div class="carousel-inner" style="padding: 15px">
-                        
-                            <!-- Element 1 -->
-                            <div class="carousel-item active">
-                                <div class="row">
-                                    <div id="cumul-line" style="height: 100%; width: 100%"></div>
-                                </div>
+                        <!-- Element 1 -->
+                        <div class="carousel-item active">
+                            <div class="row">
+                                <div id="cumul-line" style="height: 100%; width: 100%"></div>
                             </div>
-                            
-                            <!-- Element 2 -->
-                            <div class="carousel-item">
-                                <div class="row">
-                                    <div id="bar-chart" style="height: 100%; width: 100%"></div>
-                                </div>
-                            </div>
-                                  
-                    <!-- Carousel end -->
-                        </div>
-                    </div>
-                    
-                    <hr style="margin: 30px">
-                    <div class="row justify-content-center">
-                    
-                        <div class="col-6">
-                            <table class="table table-striped" id="table-vis">
-                            </table>
                         </div>
                         
+                        <!-- Element 2 -->
+                        <div class="carousel-item">
+                            <div class="row">
+                                <div id="bar-chart" style="height: 100%; width: 100%"></div>
+                            </div>
+                        </div>
+                              
+                <!-- Carousel end -->
                     </div>
                 </div>
-                <!-- Pie chart -->
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                        <div class="col-5" style="background: orange; text-align: center;">
-                            <h5 id="category" style="background: yellow; margin-top: 10px;"></h5>
-                            <h6 id="category-count" style="font-size: 28px;"></h6>
-                            <div id="summary" style="height: 30%; width: 100%"></div>
-                        </div>
+                
+                <hr style="margin: 30px">
+                <div class="row justify-content-center">
+                
+                    <div class="col-6">
+                        <table class="table table-striped" id="table-vis">
+                        </table>
                     </div>
-                    <br>
-                    <br>
-                    <div clas="row">
-                        <div id="pie-chart" style="height: 100%; width: 100%"></div>
+                    
+                </div>
+            </div>
+            
+            <!-- Pie chart -->
+            <div class="col-3">
+                <div id="pie-chart" style="height: 100%; width: 100%"></div>
+            </div>
+            
+            <!-- Summary widget -->
+            <div class="col-3">
+                <div class="row justify-content-center">
+                    <div class="col-5" style="background: orange; text-align: center;">
+                        <h5 id="category" style="background: yellow; margin-top: 10px;"></h5>
+                        <h6 id="category-count" style="font-size: 1.5rem;"></h6>
+                        <div id="summary" style="height: 30%; width: 100%"></div>
                     </div>
                 </div>
             </div>
+            
+
         </div>
         
         
